@@ -1,0 +1,69 @@
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=K2D&display=swap" rel="stylesheet">
+</head>
+<style>
+*{
+  color: white;
+  font-family: inter;
+}
+body {
+   background-color: #222222;
+   margin: 0;
+}
+#navbar {
+   position: fixed;
+   height: 87px;
+   width: 100%;
+   background-color: #262626;
+   top: 0px;
+   z-index: 99;
+}
+
+#logo {
+   position: absolute;
+   font-family: 'Irish Grover';
+   font-size: 36px;
+   top: 21px;
+   left: 20%;
+}
+
+.menuItem {
+   position: relative;
+   font-size: 20px;
+   top: 30px;
+   float: right;
+   right: 20%;
+   margin-left: 50px;
+}
+
+#timer {
+   position: relative;
+   width: 30%;
+   height: 127px;
+   background-color: 171717;
+   border-radius: 12px;
+   left: 20%;
+   top: 167px;
+   outline: 3px solid #BC2727;
+   outline-offset: -3px;
+   font-family: 'K2D';
+   font-size: 96px;
+   text-align: center;
+}
+</style>
+<body>
+<div id="navbar">
+    <span id="logo">Quizzer</span>
+    <span class="menuItem">Settings</span>
+    <span class="menuItem">Donate</span>
+    <span class="menuItem">About</span>
+    <span class="menuItem">New Room</span>
+</div>
+
+<div id="timer">
+     <span id="minutes">10</span>:<span id="seconds">00</span>.<span id="milliseconds">00</span>
+</div>
+</body>
+</html>
