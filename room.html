@@ -27,7 +27,7 @@ body {
    font-family: 'Irish Grover';
    font-size: 36px;
    top: 21px;
-   left: 20%;
+   left: 15%;
 }
 
 .menuItem {
@@ -35,7 +35,7 @@ body {
    font-size: 20px;
    top: 30px;
    float: right;
-   right: 20%;
+   right: 15%;
    margin-left: 50px;
 }
 
@@ -47,7 +47,7 @@ body {
    height: 127px;
    background-color: 171717;
    border-radius: 12px;
-   left: 20%;
+   left: 15%;
    top: 167px;
    outline: 4px solid #BC2727;
    outline-offset: -4px;
@@ -67,7 +67,7 @@ body {
    padding: 40px;
    background-color: 171717;
    border-radius: 12px;
-   left: 20%;
+   left: 15%;
    top: 200px;
    display: flex;
    justify-content: center;
@@ -88,7 +88,7 @@ body {
    align-items: center;
    font-size: 20px;
    top: 230px;
-   left: 20%;
+   left: 15%;
 }
 
 #previousQuestions {
@@ -97,9 +97,9 @@ body {
    border-radius: 6px;
    padding: 40px;
    width: 30%;
-   height: 200px;
+   height: 120px;
    margin-bottom: 350px;
-   left: 20%;
+   left: 15%;
    top: 260px;
 }
 
@@ -115,6 +115,26 @@ body {
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+#sidebar {
+   position: absolute;
+   background-color: #262626;
+   right: 15%;
+   width: 28%;
+   height: 500px;
+   top: 167px;
+   border-radius: 6px;
+}
+
+#settings {
+   position: absolute;
+   background-color: #262626;
+   right: 15%;
+   width: 28%;
+   height: 200px;
+   top: 697px;
+   border-radius: 6px;
 }
 </style>
 <body>
@@ -141,5 +161,9 @@ matter" in which atoms are</div>
 <div id="buzzer"><b>Buzz In</b></div>
 
 <div id="previousQuestions"><div id="previousQuestionsBlocker"><u>Show Previous Questions</u></div></div>
+
+<div id="sidebar"></div>
+
+<div id="settings"></div>
 </body>
 </html>
