@@ -136,6 +136,33 @@ body {
    top: 697px;
    border-radius: 6px;
 }
+
+#activityHeader {
+   font-size: 20px;
+   margin-left: 35px;
+   margin-top: 40px;
+}
+
+#leaderboardHeader {
+   font-size: 20px;
+   margin-left: 35px;
+   margin-top: 40px;
+}
+
+#activityFrame {
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-top: 15px;
+}
+
+.activity {
+   font-size: 12px;
+   background-color: #2E2E2E;
+   border-radius: 4px;
+   padding: 6px;
+   text-align: center;
+   margin-bottom: 8px;
+}
 </style>
 <body>
 <div id="navbar">
@@ -162,8 +189,20 @@ matter" in which atoms are</div>
 
 <div id="previousQuestions"><div id="previousQuestionsBlocker"><u>Show Previous Questions</u></div></div>
 
-<div id="sidebar"></div>
+<div id="sidebar">
+   <div id="activityHeader"><b>Activity:</b></div>
+   <div id="activityFrame">
+       <div class="activity"><b>Derek</b> returned to the abyss</div>
+       <div class="activity"><b>Derek</b> has joined the room!</div>
+   </div>
 
-<div id="settings"></div>
+   <div id="leaderboardHeader"><b>Leaderboard:</b></div>
+   <div id="pointsLabel">Points</div>
+   <div id="playerLabel">Player</div>
+</div>
+
+<div id="settings">
+    <div id="settingsHeader"><b>Settings:</b></div>
+</div>
 </body>
 </html>
