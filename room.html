@@ -153,6 +153,8 @@ body {
   margin-left: 35px;
   margin-right: 35px;
   margin-top: 15px;
+  height: 135px;
+  overflow-y: hidden;
 }
 
 .activity {
@@ -162,6 +164,46 @@ body {
    padding: 6px;
    text-align: center;
    margin-bottom: 8px;
+}
+
+.leaderboardLabel {
+   font-size: 12px;
+   margin-top: 20px;
+   margin-left: 35px;
+   display: inline-block;
+}
+
+#leaderboardFrame {
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-top: 7px;
+  height: 135px;
+  overflow-y: hidden;
+  font-size: 12px;
+}
+
+.leaderboardRow {
+   margin-bottom: 8px;
+}
+
+.points {
+   display: inline-block;
+   background-color: #2E2E2E;
+   padding: 3px;
+   width: 55px;
+   border-radius: 4px;
+   text-align: center;
+}
+
+.player {
+   display: inline-block;
+   background-color: #2E2E2E;
+   margin-left: 13px;
+   padding: 3px;
+   width: 55px;
+   border-radius: 4px;
+   text-align: center;
+   width: 74%;
 }
 </style>
 <body>
@@ -194,11 +236,17 @@ matter" in which atoms are</div>
    <div id="activityFrame">
        <div class="activity"><b>Derek</b> returned to the abyss</div>
        <div class="activity"><b>Derek</b> has joined the room!</div>
+       <div class="activity"><b>Donny</b> reloaded the page</div>
+       <div class="activity"><b>Donny</b> has joined the room!</div>
    </div>
 
    <div id="leaderboardHeader"><b>Leaderboard:</b></div>
-   <div id="pointsLabel">Points</div>
-   <div id="playerLabel">Player</div>
+   <div class="leaderboardLabel">Points</div>
+   <div class="leaderboardLabel">Player</div>
+   <div id="leaderboardFrame">
+       <div class="leaderboardRow"><div class="points">10</div><div class="player">Derek</div></div>
+       <div class="leaderboardRow"><div class="points">0</div><div class="player">Donny</div></div>
+   </div>
 </div>
 
 <div id="settings">
