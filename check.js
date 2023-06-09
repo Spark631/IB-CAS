@@ -32,12 +32,31 @@ function testAnswer(answer, teacherName) {
   let addOn = 0; // If the letter in the answer is not the same in teachername,
   // addon will be subtracted from the teacher name to compensate
 
+  let totalOne = 0;
+  let totalTwo = 0;
+
   for (let i = 0; i < answerLength; i++) {
-    if (answerList[i] === teacherName[i - addOn]) {
-      total++;
+    if (answerList[i] == teacherName[i - addOn]) {
+      totalOne++;
     } else {
       addOn++;
     }
+  }
+
+  for (let j = 0; j < answerLength; j++) {
+    if (answerList[j] == teacherName[j]) {
+      totalTwo++;
+      // console.log(answerList[j] + " " + teacherName)
+    }
+  }
+
+  console.log("Total One: " + totalOne);
+  console.log("Total Two: " + totalTwo);
+
+  if (totalOne > totalTwo) {
+    total = totalOne;
+  } else {
+    total = totalTwo;
   }
 
   if (
@@ -65,5 +84,5 @@ function testAnswer(answer, teacherName) {
   }
 }
 
-testAnswer("Kronled", "Kronledge");
+testAnswer("kronledge", "Kronledge");
 
