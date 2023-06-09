@@ -21,8 +21,14 @@
 // }
 
 function testAnswer(answer, teacherName) {
+
+    answer = answer.toLowerCase();
+    teacherName = teacherName.toLowerCase();
+
     const answerList = answer.split('');
     const answerLength = answerList.length;
+    const teacherNameLength = teacherName.length;
+    
     let total = 0;
     let addOn = 0; // If the letter in the answer is not the same in teachername, 
                    // addon will be subtracted from the teacher name to compensate
@@ -35,22 +41,26 @@ function testAnswer(answer, teacherName) {
         }
     }
     
-    if ((100/answerLength) * total >= 75 && answerLength <= answerLength + 2 && answerLength >= answerLength - 2) {
+    if ((100/answerLength) * total >= 75 && answerLength <= teacherNameLength + 2 && answerLength >= teacherNameLength - 2) {
         console.log("You passed with!" + (100/answerLength) * total + "%");
+        console.log("Answer Length: " + answerLength);
+        console.log("Teacher Name Length: " + teacherNameLength);
     } else {
         console.log("Prompt");
     }
 }
 
 
-testAnswer("Madoo", "Madoo");
+testAnswer("MMadoos", "Madoo");
 /*
 run case:
 
-Answer = Madoo : You passed with!100%
-Answer = Madofo : You passed with!83.33333333333334%
-Answer = Mado : You passed with!100%
-Answer = Madoos : Prompt
-
+Madoo : 100%
+M : Prompt
+Mad : 100%
+Madooss : Prompt
+Massdoo : prompt
+MMadoo : 83.33333333333334%
+MMadoos : prompt
 
 */
