@@ -89,45 +89,54 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <button id="buttonOne">Join a room</button>
-  <!-- <button id="buttonOne">Join a room</button> -->
-  <input id="inputs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="buttonOne">Join a room</button>
+    <!-- <button id="buttonOne">Join a room</button> -->
+    <button id="check">Check room</button>
+    <input id="inputs" />
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io();
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      let roomid = "";
+      // var messages = document.getElementById("messages");
+      // var form = document.getElementById("form");
+      var input = document.getElementById("inputs");
 
-    // var messages = document.getElementById("messages");
-    // var form = document.getElementById("form");
-    var input = document.getElementById("inputs");
+      var button = document.getElementById("buttonOne");
 
-    var button = document.getElementById("buttonOne")
+      var buttonCheck = document.getElementById("check");
 
-    button.onclick = function () {
-      socket.emit("join lobby", input.value)
-    };
+      buttonCheck.onclick = function () {
+        socket.emit("check room");
+      };
 
-    // form.addEventListener("submit", function (e) {
-    //   e.preventDefault();
-    //   if (input.value) {
-    //     socket.emit("chat message", input.value);
-    //     input.value = "";
-    //   }
-    // });
+      button.onclick = function () {
+        socket.emit("join lobby", input.value);
+        // window.location.href = "/room.html/" + roomid;
+        window.location.href = "/room.html";
+      };
 
-    // socket.on("chat message", function (msg) {
-    //   var item = document.createElement("li");
-    //   item.textContent = msg;
-    //   messages.appendChild(item);
-    //   window.scrollTo(0, document.body.scrollHeight);
-    // });
-  </script>
-</body>
+      // form.addEventListener("submit", function (e) {
+      //   e.preventDefault();
+      //   if (input.value) {
+      //     socket.emit("chat message", input.value);
+      //     input.value = "";
+      //   }
+      // });
+
+      // socket.on("chat message", function (msg) {
+      //   var item = document.createElement("li");
+      //   item.textContent = msg;
+      //   messages.appendChild(item);
+      //   window.scrollTo(0, document.body.scrollHeight);
+      // });
+    </script>
+  </body>
 </html>
