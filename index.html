@@ -119,6 +119,7 @@
 
       var messages = document.getElementById("messages");
       var form = document.getElementById("form");
+      var firstInput = document.getElementById("inputs");
       var input = document.getElementById("input");
 
       var joinButton = document.getElementById("joinButton");
@@ -140,21 +141,23 @@
       };
 
       joinButton.onclick = function () {
-        socket.emit("join lobby", input.value);
+        socket.emit("join lobby", firstInput.value);
         // socket.emit("create room", input.value);
         // window.location.href = "/room.html/" + roomid;
         // window.location.href = "/room.html";
       };
 
       createRoom.onclick = function () {
-        socket.emit("create room", input.value);
+        window.location.href = "/room.html?id=" + firstInput.value;
+        // window.location.href = "/room.html";
+        console.log("Input value:", firstInput.value); // Check the value of input.value
+        socket.emit("create room", firstInput.value);
       };
 
       socket.on("room created", function (room) {
         roomid = room;
         console.log(roomid);
         document.getElementById("status").innerHTML = "Joined room " + roomid;
-        // window.location.href = "/room.html/" + roomid;
       });
 
       buttonCheck.onclick = function () {

@@ -12,12 +12,15 @@ let rooms = [
   { roomid: "5678", users: [] },
 ];
 
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
 app.get("/room.html", (req, res) => {
-  res.sendFile(__dirname + "/room.html");
+  const roomId = req.query.id; // Retrieve the unique ID from the query parameter
+  res.render("room", { roomId });
 });
 
 io.on("connection", (socket) => {
@@ -66,6 +69,9 @@ io.on("connection", (socket) => {
     rooms.push(temp);
     socket.join(roomid);
     socket.emit("room created", roomid);
+    for (let i = 0; i < rooms.length; i++) {
+      console.log(rooms[i].roomid);
+    }
   });
 
   socket.on("bye", (arg) => {
