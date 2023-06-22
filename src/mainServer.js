@@ -5,13 +5,37 @@ const server = http.createServer(app);
 const ejs = require("ejs");
 const { Server } = require("socket.io");
 const io = new Server(server);
-
+const crypto = require("crypto");
 var port = Number(process.env.port) || 1337;
+
+const socketToToken = new Map();
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/templates/homeScreen.html");
 });
 
+app.get("/lobby", (req, res) => {
+  const lobbyName = req.query.id;
+  const token = socketToToken.get(req.query.user);
+
+  console.log("Lobby Name:", lobbyName);
+  console.log("Token:", token);
+
+  res.sendFile(__dirname + "/templates/lobby.html", {
+    headers: {
+      "lobby-name": lobbyName,
+      "socket-id": token,
+    },
+  });
+});
+
 server.listen(port, () => {
   console.log("listening on *:" + port);
+});
+
+io.on("connection", (socket) => {
+  const secretKey = crypto.randomBytes(8).toString("hex");
+  console.log("Secret Key:", secretKey);
+  console.log("This is your og socketid: " + socket.id);
+  socketToToken.set(socket.id, secretKey);
 });
