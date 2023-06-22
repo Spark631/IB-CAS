@@ -148,10 +148,19 @@
       };
 
       createRoom.onclick = function () {
-        window.location.href = "/room.html?id=" + firstInput.value;
         // window.location.href = "/room.html";
-        console.log("Input value:", firstInput.value); // Check the value of input.value
-        socket.emit("create room", firstInput.value);
+
+        window.location.href =
+          "/lobby?id=" + encodeURIComponent(firstInput.value);
+
+        // event.preventDefault();
+        // console.log("Input value:", firstInput.value); // Check the value of input.value
+        // socket.emit("create room", firstInput.value);
+
+        // window.location.href =
+        //   "/room.html?id=" +
+        //   firstInput.value +
+        //   +encodeURIComponent(socket.request.session.id);
       };
 
       socket.on("room created", function (room) {

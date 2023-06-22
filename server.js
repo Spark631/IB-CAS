@@ -2,8 +2,15 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
+const ejs = require("ejs");
 const { Server } = require("socket.io");
 const io = new Server(server);
+const session = require("express-session");
+const sessionMiddleware = session({
+  secret: "maowmaowmoaw",
+  resave: true,
+  saveUninitialized: true,
+});
 
 var port = Number(process.env.port) || 1337;
 
@@ -11,6 +18,11 @@ let rooms = [
   { roomid: "1234", users: [] },
   { roomid: "5678", users: [] },
 ];
+
+app.use(sessionMiddleware);
+io.use((socket, next) => {
+  sessionMiddleware(socket.request, {}, next);
+});
 
 app.set("view engine", "ejs");
 
@@ -23,7 +35,23 @@ app.get("/room.html", (req, res) => {
   res.render("room", { roomId });
 });
 
+app.get("/lobby", (req, res) => {
+  const lobbyName = req.query.id;
+  console.log(lobbyName);
+  // res.render("create-lobby", { roomId });
+  // res.sendFile(__dirname + "/create-lobby.html");
+  // res.redirect("/lobby.html");
+  res.sendFile(__dirname + "/lobby.html", {
+    headers: {
+      "lobby-name": lobbyName,
+    },
+  });
+});
+
 io.on("connection", (socket) => {
+  // socket.request.session.socketId = socket.id;
+  // socket.request.session.save();
+
   socket.on("join lobby", function (roomid) {
     let lobbyCheck = false;
     for (let i = 0; i < rooms.length; i++) {
@@ -32,6 +60,12 @@ io.on("connection", (socket) => {
         console.log("User - " + socket.id + " has joined the room: " + roomid);
         lobbyCheck = true;
         break;
+      }
+      for (let i = 0; i < rooms.length; i++) {
+        console.log("In total in this room " + rooms[i].roomid);
+        for (let j = 0; j < rooms[i].users.length; j++) {
+          console.log("-----" + rooms[i].users[j]);
+        }
       }
     }
 
@@ -71,6 +105,9 @@ io.on("connection", (socket) => {
     socket.emit("room created", roomid);
     for (let i = 0; i < rooms.length; i++) {
       console.log(rooms[i].roomid);
+      for (let j = 0; j < rooms[i].users.length; j++) {
+        console.log("-----" + rooms[i].users[j]);
+      }
     }
   });
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="question"></div>
+
+    <script>
+      let question =
+        "The creation of this type of substance generally starts by putting atoms in a magneto-optical trap, immediately followed by an evaporative method. In attempting the first synthesis of this type of substance, Wolfgang Ketterle worked with sodium atoms, while contemporaneously Eric Cornell and Carl Wieman succeeded with rubidium atoms. Atoms in this type of substance are all at the lowest quantum level. For 10 points, name this 'fifth state of matter' in which atoms are";
+
+      const word = question.split(" ");
+      var readSpeed = 200;
+
+      var i = -1;
+      var interval = setInterval(increment, readSpeed);
+
+      function increment() {
+        i = i + 1;
+        if (i == word.length) {
+          clearInterval(interval);
+        } else {
+          document.getElementById("question").innerHTML += word[i] + " ";
+        }
+      }
+    </script>
+  </body>
+</html>
