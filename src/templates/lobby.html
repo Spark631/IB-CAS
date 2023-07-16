@@ -10,16 +10,23 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      // Example using EJS template engine
-      const token = "<%= user %>";
+      const urlStr = window.location.href;
+      let url = new URL(urlStr);
+      let search_params = url.searchParams;
 
-      // Connect to the Socket.IO server with the retrieved token
-      const socket = io.connect({ query: { token } });
+      const socketHashed = search_params.get("user");
+      const socket = io.connect(socketHashed);
 
-      // Handle socket events as needed
-      socket.on("connect", () => {
-        console.log("Connected with socket ID:", socket.id);
-      });
+      fetch("/info?id=" + socketHashed)
+        .then((response) => response.text())
+        .then((token) => {
+          const socket = io.connect(token);
+        })
+        .catch((error) => {
+          console.error("Error fetching token:", error);
+        });
+
+      console.log(socket.id);
     </script>
   </body>
 </html>
