@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    
+    <!-- Webpage Title -->
+    <title>Chess</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/chessicon.png">
+    
+    <!-- External Styles and Scripts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <script src="chess.js"></script>
+    <script src="./chessboard/js/chessboard-0.3.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="./chessboard/css/chessboard-0.3.0.min.css">
+
+  <style>
+    body{
+      margin: 0;
+      background-color: #f7fafd;
+	    font: 400 1rem/1.75rem "Open Sans", sans-serif;
+      overflow: hidden;
+      transition: 1s !important;
+    }
+    canvas {
+    display: none;
+}
+    .deco-white-circle-1 {
+		position: absolute;
+		top: 26rem;
+		left: -12rem;
+		display: block;
+		width: 22rem;
+		height: 22rem;
+	  }
+	  .deco-white-circle-2 {
+		position: absolute;
+		top: 19rem;
+		right: -12rem;
+		display: block;
+		width: 20rem;
+		height: 20rem;
+  	}
+  	.deco-blue-circle {
+		position: absolute;
+		top: 28rem;
+		left: 5rem;
+		display: block;
+		width: 5rem;
+		height: 5rem;
+  	}
+	  .deco-yellow-circle {
+		position: absolute;
+		top: 9rem;
+		right: 7rem;
+		display: block;
+		width: 1.5rem;
+		height: 1.5rem;
+	  }
+	  .deco-green-diamond {
+		position: absolute;
+		top: 9rem;
+		left: 4rem;
+		display: block;
+		width: 1rem;
+		height: 1rem;
+  	}
+
+.visible {
+  animation: movein 0.4s ease forwards, moveout 0.4s 2.5s ease forwards;
+}
+
+#notif {
+  width: 150px;
+  height: 50px;
+  background: #50b9e8;
+  color: white;
+  border-radius: 5px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  right: -150px;
+  opacity: 0.5;
+  z-index: 10000;
+}
+
+@keyframes movein {
+  from { right: -150px; opacity: 0.5; }
+  to   { right: 20px; opacity: 1;}
+}
+
+@keyframes moveout {
+  from { right: 20px; opacity: 1;}
+  to   { right: -150px; opacity: 0.5;}
+}
+
+.numeric-fc462 {
+    top: -1px !important;
+    left: 3px !important;
+    font-size: 1.14em !important;
+    font-weight: 550 !important;
+}
+.notation-322f9 {
+    font-size: 1.14em !important;
+    font-weight: 550 !important;
+    bottom: -1px !important;
+}
+.board-b72b1 {
+    border: 4px solid #b58863 !important;
+    border-radius: 5px !important;
+}
+#stateb {
+    color: #121212;
+    position: absolute;
+    padding: 25px;
+    padding-right: 25px;
+    padding-left: 25px;
+    text-align: center;
+    border-radius: 4px;
+    top: 50%;
+    left: 50%;
+    widtH: 100%;
+    font-size: 3em;
+    line-height: 1.4em;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: 0.2s !important;
+}
+.promotionoption {
+    background-color: #f7fafd;
+    border:6px solid transparent;
+    padding: 13px;
+    border-radius: 16px;
+    margin-left: 7px;
+    margin-right: 7px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.promotionoption:hover {
+    border: 6px solid #19ca94 !important;
+    transition: 1s;
+}
+.promotionoption:active {
+    border: 6px solid #19ca94 !important;
+    transition: 5s;
+}
+#promotionoptions {
+    position: absolute;
+    padding: 35px;
+    top: -300px;
+    background-color: white;
+    text-align: center;
+    transition: 1s;
+    width: 100%;
+    z-index: 100;
+}
+.down {
+  top: 0px !important;
+  transition: 1s;
+}
+
+.boardblur {filter: blur(19px); pointer-events: none !important; transition: 1s;} 
+
+.highlight-white {
+  box-shadow: inset 0 0 3px 3px yellow;
+}
+.highlight-black {
+  box-shadow: inset 0 0 3px 3px blue;
+}
+
+.checkhighlight {box-shadow: inset 0 0 56px 67px #ff0f0f66;}
+
+#resign:hover {cursor: pointer; border-radius: 8px !important; background-color: #276683 !important; color: white !important;}
+  </style>
+</head>
+
+<body>
+  <div id="promotionoptions">
+  <button id="q" class="promotionoption" onClick="sendpromotionpiece(this.id)"><img id="promotion1" src="img/chesspieces/wikipedia/wQ.png" draggable="false"></button>
+<button id="r" class="promotionoption" onClick="sendpromotionpiece(this.id)"><img id="promotion2" src="img/chesspieces/wikipedia/wR.png" draggable="false"></button>
+<button id="b" class="promotionoption" onClick="sendpromotionpiece(this.id)"><img id="promotion3" src="img/chesspieces/wikipedia/wB.png" draggable="false"></button>
+<button id="n" class="promotionoption" onClick="sendpromotionpiece(this.id)"><img id="promotion4" src="img/chesspieces/wikipedia/wN.png" draggable="false"></button>
+</div>
+<div id="piecetopromoteto" style="display: none;"></div>
+
+  <div id="notif">Copied!</div>
+  <div class="deco-white-circle-1"><img src="/img/decorative-white-circle.svg" draggable="false"></div>
+  <div class="deco-white-circle-2"><img src="/img/decorative-white-circle.svg" draggable="false"></div>
+  <div class="deco-blue-circle"><img src="/img/decorative-blue-circle.svg" draggable="false"></div>
+  <div class="deco-yellow-circle"><img src="/img/decorative-yellow-circle.svg" draggable="false"></div>
+  <div class="deco-green-diamond" style="margin-top: 75px !important; margin-left: 135px !important;"><img src="/img/decorative-green-diamond.svg" draggable="false"></div>
+
+        <!--Double check input--><input type="number" id="room" min="1" max="999999" style="display: none;">
+
+  <div id="container" class="container" style="height: 85vh; width: 85vh; margin-top: 7.5vh; position: absolute; left: 50%; -ms-transform: translateX(-50%); transform: translateX(-50%); -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); transition: 1s;">
+        <div id="board" style="transition: 1s !important;"></div>
+        <div id="state" style="display: inline-block; transition: 1s !important;"></div>
+        <div id="player" style="display: inline-block;"></div>
+        <div id="roomNumbers" style="display: none; transition: 1s !important;"><h1><b>Creating Room...</b></h1></div>
+        <div id="check"></div>
+        <div id="currentfen" style="display: none;"></div>
+        <div id="customscripts"></div>
+        <div id="customscriptstwo"></div>
+        <div id="secondsme" style="display: none;">20</div>
+        <div id="secondsopp" style="display: none;">20</div>
+        <div id="stopme" style="display: none;"></div>
+        <div id="stopopp" style="display: none;"></div>
+        <div id="fliptimer"></div>
+        <div id="timeme" style="border-radius: 6px;width: 100px;height: 23px;background-color: #d7d7d7; text-align: center;line-height: 24.5px; font-weight: 800; opacity: 0; transition: 0.8s;">10:00</div>
+        <div id="timeopp" style="border-radius: 6px;width: 100px;height: 23px;background-color: #d7d7d7; text-align: center;line-height: 24.5px; font-weight: 800; opacity: 0; transition: 0.8s;">10:00</div>
+        <div id="timersstarted" style="display: none;"></div>
+        <div id="turn"></div>
+        <div id="whitepiecescaptured" style="display: none; border-radius: 6px;height: 23px;background-color: #d7d7d7; transition: 1s; padding-left: 10px; padding-right: 10px;"></div>
+        <div id="blackpiecescaptured" style="display: none; border-radius: 6px;height: 23px;background-color: #d7d7d7; transition: 1s; padding-left: 10px; padding-right: 10px;"></div>
+        <div id="resign" onclick="resign()" style="color: #1e1e1e; border: 3px solid #276683; border-radius: 6px; position: absolute; bottom: -3em; right: 0em; width: 100px;height: 23px;text-align: center;line-height: 24.5px; transition: 0.2s; opacity: 0; display: none;">Resign</div>
+  </div>
+  <input id="screenshot" name="screenshot" style='display: none;'></input>
+<form style='display: none;' id="winorloss" method="get">
+ <input id="fen" name="fen"></input>
+ <input id="pgn" name="pgn"></input>
+</form>
+
+<script>
+  function beforesubmit() {
+    function ScrnShot() {
+        html2canvas(document.getElementById("board"), {
+            onrendered: function (canvas) {
+                document.body.appendChild(canvas);            
+                var dataURL = canvas.toDataURL();
+                console.log(dataURL)
+                document.getElementById('screenshot').value = dataURL;
+            }
+        });
+    }
+ScrnShot();
+document.getElementById("pgn").innerHTML = game.pgn();
+console.log(game.pgn())
+document.getElementById("fen").innerHTML = game.fen();
+console.log(game.fen())
+}
+
+function resign() {
+  document.getElementById("pgn").innerHTML = game.pgn();
+console.log(game.pgn())
+document.getElementById("fen").innerHTML = game.fen();
+  beforesubmit();
+  setTimeout(function(){ 
+    document.getElementById("winorloss").action = "https://www.chess.gq/l/resignation.php";
+    document.getElementById("winorloss").submit();
+}, 1000);
+}
+</script>
+
+  <script>
+     function format(time) {   
+        var hrs = ~~(time / 3600);
+        var mins = ~~((time % 3600) / 60);
+        var secs = ~~time % 60;
+    
+        var ret = "";
+        if (hrs > 0) {
+            ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+        }
+        ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+        ret += "" + secs;
+        return ret;
+      }
+
+    function countdownme() {
+      setInterval(function(){
+        mystopnote = document.getElementById('stopme').innerHTML;
+        inf = document.getElementById('timeopp').innerHTML;
+        if (mystopnote == "stop") {
+        return;
+        } else {
+          if(inf == "∞") {return;}
+        secondsme = document.getElementById('secondsme').innerHTML;
+        newsecondsme = secondsme - 1;
+        document.getElementById('secondsme').innerHTML = newsecondsme;
+        document.getElementById('timeme').innerHTML = format(secondsme);
+        }
+      }, 1000);
+    }
+    
+    function countdownopp() {
+      setInterval(function(){
+        oppstopnote = document.getElementById('stopopp').innerHTML;
+        inf = document.getElementById('timeopp').innerHTML;
+        if (oppstopnote == "stop") {
+          return;
+        } else {
+          if(inf == "∞") {return;}
+        secondsopp = document.getElementById('secondsopp').innerHTML;
+        newsecondsopp = secondsopp - 1;
+        document.getElementById('secondsopp').innerHTML = newsecondsopp;
+        document.getElementById('timeopp').innerHTML = format(secondsopp);
+        }
+      }, 1000);
+    }
+    </script>
+
+  <script src="./game.js"></script>
+
+  <script>
+    if(window.location.hash) {
+        var hash = window.location.hash.substring(1);
+        document.getElementById("room").value = hash;
+        connect();
+    } else {
+        alert('A game failed to be created. Please try again.');
+  }
+  </script>
+
+  <script>
+    var lastClick = 0;
+    var delay = 3200;
+
+    function checkalert() {
+      if (lastClick >= (Date.now() - delay))
+          return;
+       lastClick = Date.now();
+    document.getElementById('notif').classList.toggle('visible');
+    setTimeout(function() {document.getElementById('notif').classList.toggle('visible');}, 3300);
+    };
+  </script>
+
+  <script>
+    function copylink() {
+    document.getElementById('copy-text').select();
+    document.execCommand('copy');
+    checkalert();
+    var audio = new Audio('copied.wav');
+                            audio.play();
+    }
+  </script>
+
+<script>
+  function sendpromotionpiece(id) {
+      document.getElementById('piecetopromoteto').innerHTML = id;
+      document.getElementById('promotionoptions').classList.remove('down');
+      document.getElementById('container').classList.remove('boardblur');
+  }
+</script> 
+
+<script>
+const pageAccessedByReload = (
+  (window.performance.navigation && window.performance.navigation.type === 1) ||
+    window.performance
+      .getEntriesByType('navigation')
+      .map((nav) => nav.type)
+      .includes('reload')
+);
+
+if(pageAccessedByReload) {
+   window.location.replace('https://www.chess.gq/l/resignation.php');
+}
+</script>
+
+<script>
+  function stoptheclock() {
+    setInterval(function(){ 
+      //document.getElementById('stopopp').innerHTML = "stop";
+    //document.getElementById('stopme').innerHTML = "stop";
+}, 500);
+  }
+</script>
+
+<script>
+  var url_string = window.location.href;
+var url = new URL(url_string);
+var t = url.searchParams.get("t");
+seconds = t * 60;
+document.getElementById('timeopp').innerHTML = format(seconds);
+document.getElementById('timeme').innerHTML = format(seconds);
+document.getElementById('secondsme').innerHTML = seconds;
+document.getElementById('secondsopp').innerHTML = seconds;
+if(t == 999999999999999999999){
+  stoptheclock();
+  document.getElementById('timeopp').innerHTML = "∞";
+document.getElementById('timeme').innerHTML = "∞";
+document.getElementById('secondsme').innerHTML = "∞";
+document.getElementById('secondsopp').innerHTML = "∞";
+}
+</script>
+
+</body>
+</html>
