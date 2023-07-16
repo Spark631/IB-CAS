@@ -1,62 +1,73 @@
-function testAnswer(answer, teacherName1, teacherName2) {
+function testAnswer(answer, ...teacherNames) {
   answer = answer.toLowerCase();
-  teacherName1 = teacherName1.toLowerCase();
-  teacherName2 = teacherName2.toLowerCase();
+  teacherNames = teacherNames.map(name => name.toLowerCase());
 
   const answerList = answer.split("");
   const answerLength = answerList.length;
-  const teacherNameLength1 = teacherName1.length;
-  const teacherNameLength2 = teacherName2.length;
+  const teacherNameLengths = teacherNames.map(name => name.length);
 
-  let total = 0;
-  let addOn = 0; // If the letter in the answer is not the same in teachername,
-  // addon will be subtracted from the teacher name to compensate
+  const results = [];
 
-  let totalOne = 0;
-  let totalTwo = 0;
+  for (let i = 0; i < teacherNames.length; i++) {
+    let total = 0;
+    let addOn = 0;
+    let matchCount = 0;
 
-  for (let i = 0; i < answerLength; i++) {
-    if (answerList[i] == teacherName1[i - addOn]) {
-      totalOne++;
-    } else if (answerList[i] == teacherName2[i - addOn]) {
-      totalTwo++;
+    for (let j = 0; j < answerLength; j++) {
+      if (answerList[j] == teacherNames[i][j - addOn]) {
+        total++;
+        matchCount++;
+      } else {
+        addOn++;
+      }
+    }
+
+    const percentage = (100 / answerLength) * total;
+
+    if (
+      percentage >= 75 &&
+      (answerLength <= teacherNameLengths[i] + 2 && answerLength >= teacherNameLengths[i] - 2)
+    ) {
+      results.push({
+        teacherName: teacherNames[i],
+        passed: true,
+        percentage: percentage,
+        matchCount: matchCount
+      });
+    } else if (percentage > 50 && percentage < 75 &&
+      (answerLength <= teacherNameLengths[i] + 2 && answerLength >= teacherNameLengths[i] - 2)
+    ) {
+      results.push({
+        teacherName: teacherNames[i],
+        passed: false,
+        prompt: true,
+        percentage: percentage,
+        matchCount: matchCount
+      });
     } else {
-      addOn++;
+      results.push({
+        teacherName: teacherNames[i],
+        passed: false,
+        percentage: percentage,
+        matchCount: matchCount
+      });
     }
   }
 
-  if (totalOne > totalTwo) {
-    total = totalOne;
-  } else {
-    total = totalTwo;
-  }
-
-  if (
-    (100 / answerLength) * total >= 75 &&
-    (
-      (answerLength <= teacherNameLength1 + 2 && answerLength >= teacherNameLength1 - 2) ||
-      (answerLength <= teacherNameLength2 + 2 && answerLength >= teacherNameLength2 - 2)
-    )
-  ) {
-    console.log("You passed with " + (100 / answerLength) * total + "%");
-    console.log("Answer Length: " + answerLength);
-    console.log("Teacher Name 1 Length: " + teacherNameLength1);
-    console.log("Teacher Name 2 Length: " + teacherNameLength2);
-  } else if (
-    (100 / answerLength) * total > 50 &&
-    (100 / answerLength) * total < 75 &&
-    (
-      (answerLength <= teacherNameLength1 + 2 && answerLength >= teacherNameLength1 - 2) ||
-      (answerLength <= teacherNameLength2 + 2 && answerLength >= teacherNameLength2 - 2)
-    )
-  ) {
-    console.log("Prompt");
-  } else {
-    console.log("You failed with " + (100 / answerLength) * total + "%");
-    console.log("Answer Length: " + answerLength);
-    console.log("Teacher Name 1 Length: " + teacherNameLength1);
-    console.log("Teacher Name 2 Length: " + teacherNameLength2);
+  for (let i = 0; i < results.length; i++) {
+    const result = results[i];
+    if (result.passed) {
+      console.log(`You passed with ${result.percentage}% for teacher ${result.teacherName}`);
+      console.log("Answer Length: " + answerLength);
+      console.log(`Teacher Name Length: ${teacherNameLengths[i]}`);
+    } else if (result.prompt) {
+      console.log(`Prompt for teacher ${result.teacherName}`);
+    } else {
+      console.log(`You failed with ${result.percentage}% for teacher ${result.teacherName}`);
+      console.log("Answer Length: " + answerLength);
+      console.log(`Teacher Name Length: ${teacherNameLengths[i]}`);
+    }
   }
 }
 
-testAnswer("two", "2", "Two");
+testAnswer("Derek Steroi", "Derek Steriods", "Donny Kronladge", "Noah Pielmier");
