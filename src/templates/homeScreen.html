@@ -19,17 +19,25 @@
       var lobbyCode = document.getElementById("lobbyCode");
 
       createLobby.onclick = function () {
-        window.location.href =
-          "/lobby?id=" +
-          encodeURIComponent(lobbyCode.value) +
-          "&user=" +
-          encodeURIComponent(socket.id);
-        // encodeURIComponent(socket.id);
+        socket.emit("create lobby", lobbyCode.value);
+        // window.location.href =
+        //   "/lobby?id=" +
+        //   encodeURIComponent(lobbyCode.value) +
+        //   "&user=" +
+        //   encodeURIComponent(socket.id);
       };
 
       joinLobby.onclick = function () {
         socket.emit("join lobby");
       };
+
+      socket.on("lobby created", function (user) {
+        window.location.href =
+          "/lobby?id=" +
+          encodeURIComponent(lobbyCode.value) +
+          "&user=" +
+          encodeURIComponent(user);
+      });
     </script>
   </body>
 </html>
