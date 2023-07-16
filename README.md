@@ -1,3 +1,0 @@
-# IB-CAS
-
-QUIZ BOWL
