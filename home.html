@@ -1,150 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-    
-    <!-- Webpage Title -->
-    <title>Select Time Control</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="">
-    
-    <!-- External Styles and Scripts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <style>
-    body{
-        margin: 0;
-        color: #777;
-        background-color: #f7fafd;
-	    font: 400 1rem/1.75rem "Open Sans", sans-serif;
-        overflow: hidden;
-    }
-    .deco-white-circle-1 {
-		position: absolute;
-		top: 26rem;
-		left: -12rem;
-		display: block;
-		width: 22rem;
-		height: 22rem;
-	}
-	.deco-white-circle-2 {
-		position: absolute;
-		top: 19rem;
-		right: -12rem;
-		display: block;
-		width: 20rem;
-		height: 20rem;
-  	}
-  	.deco-blue-circle {
-		position: absolute;
-		top: 28rem;
-		left: 5rem;
-		display: block;
-		width: 5rem;
-		height: 5rem;
-  	}
-	.deco-yellow-circle {
-		position: absolute;
-		top: 9rem;
-		right: 7rem;
-		display: block;
-		width: 1.5rem;
-		height: 1.5rem;
-	}
-	.deco-green-diamond {
-		position: absolute;
-		top: 9rem;
-		left: 4rem;
-		display: block;
-		width: 1rem;
-		height: 1rem;
-  	}
-	.option {
-        background-color: #3e89ab;
-        border-radius: 6px;
-        color: white;
-        font-weight: 900;
-        padding: 10px;
-        margin-bottom: 10px;
-        transition: 0.2s;
-        cursor: pointer;
-    }
-    .option:hover {
-        border-radius: 10px !important;
-        background-color: #29566a !important;
-    }
-    .submitbutton {
-        background-color: #3e89ab;
-        border-radius: 6px;
-        color: white;
-        font-weight: 900;
-        padding: 6px;
-        padding-bottom: 5.8px;
-        padding-top: 5px;
-        margin-left: 5px;
-        margin-bottom: 10px;
-        transition: 0.2s;
-        cursor: pointer;
-        border: none;
-    }
-    .submitbutton:hover {
-        border-radius: 10px !important;
-        background-color: #29566a !important;
-    }
-  </style>
+  <title>Socket.IO Room Example</title>
 </head>
-
 <body>
-  <div class="deco-white-circle-1"><img src="https://raw.githubusercontent.com/das150/chess.gq/de97eb6a7ae49c3e905cb899f026e563d2d8bb78/decorative-white-circle.svg"></div>
-  <div class="deco-white-circle-2"><img src="https://raw.githubusercontent.com/das150/chess.gq/de97eb6a7ae49c3e905cb899f026e563d2d8bb78/decorative-white-circle.svg"></div>
-  <div class="deco-blue-circle"><img src="https://raw.githubusercontent.com/das150/chess.gq/de97eb6a7ae49c3e905cb899f026e563d2d8bb78/decorative-blue-circle.svg"></div>
-  <div class="deco-yellow-circle"><img src="https://raw.githubusercontent.com/das150/chess.gq/de97eb6a7ae49c3e905cb899f026e563d2d8bb78/decorative-yellow-circle.svg"></div>
-  <div class="deco-green-diamond" style="margin-top: 75px !important; margin-left: 135px !important;"><img src="https://raw.githubusercontent.com/das150/chess.gq/de97eb6a7ae49c3e905cb899f026e563d2d8bb78/decorative-green-diamond.svg"></div>
+  <h1>Quiz Rooms</h1>
 
-  <div class="container" style="position: absolute; left: 50%; top: 48%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
-	    <center>
-        <h1 style="line-height: 1.5; color: #4a4a4a;"><b>Select a time control:</b></h1>
-        <div onclick="five()" class="option">5 min</div>
-        <div onclick="ten()" class="option">10 min</div>
-        <div onclick="thirty()" class="option">30 min</div>
-        <div onclick="unlimited()" class="option">Unlimited</div>
-        <div class="custom" style="margin-top: 35px; border-radius: 6px; border:3px solid transparent; color: #303030; font-weight: 600; transition: 0.2s; font-size: 12px; letter-spacing: 2px;"><u>CUSTOM</u></div>
-        <form target="hiddenFrame" onsubmit="custom()"><input type="text" id="minutes" style="border-radius: 6px;
-        border: 1px solid #4a4a4a; text-align: center; padding: 6px; width: 100px;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" placeholder="# of minutes" required></center></form>
-        <iframe name="hiddenFrame" style="display: none;"></iframe>
-        </center>
+  <label for="room-input">Room:</label>
+  <input type="text" id="room-input" placeholder="Enter room name">
+
+  <button onclick="joinRoom()">Join Room</button>
+  <button onclick="leaveRoom()">Leave Room</button>
+
+  <div id="chat">
+    <input type="text" id="message-input" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+    <ul id="messages"></ul>
   </div>
 
-<script>
-function five() {
-    var random = Math.floor(Math.random() * 999999) + 1;
-    window.location.replace('/room/?t=5#' + random);
-}
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
 
-function ten() {
-    var random = Math.floor(Math.random() * 999999) + 1;
-    window.location.replace('/room/match/?t=10#' + random);
-}
+    function joinRoom() {
+      const room = document.getElementById('room-input').value;
+      socket.emit('joinRoom', room);
+    }
 
-function thirty() {
-    var random = Math.floor(Math.random() * 999999) + 1;
-    window.location.replace('/room/match/?t=30#' + random);
-}
+    function leaveRoom() {
+      const room = document.getElementById('room-input').value;
+      socket.emit('leaveRoom', room);
+    }
 
-function unlimited() {
-    var random = Math.floor(Math.random() * 999999) + 1;
-    window.location.replace('/room/?t=999999999999999999999#' + random);
-}
+    function sendMessage() {
+      const room = document.getElementById('room-input').value;
+      const message = document.getElementById('message-input').value;
+      socket.emit('chatMessage', room, message);
+      document.getElementById('message-input').value = '';
+    }
 
-function custom() {
-    var random = Math.floor(Math.random() * 999999) + 1;
-    var minutes = document.getElementById('minutes').value;
-    window.location.replace('/room/?t=' + minutes + '#' + random);
-}
-</script>
-
+    socket.on('chatMessage', (message) => {
+      const messages = document.getElementById('messages');
+      const li = document.createElement('li');
+      li.textContent = message;
+      messages.appendChild(li);
+    });
+  </script>
 </body>
 </html>
