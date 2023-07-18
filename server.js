@@ -35,6 +35,12 @@ io.on('connection', (socket) => {
     roomId = room;
   });
 
+  // Buzzed in
+  socket.on('buzzedIn', (room) => {
+    console.log('User with id ' + playerId + ' buzzed in room ' + room);
+    socket.to(room).emit('userBuzzed', playerId);
+  });
+
   // Get users in a room
   socket.on('getUsersInRoom', (room) => {
     const usersInRoom = Array.from(users.values())
@@ -75,6 +81,11 @@ socket.on('updateScore', (score) => { // also need to save scores in local stora
         console.log("Prompt!");
     } else if (answerGrade === "fail") {
         console.log("Failed!");
+        const user = Array.from(users.values()).find(user => user.playerId === playerId);
+  if (user) {
+    user.score-=10;
+    console.log(`Updated score for ${playerId} in room ${user.room}: ${user.score}`);
+  }
     }
 
     // Broadcast the message to all sockets in the room

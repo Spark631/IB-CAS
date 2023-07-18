@@ -75,21 +75,22 @@ body {
    align-items: center;
    font-size: 16px;
 }
-
+#answerFrame {
+  position: relative;
+  width: 30%;
+  top: 230px;
+   left: 15%;
+}
 #buzzer {
-   position: relative;
    background-color: #BC2727;
    border-radius: 6px;
    height: 50px;
-   width: 30%;
    padding-right: 40px;
    padding-left: 40px;
    display: flex;
    justify-content: center;
    align-items: center;
    font-size: 20px;
-   top: 230px;
-   left: 15%;
 }
 
 #previousQuestions {
@@ -293,8 +294,6 @@ body {
   <button onclick="leaveRoom()" style="color: black;">Leave Room</button><!-- leave automatically -->
 
   <div id="chat">
-    <input type="text" id="message-input" style="color: black;" placeholder="Type an answer" />
-    <button onclick="sendMessage()" style="color: black;">Send</button>
     <ul id="messages"></ul>
   </div>
 </div>
@@ -311,12 +310,12 @@ Wieman succeeded with rubidium atoms. Atoms in this type of substance
 are all at the lowest quantum level. For 10 points, name this "fifth state of
 matter" in which atoms are</div>
 
-<div id="buzzer"><b>Buzz In</b></div>
+<div id="answerFrame"><div id="buzzer" onclick="buzzIn();"><b>Buzz In</b></div></div>
 
 <div id="previousQuestions"><div id="previousQuestionsBlocker"><u>Show Previous Questions</u></div></div>
 
 <div id="sidebar">
-   <div id="activityHeader"><b>Activity:</b></div>
+   <div id="activityHeader"><b>Activity</b></div>
    <div id="activityFrame">
        <div class="activity"><b>&nbsp;</b> </div>
        <div class="activity"><b> &nbsp;</b> </div>
@@ -324,7 +323,7 @@ matter" in which atoms are</div>
        <div class="activity"><b> &nbsp;</b> </div>
    </div>
 
-   <div id="leaderboardHeader"><b>Leaderboard:</b></div>
+   <div id="leaderboardHeader"><b>Leaderboard</b></div>
    <div class="leaderboardLabel">Points</div>
    <div class="leaderboardLabel">Player</div>
    <div id="leaderboardFrame">
@@ -398,6 +397,19 @@ function sortTable() {
       socket.emit('setPlayerId', playerId);
     }
 
+    function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      sendMessage(); // also update this
+    }
+  }
+
+    function buzzIn() {
+      const room = document.getElementById('room-input').value;
+      document.getElementById('answerFrame').innerHTML = '<input type="text" id="message-input" onkeypress="handleKeyPress(event)" style="color: black;" placeholder="Type an answer" /> <div id="buzzer" onclick="sendMessage();"><b>Answer</b></div>'; // will need to change function name
+      document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> buzzed in!</div>');
+      socket.emit('buzzedIn', room);
+    }
+
     function joinRoom() {
       const room = document.getElementById('room-input').value;
       socket.emit('joinRoom', room);
@@ -406,6 +418,10 @@ function sortTable() {
       document.getElementById('settings').innerHTML = "Room code: " + room; // update this with new website
       socket.emit('getUsersInRoom', room);
       document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>');
+      setTimeout(function() {
+  document.getElementById('overlay').style.display = "none";
+      document.getElementById('joinRoomBox').style.display = "none";
+}, 800);
     }
 
     function joinRandomRoom() {
@@ -415,6 +431,10 @@ function sortTable() {
       document.getElementById('joinRoomBox').style.opacity = 0;
       document.getElementById('settings').innerHTML = "Room code: " + room; // update this with new website
       document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>');
+      setTimeout(function() {
+  document.getElementById('overlay').style.display = "none";
+      document.getElementById('joinRoomBox').style.display = "none";
+}, 800);
     }
 
     function updateScore(score) {
@@ -430,6 +450,7 @@ function sortTable() {
       const room = document.getElementById('room-input').value;
       const message = document.getElementById('message-input').value;
       socket.emit('chatMessage', room, message);
+      socket.emit('getUsersInRoom', room);
       document.getElementById('message-input').value = '';
     }
 
@@ -437,6 +458,11 @@ function sortTable() {
     const room = document.getElementById('room-input').value;
     socket.emit('getUsersInRoom', room);
     document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> has joined the room!</div>');
+  });
+
+  socket.on('userBuzzed', (username) => {
+    const room = document.getElementById('room-input').value;
+    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> buzzed in!</div>');
   });
 
   socket.on('userLeft', (username) => {
@@ -450,6 +476,8 @@ function sortTable() {
       const li = document.createElement('li');
       li.textContent = message;
       messages.appendChild(li);
+      const room = document.getElementById('room-input').value;
+      socket.emit('getUsersInRoom', room);
     });
   </script>
 
