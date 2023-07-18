@@ -302,13 +302,7 @@ body {
      <span id="minutes">10</span>:<span id="seconds">00</span><span id="milliseconds">.00</span>
 </div>
 
-<div id="question">The creation of this type of substance generally starts by putting atoms in a
-magneto-optical trap, immediately followed by an evaporative method. In 
-attempting the first synthesis of this type of substance, Wolfgang Ketterle
- worked with sodium atoms, while contemporaneously Eric Cornell and Carl 
-Wieman succeeded with rubidium atoms. Atoms in this type of substance
-are all at the lowest quantum level. For 10 points, name this "fifth state of
-matter" in which atoms are</div>
+<div id="question"><button id="writeButton" onclick="writeQ();" style="color: black;">Start Questions</button></div>
 
 <div id="answerFrame"><div id="buzzer" onclick="buzzIn();"><b>Buzz In</b></div></div>
 
@@ -350,7 +344,7 @@ matter" in which atoms are</div>
 
 <div id="settings">
 </div>
-<ul id="usersList"></ul>
+<ul id="roomOwner"></ul>
 
 <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -446,18 +440,56 @@ function sortTable() {
       socket.emit('leaveRoom', room);
     }
 
+    function writeQ() {
+      const room = document.getElementById('room-input').value;
+      socket.emit('writeQuestion', room, 200); // change the speed
+    }
+
+    function pauseQ() {
+      const room = document.getElementById('room-input').value;
+      socket.emit('writeQuestion', room, 200); // CANCEL THIS
+    }
+
+    function resumeQ() {
+      const room = document.getElementById('room-input').value;
+      socket.emit('writeQuestion', room, 200); // RESUME THIS
+    }
+
     function sendMessage() {
       const room = document.getElementById('room-input').value;
       const message = document.getElementById('message-input').value;
       socket.emit('chatMessage', room, message);
       socket.emit('getUsersInRoom', room);
-      document.getElementById('message-input').value = '';
     }
+
+    function kick() {
+      const room = document.getElementById('room-input').value;
+      socket.emit('kick', room);
+    }
+
+    socket.on('chatMessageReply', (grade) => {
+      const room = document.getElementById('room-input').value;
+      if (grade === "pass") {
+        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> answered correctly!</div>');
+      } else if (grade === "prompt") {
+        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was prompted!</div>');
+        var promptAnswer = prompt("'" + document.getElementById('question').innerHTML + "'\n \nPrompt on " + document.getElementById('message-input').value + ". Enter the correct answer below, then click OK.");
+        socket.emit('scorePromptAnswer', room, promptAnswer);
+      } else if (grade === "fail") {
+        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was wrong.</div>');
+      }
+});
+
 
     socket.on('userJoined', (username) => {
     const room = document.getElementById('room-input').value;
     socket.emit('getUsersInRoom', room);
     document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> has joined the room!</div>');
+  });
+
+  socket.on('updateLeaderboard', (username) => {
+    const room = document.getElementById('room-input').value;
+    socket.emit('getUsersInRoom', room);
   });
 
   socket.on('userBuzzed', (username) => {
@@ -471,11 +503,42 @@ function sortTable() {
     document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> returned to the abyss.</div>');
   });
 
-    socket.on('chatMessage', (message) => {
-      const messages = document.getElementById('messages');
-      const li = document.createElement('li');
-      li.textContent = message;
-      messages.appendChild(li);
+  socket.on('increment', (word) => {
+    document.getElementById("writeButton").style.display = "none";
+    document.getElementById("question").innerHTML += word;
+  });
+
+  socket.on('roomLeader', (isRoomLeader, RoomLeader) => {
+    if (isRoomLeader) {
+    console.log('You are the room leader.');
+  } else {
+    console.log('The room leader is player:', RoomLeader);
+    document.getElementById("writeButton").style.display = "none";
+  }
+  document.getElementById("roomOwner").innerHTML = "Room leader: " + RoomLeader;
+});
+
+socket.on('roomLeaderTransferred', (RoomLeader) => {
+  if (RoomLeader == playerId) {
+    console.log('You are the room leader.');
+    document.getElementById("writeButton").style.display = "block";
+  } else {
+    console.log('The room leader is player:', RoomLeader);
+    document.getElementById("writeButton").style.display = "none";
+  }
+  document.getElementById("roomOwner").innerHTML = "Room leader: " + RoomLeader;
+});
+
+    socket.on('chatMessage', (username, message) => {
+      
+      if (message === "pass") {
+        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> answered correctly!</div>');
+      } else if (message === "prompt") {
+        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was prompted!</div>');
+      } else if (message === "fail") {
+        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was wrong.</div>');
+      }
+
       const room = document.getElementById('room-input').value;
       socket.emit('getUsersInRoom', room);
     });

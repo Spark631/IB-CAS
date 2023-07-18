@@ -57,13 +57,15 @@ function testAnswer(answer, ...teacherNames) {
     for (let i = 0; i < results.length; i++) {
       const result = results[i];
       if (result.passed) {
+        console.log("pass");
         return "pass";
       } else if (result.prompt) {
-        return "prompt";
-      } else {
-        return "fail";
+         console.log("prompt");
+         return "prompt";
       }
     }
+    console.log("fail");
+    return "fail";
   }
 
   module.exports = { testAnswer };
