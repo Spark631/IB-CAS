@@ -442,7 +442,7 @@ function sortTable() {
   socket.on('userLeft', (username) => {
     const room = document.getElementById('room-input').value;
     socket.emit('getUsersInRoom', room);
-    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> returned to the abyss</div>');
+    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> returned to the abyss.</div>');
   });
 
     socket.on('chatMessage', (message) => {
