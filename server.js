@@ -63,6 +63,7 @@ io.on('connection', (socket) => {
       var value = (roomVotes[room].length)/(roomSize-1);
       if (value == 1) {
         console.log(players[roomLeader] + " voted out by " + playerId);
+        users.delete(roomLeader);
       }
     }
   });
