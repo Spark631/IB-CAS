@@ -318,10 +318,10 @@ matter" in which atoms are</div>
 <div id="sidebar">
    <div id="activityHeader"><b>Activity:</b></div>
    <div id="activityFrame">
-       <div class="activity"><b>Derek</b> returned to the abyss</div>
-       <div class="activity"><b>Derek</b> has joined the room!</div>
-       <div class="activity"><b>Donny</b> reloaded the page</div>
-       <div class="activity"><b>Donny</b> has joined the room!</div>
+       <div class="activity"><b>&nbsp;</b> </div>
+       <div class="activity"><b> &nbsp;</b> </div>
+       <div class="activity"><b> &nbsp;</b> </div>
+       <div class="activity"><b> &nbsp;</b> </div>
    </div>
 
    <div id="leaderboardHeader"><b>Leaderboard:</b></div>
@@ -405,6 +405,7 @@ function sortTable() {
       document.getElementById('joinRoomBox').style.opacity = 0;
       document.getElementById('settings').innerHTML = "Room code: " + room; // update this with new website
       socket.emit('getUsersInRoom', room);
+      document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>');
     }
 
     function joinRandomRoom() {
@@ -413,6 +414,7 @@ function sortTable() {
       document.getElementById('overlay').style.opacity = 0;
       document.getElementById('joinRoomBox').style.opacity = 0;
       document.getElementById('settings').innerHTML = "Room code: " + room; // update this with new website
+      document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>');
     }
 
     function updateScore(score) {
@@ -434,11 +436,13 @@ function sortTable() {
     socket.on('userJoined', (username) => {
     const room = document.getElementById('room-input').value;
     socket.emit('getUsersInRoom', room);
+    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> has joined the room!</div>');
   });
 
   socket.on('userLeft', (username) => {
     const room = document.getElementById('room-input').value;
     socket.emit('getUsersInRoom', room);
+    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> returned to the abyss</div>');
   });
 
     socket.on('chatMessage', (message) => {
