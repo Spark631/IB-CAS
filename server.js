@@ -127,58 +127,45 @@ function increment(){
     socket.on('scorePromptAnswer', (room, answer) => {
       var answerGrade = testAnswer(answer, "Derek Steriods", "Donny Kronladge", "Red");
       if (answerGrade === "pass") {
-        socket.to(room).emit('chatMessage', playerId, "pass");
+        socket.to(room).emit('chatanswer', playerId, "pass");
         const user = Array.from(users.values()).find(user => user.playerId === playerId);
         if (user) {
           user.score+=10;
         }
-        socket.emit('chatMessageReply', "pass");
+        socket.emit('chatanswerReply', "pass");
         socket.emit('updateLeaderboard', playerId);
       } else if (answerGrade === "prompt") {
-        socket.to(room).emit('chatMessage', playerId, "fail");
-        const user = Array.from(users.values()).find(user => user.playerId === playerId);
-        if (user) {
-          user.score-=10;
-        }
-        socket.emit('chatMessageReply', "fail");
+        socket.to(room).emit('chatanswer', playerId, "fail");
+        socket.emit('chatanswerReply', "fail");
         socket.emit('updateLeaderboard', playerId);
       } else if (answerGrade === "fail") {
           console.log("Failed!");
-          socket.to(room).emit('chatMessage', playerId, "fail");
-          const user = Array.from(users.values()).find(user => user.playerId === playerId);
-          if (user) {
-            user.score-=10;
-          }
-          socket.emit('chatMessageReply', "fail");
-          socket.emit('updateLeaderboard', playerId);
+          socket.to(room).emit('chatanswer', playerId, "fail");
+          socket.emit('chatanswerReply', "fail");
+          socket.emit('updateLeaderboard', playerId); // change this for after timer expires or all have answered.
       }
   });
 
-  // Handle chat messages
-  socket.on('chatMessage', (room, message) => {
-    var answerGrade = testAnswer(message, "Derek Steriods", "Donny Kronladge", "Red");
+  // Handle chat answers
+  socket.on('chatanswer', (room, answer) => {
+    var answerGrade = testAnswer(answer, "Derek Steriods", "Donny Kronladge", "Red");
     if (answerGrade === "pass") {
       console.log("Passed!");
-      socket.to(room).emit('chatMessage', playerId, "pass");
+      socket.to(room).emit('chatanswer', playerId, "pass");
       const user = Array.from(users.values()).find(user => user.playerId === playerId);
       if (user) {
         user.score+=10;
         console.log(`Updated score for ${playerId} in room ${user.room}: ${user.score}`);
       }
-      socket.emit('chatMessageReply', "pass");
+      socket.emit('chatanswerReply', "pass");
     } else if (answerGrade === "prompt") {
-      socket.to(room).emit('chatMessage', playerId, "prompt");
+      socket.to(room).emit('chatanswer', playerId, "prompt");
       console.log("Prompt!");
-      socket.emit('chatMessageReply', "prompt");
+      socket.emit('chatanswerReply', "prompt");
     } else if (answerGrade === "fail") {
         console.log("Failed!");
-        socket.to(room).emit('chatMessage', playerId, "fail");
-        const user = Array.from(users.values()).find(user => user.playerId === playerId);
-        if (user) {
-          user.score-=10;
-          console.log(`Updated score for ${playerId} in room ${user.room}: ${user.score}`);
-        }
-        socket.emit('chatMessageReply', "fail");
+        socket.to(room).emit('chatanswer', playerId, "fail");
+        socket.emit('chatanswerReply', "fail");
     }
   });
 

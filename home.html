@@ -391,13 +391,13 @@ function sortTable() {
 
     function handleKeyPress(event) {
     if (event.key === "Enter") {
-      sendMessage(); // also update this
+      sendanswer(); // also update this
     }
   }
 
     function buzzIn() {
       const room = document.getElementById('room-input').value;
-      document.getElementById('answerFrame').innerHTML = '<input type="text" id="message-input" onkeypress="handleKeyPress(event)" style="color: black;" placeholder="Type an answer" /> <div id="buzzer" onclick="sendMessage();"><b>Answer</b></div>'; // will need to change function name
+      document.getElementById('answerFrame').innerHTML = '<input type="text" id="answer-input" onkeypress="handleKeyPress(event)" style="color: black;" placeholder="Type an answer" /> <div id="buzzer" onclick="sendanswer();"><b>Answer</b></div>'; // will need to change function name
       document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> buzzed in!</div>');
       socket.emit('buzzedIn', room);
     }
@@ -443,20 +443,10 @@ function sortTable() {
       socket.emit('writeQuestion', room, 200); // change the speed
     }
 
-    function pauseQ() {
+    function sendanswer() {
       const room = document.getElementById('room-input').value;
-      socket.emit('writeQuestion', room, 200); // CANCEL THIS
-    }
-
-    function resumeQ() {
-      const room = document.getElementById('room-input').value;
-      socket.emit('writeQuestion', room, 200); // RESUME THIS
-    }
-
-    function sendMessage() {
-      const room = document.getElementById('room-input').value;
-      const message = document.getElementById('message-input').value;
-      socket.emit('chatMessage', room, message);
+      const answer = document.getElementById('answer-input').value;
+      socket.emit('chatanswer', room, answer);
       socket.emit('getUsersInRoom', room);
     }
 
@@ -465,13 +455,13 @@ function sortTable() {
       socket.emit('kick', room);
     }
 
-    socket.on('chatMessageReply', (grade) => {
+    socket.on('chatanswerReply', (grade) => {
       const room = document.getElementById('room-input').value;
       if (grade === "pass") {
         document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> answered correctly!</div>');
       } else if (grade === "prompt") {
         document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was prompted!</div>');
-        var promptAnswer = prompt("'" + document.getElementById('question').innerHTML + "'\n \nPrompt on " + document.getElementById('message-input').value + ". Enter the correct answer below, then click OK.");
+        var promptAnswer = prompt("'" + document.getElementById('questionText').innerHTML + "'\n \nPrompt on " + document.getElementById('answer-input').value + ". Enter the correct answer below, then click OK.");
         socket.emit('scorePromptAnswer', room, promptAnswer);
       } else if (grade === "fail") {
         document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was wrong.</div>');
@@ -541,13 +531,13 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
   document.getElementById("roomOwner").innerHTML = RoomLeader;
 });
 
-    socket.on('chatMessage', (username, message) => {
+    socket.on('chatanswer', (username, answer) => {
       
-      if (message === "pass") {
+      if (answer === "pass") {
         document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> answered correctly!</div>');
-      } else if (message === "prompt") {
+      } else if (answer === "prompt") {
         document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was prompted!</div>');
-      } else if (message === "fail") {
+      } else if (answer === "fail") {
         document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was wrong.</div>');
       }
 
