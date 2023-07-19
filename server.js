@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
   });
 
 // Update user score
-socket.on('updateScore', (score) => { // also need to save scores in local storage (which can be edited lmao but im lazy)
+socket.on('updateScore', (score) => {
   const user = Array.from(users.values()).find(user => user.playerId === playerId);
   if (user) {
     user.score = score;
