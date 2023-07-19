@@ -35,6 +35,7 @@ io.on('connection', (socket) => {
 
     if (playerSocket[playerId + room]){
       console.log("that username already exists");
+      socket.emit('refresh', playerId);
       return;
     }
 
