@@ -72,7 +72,7 @@
             transition: 0.2s all ease, background-color 0.6s ease;
         }
         .redbtn {
-            background-color: red !important;
+            background-color: #e62227 !important;
             color: white !important;
         }
         .accentbtn {
@@ -88,6 +88,7 @@
             grid-gap: 12px;
             align-items: center;
             padding: 12px 90px;
+            z-index: 99;
         }
         .navtitle {
             font-weight: 700;
@@ -142,8 +143,11 @@
             width: fit-content;
             font-size: 13px;
         }
+        #questiontxt {
+            min-height: 125px;
+        }
         .header {
-            font-size: 19px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--txt1);
         }
@@ -195,6 +199,56 @@
             font-size: 14px;
             padding-right: 20px;
         }
+        #leaderboardgrid {
+            max-height: 170px;
+            overflow-y: scroll;
+            padding-right: 20px;
+        }
+        #activitygrid {
+            max-height: 230px;
+            overflow-y: scroll;
+            padding-right: 20px;
+        }
+        .popup {
+             width: 30%;
+        }
+        .input {
+                 box-shadow:inset 0px 0px 0px 1px white;
+        }
+        #overlay {
+                  transition: 1.2s !important;
+   background-color: 000000;
+   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 9;
+}
+#roompopup {
+   transition: .8s !important;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: #262626;
+   z-index: 9999;
+   padding: 40px;
+   border-radius: 8px;
+}
+#settingspopup {
+   transition: .8s !important;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: #262626;
+   z-index: 9999;
+   padding: 40px;
+   border-radius: 8px;
+   display: none;
+}
     </style>
 
     <div class="navbar">
@@ -236,11 +290,90 @@
                     Buzz In
                 </div>
             </div>
-            <div class="button" style="margin: auto;">
-                Previous Question
+            <div class="button" style="margin: auto; margin-top: 25px;">
+                View Previous Questions
             </div>
         </div>
         <div>
+
+            <div class="card">
+                <div class="header">
+                    Leaderboard
+                </div>
+                <div class="usergrid" id="leaderboardgrid">
+                    <div class="profileimg" style="background-color: #E75353;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        1038
+                    </div>
+
+                    <div class="profileimg" style="background-color: #7788E3;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        503
+                    </div>
+
+                    <div class="profileimg" style="background-color: #79B274;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        80
+                    </div>
+                    <div class="profileimg" style="background-color: #E75353;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        1038
+                    </div>
+
+                    <div class="profileimg" style="background-color: #7788E3;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        503
+                    </div>
+
+                    <div class="profileimg" style="background-color: #79B274;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        80
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="header">
                     Activity
@@ -290,13 +423,6 @@
                     <div class="profileaction">
                         <i class="fa-solid fa-microphone"></i>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="header">
-                    Leaderboard
-                </div>
-                <div class="usergrid" id="activitygrid">
                     <div class="profileimg" style="background-color: #E75353;">
                         HC
                     </div>
@@ -304,9 +430,12 @@
                         <div class="profilename">
                             HappyCat367
                         </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
                     </div>
                     <div class="profileaction">
-                        1038
+                        <i class="fa-solid fa-microphone"></i>
                     </div>
 
                     <div class="profileimg" style="background-color: #7788E3;">
@@ -316,9 +445,12 @@
                         <div class="profilename">
                             HappyCat367
                         </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
                     </div>
                     <div class="profileaction">
-                        503
+                        <i class="fa-solid fa-microphone"></i>
                     </div>
 
                     <div class="profileimg" style="background-color: #79B274;">
@@ -328,13 +460,20 @@
                         <div class="profilename">
                             HappyCat367
                         </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
                     </div>
                     <div class="profileaction">
-                        80
+                        <i class="fa-solid fa-microphone"></i>
                     </div>
                 </div>
             </div>
-            <div class="card">
+        </div>
+    </div>
+
+           <!--Settings Popup-->
+           <div id="settingspopup" class="card popup">
                 <div class="header">
                     Settings
                 </div>
@@ -360,9 +499,7 @@
                     <div class="settingtxt">
                         Nickname
                     </div>
-                    <div class="button">
-                        Derek
-                    </div>
+                    <input class="button input" value="D erek" />
                     <div class="button accentbtn">
                         Update
                     </div>
@@ -371,7 +508,29 @@
                     Reset Score
                 </div>
             </div>
-        </div>
-    </div>
+
+           <!--Room Popup-->
+           <div id="roompopup" class="card popup">
+                <div class="header">
+                    Join Room
+                </div>
+                <div class="settingsgrid">
+                    <div class="settingtxt">
+                        Room Code
+                    </div>
+                    <input class="button input" placeholder="Code"/>
+                    <div class="button accentbtn">
+                        Join
+                    </div>
+                </div>
+                <center>- or -</center>
+
+                <div class="button accentbtn" style="width: 100%;">
+                    Join Random
+                </div>
+            </div>
+
+            <div id="overlay"></div>
+
 </body>
 </html>
