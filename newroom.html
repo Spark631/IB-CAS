@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzer</title>
+    <script src="https://kit.fontawesome.com/4616ff3f2d.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        :root {
+            --bg1: #222222;
+            --bg2: #262626;
+            --bg3: #171717;
+
+            --txt1: white;
+            --txt2: #b4b4b4;
+        }
+        * {
+            font-family: "Figtree", Arial, sans-serif;
+            margin: 0px;
+            transition: 0.3s all ease, background-color 0.6s ease;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            position: relative;
+            background-color: var(--bg1);
+            overflow-x: hidden;
+        }
+        *::-webkit-scrollbar {
+            width: 16px;
+            background-color: var(--bg2);
+        }
+        *::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            border: 4.5px solid transparent;
+            background-clip: content-box;
+            background-color: grey;
+        }
+        .button {
+            text-align: center;
+            display: inline-flex;
+            column-gap: 9px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: fit-content;
+            height: fit-content;
+            border-radius: 5px;
+            padding: 13px 32px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.2s all ease, background-color 0.6s ease;
+            background-color: var(--bg3);
+            color: var(--txt1);
+            border: none;
+            outline: none;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            text-decoration: none;
+            line-height: 1;
+        }
+        .button * {
+            position: relative;
+            z-index: 999;
+            transition: 0.2s all ease, background-color 0.6s ease;
+        }
+        .redbtn {
+            background-color: red !important;
+            color: white !important;
+        }
+        .accentbtn {
+            background-color: var(--txt1) !important;
+            color: var(--bg1) !important;
+        }
+        .navbar {
+            position: sticky;
+            top: 0px;
+            background-color: var(--bg2);
+            display: grid;
+            grid-template-columns: 1fr repeat(2, auto);
+            grid-gap: 12px;
+            align-items: center;
+            padding: 12px 90px;
+        }
+        .navtitle {
+            font-weight: 700;
+            color: var(--txt1);
+            font-size: 18px;
+        }
+        .main {
+            padding: 70px 90px;
+            display: grid;
+            grid-template-columns: 5fr 4fr;
+            grid-gap: 40px;
+        }
+        .main > div {
+            display: grid;
+            grid-gap: inherit;
+            height: fit-content;
+        }
+        .timer {
+            width: 100%;
+            background-color: var(--bg3);
+            padding: 24px;
+            border-radius: 8px;
+            border: 2px solid var(--txt1);
+            color: var(--txt1);
+            font-size: 100px;
+            display: flex;
+            justify-content: center;
+        }
+        #minutes {
+            line-height: 0.8;
+        }
+        #miliseconds {
+            margin-top: auto;
+            font-size: 24px;
+        }
+        .card {
+            padding: 30px;
+            background-color: var(--bg3);
+            border-radius: 8px;
+            color: var(--txt1);
+            display: grid;
+            grid-gap: 24px;
+            font-size: 15px;
+            height: fit-content;
+        }
+        .tag {
+            background-color: var(--bg1);
+            color: var(--txt1);
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 5px;
+            width: fit-content;
+            font-size: 13px;
+        }
+        .header {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--txt1);
+        }
+        .usergrid {
+            display: grid;
+            grid-template-columns: auto 1fr 65px;
+            row-gap: 16px;
+            column-gap: 12px;
+            align-items: center;
+        }
+        .profileimg {
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            height: 44px;
+            width: 44px;
+            border-radius: 30px;
+            display: grid;
+            place-items: center;
+        }
+        .profilename {
+            font-weight: 700;
+            color: var(--txt1);
+        }
+        .profiledetails {
+            font-size: 10px;
+            color: var(--txt2);
+        }
+        .profileaction {
+            background-color: var(--bg2);
+            color: var(--txt1);
+            padding: 8px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .settingsgrid {
+            display: grid;
+            grid-gap: 12px;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+        }
+        .settingsgrid > .button {
+            width: 100%;
+            background-color: var(--bg2);
+        }
+        .settingtxt {
+            font-size: 14px;
+            padding-right: 20px;
+        }
+    </style>
+
+    <div class="navbar">
+        <div class="navtitle">
+            Quizzer
+        </div>
+        <div class="button">
+            Settings
+        </div>
+        <div class="button redbtn">
+            Leave Room
+        </div>
+    </div>
+
+    <div class="main">
+        <div>
+            <div class="timer">
+                <div id="minutes">
+                    10:00
+                </div>
+                <div id="miliseconds">
+                    .00
+                </div>
+            </div>
+            <div class="card">
+                <div class="tag">
+                    Science
+                </div>
+                <div id="questiontxt">
+                    The creation of this type of substance generally starts by putting atoms in a
+                    magneto-optical trap, immediately followed by an evaporative method. In 
+                    attempting the first synthesis of this type of substance, Wolfgang Ketterle
+                    worked with sodium atoms, while contemporaneously Eric Cornell and Carl 
+                    Wieman succeeded with rubidium atoms. Atoms in this type of substance
+                    are all at the lowest quantum level. For 10 points, name this "fifth state of
+                    matter" in which atoms are
+                </div>
+                <div class="button accentbtn" style="width: 100%;">
+                    Buzz In
+                </div>
+            </div>
+            <div class="button" style="margin: auto;">
+                Previous Question
+            </div>
+        </div>
+        <div>
+            <div class="card">
+                <div class="header">
+                    Activity
+                </div>
+                <div class="usergrid" id="activitygrid">
+                    <div class="profileimg" style="background-color: #E75353;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+
+                    <div class="profileimg" style="background-color: #7788E3;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+
+                    <div class="profileimg" style="background-color: #79B274;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    Leaderboard
+                </div>
+                <div class="usergrid" id="activitygrid">
+                    <div class="profileimg" style="background-color: #E75353;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        1038
+                    </div>
+
+                    <div class="profileimg" style="background-color: #7788E3;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        503
+                    </div>
+
+                    <div class="profileimg" style="background-color: #79B274;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        80
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    Settings
+                </div>
+                <div class="settingsgrid">
+                    <div class="settingtxt">
+                        Room Code
+                    </div>
+                    <div class="button">
+                        022867
+                    </div>
+                    <div class="button accentbtn">
+                        Copy
+                    </div>
+                    <div class="settingtxt">
+                        Room Owner
+                    </div>
+                    <div class="button">
+                        Noah
+                    </div>
+                    <div class="button accentbtn">
+                        Kick
+                    </div>
+                    <div class="settingtxt">
+                        Nickname
+                    </div>
+                    <div class="button">
+                        Derek
+                    </div>
+                    <div class="button accentbtn">
+                        Update
+                    </div>
+                </div>
+                <div class="button redbtn" style="width: 100%;">
+                    Reset Score
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
