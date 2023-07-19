@@ -291,18 +291,16 @@ body {
    <button id="joinRoomButton" onclick="joinRoom()">Join</button>
    <br />-or-<br />
    <button id="joinRandomRoomButton" onclick="joinRandomRoom()">Create Random</button>
-  <button onclick="leaveRoom()" style="color: black;">Leave Room</button><!-- leave automatically -->
-
-  <div id="chat">
-    <ul id="messages"></ul>
-  </div>
 </div>
 
 <div id="timer">
      <span id="minutes">10</span>:<span id="seconds">00</span><span id="milliseconds">.00</span>
 </div>
 
-<div id="question"><button id="writeButton" onclick="writeQ();" style="color: black;">Start Questions</button></div>
+<div id="question">
+  <button id="writeButton" onclick="writeQ();" style="color: black;">Start Questions</button>
+  <div id="questionText"></div>
+</div>
 
 <div id="answerFrame"><div id="buzzer" onclick="buzzIn();"><b>Buzz In</b></div></div>
 
@@ -480,6 +478,20 @@ function sortTable() {
       }
 });
 
+socket.on('votesNeeded', (numerator, denominator) => {
+  var roomLeader = document.getElementById('roomOwner').innerHTML;
+  document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity">' + numerator + '/' + denominator + ' votes received to kick <b>' + roomLeader + '</b></div>');
+  });
+
+socket.on('refresh', (username) => {
+  location.reload();
+  });
+
+socket.on('userKicked', (username) => {
+    const room = document.getElementById('room-input').value;
+    socket.emit('getUsersInRoom', room);
+    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was kicked.</div>');
+  });
 
     socket.on('userJoined', (username) => {
     const room = document.getElementById('room-input').value;
@@ -505,7 +517,7 @@ function sortTable() {
 
   socket.on('increment', (word) => {
     document.getElementById("writeButton").style.display = "none";
-    document.getElementById("question").innerHTML += word;
+    document.getElementById("questionText").innerHTML += word;
   });
 
   socket.on('roomLeader', (isRoomLeader, RoomLeader) => {
@@ -515,7 +527,7 @@ function sortTable() {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
   }
-  document.getElementById("roomOwner").innerHTML = "Room leader: " + RoomLeader;
+  document.getElementById("roomOwner").innerHTML = RoomLeader;
 });
 
 socket.on('roomLeaderTransferred', (RoomLeader) => {
@@ -526,7 +538,7 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
   }
-  document.getElementById("roomOwner").innerHTML = "Room leader: " + RoomLeader;
+  document.getElementById("roomOwner").innerHTML = RoomLeader;
 });
 
     socket.on('chatMessage', (username, message) => {

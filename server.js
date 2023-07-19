@@ -10,6 +10,7 @@ const users = new Map();
 const roomLeaders = {};
 const players = {};
 const roomVotes = {};
+const playerSocket = {};
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/home.html');
@@ -31,7 +32,14 @@ io.on('connection', (socket) => {
 
   // Join a room
   socket.on('joinRoom', (room) => {
+
+    if (playerSocket[playerId + room]){
+      console.log("that username already exists");
+      return;
+    }
+
     players[socket.id] = playerId;
+    playerSocket[playerId + room] = socket.id;
     roomVotes[room] = []
     // If there is no existing room leader for the room, assign the current socket as the room leader
     if (!roomLeaders[room]) {
@@ -58,12 +66,17 @@ io.on('connection', (socket) => {
     const votes = roomVotes[room];
     const roomSize = io.sockets.adapter.rooms.get(room)?.size || 0;
 
-    if (roomLeader != socket.id && !votes.includes(playerId)) {
-      votes.push(playerId);
+    if (roomLeader != socket.id && !votes.includes(playerSocket[playerId+room])) {
+      votes.push(playerSocket[playerId+room]);
       var value = (roomVotes[room].length)/(roomSize-1);
       if (value == 1) {
         console.log(players[roomLeader] + " voted out by " + playerId);
+        socket.to(roomLeader).emit('refresh', players[roomLeader]);
+        socket.to(room).emit('userKicked', players[roomLeader]);
         users.delete(roomLeader);
+      } else {
+        socket.emit('votesNeeded', (roomVotes[room].length), (roomSize-1));
+        socket.to(room).emit('votesNeeded', (roomVotes[room].length), (roomSize-1));
       }
     }
   });
@@ -173,28 +186,34 @@ function increment(){
   socket.on('disconnect', () => {
     console.log('A user with id ' + playerId + ' disconnected');
 
-    const room = Object.keys(roomLeaders).find(
-      (key) => roomLeaders[key] === socket.id
-    );
+    if(roomId) {
+      var room = roomId;
+      const roomLeader = roomLeaders[room];
 
-    if (room) {
-      delete roomLeaders[room]; // Remove the room leader for the room
-
-      // Find another socket in the room and designate it as the new room leader
-      const socketsInRoom = io.sockets.adapter.rooms.get(room);
-
-      if (socketsInRoom && socketsInRoom.size > 0) {
-        const newLeader = Array.from(socketsInRoom)[0];
-        roomLeaders[room] = newLeader;
-        io.to(room).emit('roomLeaderTransferred', players[newLeader]);
-        console.log("new leader is:" + players[newLeader]);
+      if (roomLeader == socket.id) {
+        const room = Object.keys(roomLeaders).find(
+          (key) => roomLeaders[key] === socket.id
+        );
+        delete roomLeaders[room];
+        const socketsInRoom = io.sockets.adapter.rooms.get(room);
+        if (socketsInRoom && socketsInRoom.size > 0) {
+          const newLeader = Array.from(socketsInRoom)[0];
+          roomLeaders[room] = newLeader;
+          io.to(room).emit('roomLeaderTransferred', players[newLeader]);
+          console.log("new leader is:" + players[newLeader]);
+        }
+      } else {
+          io.to(room).emit('userLeft', playerId);
       }
+
+      delete players[socket.id];
+      delete playerSocket[playerId + room];
+      roomVotes[room] = [];
     }
-    delete players[socket.id];
-    if (roomId) {
-      const { playerId } = users.get(socket.id);
-      io.to(roomId).emit('userLeft', playerId);
-      users.delete(socket.id);
+    try {
+        users.delete(socket.id);
+    } catch (error) {
+        console.log("error: " + error);
     }
   });
 });
