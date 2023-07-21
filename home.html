@@ -1,214 +1,219 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Quizzard</title>
-<link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=K2D&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzer</title>
+    <script src="https://kit.fontawesome.com/4616ff3f2d.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<style>
-*{
-  color: white;
-  font-family: inter;
-}
-body {
-   background-color: #222222;
-   margin: 0;
-}
-#navbar {
-   position: fixed;
-   height: 87px;
-   width: 100%;
-   background-color: #262626;
-   top: 0px;
-   z-index: 99;
-}
+<body>
+    <style>
+        :root {
+            --bg1: #222222;
+            --bg2: #262626;
+            --bg3: #171717;
 
-#logo {
-   position: absolute;
-   font-family: 'Irish Grover';
-   font-size: 36px;
-   top: 21px;
-   left: 15%;
-}
-
-.menuItem {
-   position: relative;
-   font-size: 20px;
-   top: 30px;
-   float: right;
-   right: 15%;
-   margin-left: 50px;
-}
-
-#timer {
-   position: relative;
-   width: 30%;
-   padding-left: 40px;
-   padding-right: 40px;
-   height: 127px;
-   background-color: 171717;
-   border-radius: 12px;
-   left: 15%;
-   top: 167px;
-   outline: 4px solid #BC2727;
-   outline-offset: -4px;
-   font-family: 'K2D';
-   font-size: 96px;
-   text-align: center;
-}
-
-#milliseconds {
-   font-size: 24px;
-}
-
-#question {
-   position: relative;
-   width: 30%;
-   height: 180px;
-   padding: 40px;
-   background-color: 171717;
-   border-radius: 12px;
-   left: 15%;
-   top: 200px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 16px;
-}
-#answerFrame {
-  position: relative;
-  width: 30%;
-  top: 230px;
-   left: 15%;
-}
-#buzzer {
-   background-color: #BC2727;
-   border-radius: 6px;
-   height: 50px;
-   padding-right: 40px;
-   padding-left: 40px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 20px;
-}
-
-#previousQuestions {
-   position: relative;
-   background-color: #262626;
-   border-radius: 6px;
-   padding: 40px;
-   width: 30%;
-   height: 120px;
-   margin-bottom: 350px;
-   left: 15%;
-   top: 260px;
-}
-
-#previousQuestionsBlocker {
-   background-color: #1f1f1f;
-   width: 100%;
-   height: 100%;
-   border-radius: 6px;
-   border: 20px solid #1f1f1f;
-   margin-left: -20px;
-   margin-top: -20px;
-   font-size: 14px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-}
-
-#sidebar {
-   position: absolute;
-   background-color: #262626;
-   right: 15%;
-   width: 28%;
-   height: 500px;
-   top: 167px;
-   border-radius: 6px;
-}
-
-#settings {
-   position: absolute;
-   background-color: #262626;
-   right: 15%;
-   width: 28%;
-   height: 200px;
-   top: 697px;
-   border-radius: 6px;
-}
-
-#activityHeader {
-   font-size: 20px;
-   margin-left: 35px;
-   margin-top: 40px;
-}
-
-#leaderboardHeader {
-   font-size: 20px;
-   margin-left: 35px;
-   margin-top: 40px;
-}
-
-#activityFrame {
-  margin-left: 35px;
-  margin-right: 35px;
-  margin-top: 15px;
-  height: 135px;
-  overflow-y: hidden;
-}
-
-.activity {
-   font-size: 12px;
-   background-color: #2E2E2E;
-   border-radius: 4px;
-   padding: 6px;
-   text-align: center;
-   margin-bottom: 8px;
-}
-
-.leaderboardLabel {
-   font-size: 12px;
-   margin-top: 20px;
-   margin-left: 35px;
-   display: inline-block;
-}
-
-#leaderboardFrame {
-  margin-left: 35px;
-  margin-right: 35px;
-  margin-top: 7px;
-  height: 140px;
-  overflow-y: hidden;
-  font-size: 12px;
-}
-
-.leaderboardRow {
-   margin-bottom: 8px;
-}
-
-.points {
-   display: inline-block;
-   background-color: #2E2E2E;
-   padding: 3px;
-   width: 18%;
-   border-radius: 4px;
-   text-align: center;
-}
-
-.player {
-   display: inline-block;
-   background-color: #2E2E2E;
-   margin-left: 4%;
-   padding: 3px;
-   width: 55px;
-   border-radius: 4px;
-   text-align: center;
-   width: 74%;
-}
-#overlay {
-  transition: 1.2s !important;
+            --txt1: white;
+            --txt2: #b4b4b4;
+        }
+        * {
+            font-family: "Figtree", Arial, sans-serif;
+            margin: 0px;
+            transition: 0.3s all ease, background-color 0.6s ease;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            position: relative;
+            background-color: var(--bg1);
+            overflow-x: hidden;
+        }
+        *::-webkit-scrollbar {
+            width: 16px;
+            background-color: var(--bg2);
+        }
+        *::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            border: 4.5px solid transparent;
+            background-clip: content-box;
+            background-color: grey;
+        }
+        .button {
+            text-align: center;
+            display: inline-flex;
+            column-gap: 9px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: fit-content;
+            height: fit-content;
+            border-radius: 5px;
+            padding: 13px 32px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.2s all ease, background-color 0.6s ease;
+            background-color: var(--bg3);
+            color: var(--txt1);
+            border: none;
+            outline: none;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            text-decoration: none;
+            line-height: 1;
+        }
+        .button * {
+            position: relative;
+            z-index: 999;
+            transition: 0.2s all ease, background-color 0.6s ease;
+        }
+        .redbtn {
+            background-color: #e62227 !important;
+            color: white !important;
+        }
+        .accentbtn {
+            background-color: var(--txt1) !important;
+            color: var(--bg1) !important;
+        }
+        .navbar {
+            position: sticky;
+            top: 0px;
+            background-color: var(--bg2);
+            display: grid;
+            grid-template-columns: 1fr repeat(2, auto);
+            grid-gap: 12px;
+            align-items: center;
+            padding: 12px 90px;
+            z-index: 99;
+        }
+        .navtitle {
+            font-weight: 700;
+            color: var(--txt1);
+            font-size: 18px;
+        }
+        .main {
+            padding: 70px 90px;
+            display: grid;
+            grid-template-columns: 5fr 4fr;
+            grid-gap: 40px;
+        }
+        .main > div {
+            display: grid;
+            grid-gap: inherit;
+            height: fit-content;
+        }
+        .timer {
+            width: 100%;
+            background-color: var(--bg3);
+            padding: 24px;
+            border-radius: 8px;
+            border: 2px solid var(--txt1);
+            color: var(--txt1);
+            font-size: 100px;
+            display: flex;
+            justify-content: center;
+        }
+        #minutes {
+            line-height: 0.8;
+        }
+        #miliseconds {
+            margin-top: auto;
+            font-size: 24px;
+        }
+        .card {
+            padding: 30px;
+            background-color: var(--bg3);
+            border-radius: 8px;
+            color: var(--txt1);
+            display: grid;
+            grid-gap: 24px;
+            font-size: 15px;
+            height: fit-content;
+        }
+        .tag {
+            background-color: var(--bg1);
+            color: var(--txt1);
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 5px;
+            width: fit-content;
+            font-size: 13px;
+        }
+        #questiontxt {
+            min-height: 125px;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--txt1);
+        }
+        .usergrid {
+            display: grid;
+            grid-template-columns: auto 1fr 65px;
+            row-gap: 16px;
+            column-gap: 12px;
+            align-items: center;
+        }
+        .profileimg {
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            height: 44px;
+            width: 44px;
+            border-radius: 30px;
+            display: grid;
+            place-items: center;
+        }
+        .profilename {
+            font-weight: 700;
+            color: var(--txt1);
+        }
+        .profiledetails {
+            font-size: 10px;
+            color: var(--txt2);
+        }
+        .profileaction {
+            background-color: var(--bg2);
+            color: var(--txt1);
+            padding: 8px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .settingsgrid {
+            display: grid;
+            grid-gap: 12px;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+        }
+        .settingsgrid > .button {
+            width: 100%;
+            background-color: var(--bg2);
+        }
+        .settingtxt {
+            font-size: 14px;
+            padding-right: 20px;
+        }
+        #leaderboardgrid {
+            max-height: 170px;
+            overflow-y: scroll;
+            padding-right: 20px;
+        }
+        #activitygrid {
+            max-height: 230px;
+            overflow-y: scroll;
+            padding-right: 20px;
+        }
+        .input {
+                 box-shadow:inset 0px 0px 0px 1px white;
+        }
+        #overlay {
+                  transition: 1.2s !important;
    background-color: 000000;
    position: fixed;
   top: 0;
@@ -218,138 +223,256 @@ body {
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 9;
 }
-#joinRoomBox {
+#roompopup {
    transition: .8s !important;
    position: fixed;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   width: 400px;
    background-color: #262626;
    z-index: 9999;
    padding: 40px;
    border-radius: 8px;
 }
-#joinRoomBoxTitle {
-  font-weight: 800;
-  font-size: 30px;
+#settingspopup {
+   transition: .8s !important;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border: 3px solid white;
+   z-index: 9999;
+   padding: 40px;
+   border-radius: 8px;
+   display: none;
+   opacity: 0;
 }
-#joinRoomBoxSubtitle {
-  margin-top: 25px;
-  font-weight: 500;
-  margin-bottom: 15px;
+.navbarButtons {
+   opacity: 0;
 }
-#room-input {
-  background-color: #222222;
+#answerInput {
   width: 100%;
-  border: 4px solid white;
-  border-radius: 6px;
-  height: 45px;
-  margin-bottom: 15px;
-}
-#joinRoomButton {
-  transition: .5s;
-  cursor: pointer;
-  background-color: #BC2727;
-  border: none;
-  border-radius: 6px;
-  width: 175px;
-  height: 35px;
-  margin-bottom: 30px;
-}
-#joinRoomButton:hover {
-  border: 1px solid white;
-}
-#joinRandomRoomButton {
-  transition: .5s;
-  cursor: pointer;
-  background-color: #BC2727;
-  border: none;
-  border-radius: 6px;
-  width: 225px;
-  height: 35px;
-  margin-top: 30px;
-}
-#joinRandomRoomButton:hover {
-  border: 1px solid white;
+border-radius: 4px;
+padding: 10px;
+border: 3px solid white;
 }
 </style>
-<body>
-<div id="navbar">
-    <span id="logo">Quizzer</span>
-    <span class="menuItem">Settings</span>
-    <span class="menuItem">Donate</span>
-    <span class="menuItem">About</span>
-    <span class="menuItem">Change Room</span>
-</div>
 
-<div id="overlay"></div>
-<div id="joinRoomBox">
-   <div id="joinRoomBoxTitle">Join A Room</div>
-   <div id="joinRoomBoxSubtitle">Room Code</div>
-   <input type="text" id="room-input" placeholder="   Room Code" />
-   <button id="joinRoomButton" onclick="joinRoom()">Join</button>
-   <br />-or-<br />
-   <button id="joinRandomRoomButton" onclick="joinRandomRoom()">Create Random</button>
-</div>
+    <div class="navbar">
+        <div class="navtitle">
+            Quizzer
+        </div>
+        <div class="button navbarButtons" onclick="openSettings();">
+            Settings
+        </div>
+        <div class="button redbtn navbarButtons" onclick="window.location.reload();">
+            Leave Room
+        </div>
+    </div>
 
-<div id="timer">
-     <span id="minutes">10</span>:<span id="seconds">00</span><span id="milliseconds">.00</span>
-</div>
+    <div class="main">
+        <div>
+            <div class="timer">
+                <div id="minutes">
+                    10:00
+                </div>
+                <div id="miliseconds">
+                    .00
+                </div>
+            </div>
+            <div class="card">
+                <div class="tag">
+                    Waiting for room leader...
+                </div>
+                <button id="writeButton" class="button accentbtn" style="background-color: #e62227 !important; color: white !important;" onclick="writeQ();">Start Questions</button>
+                <div id="questiontxt"></div>
+                <div id="answerFrame">
+                    <div id="buzzer" onclick="buzzIn();" class="button accentbtn" style="width: 100%;">
+                        Buzz In
+                    </div>
+                </div>
+            </div>
+            <div class="button" style="margin: auto; margin-top: 25px;">
+                View Previous Questions
+            </div>
+        </div>
+        <div>
 
-<div id="question">
-  <button id="writeButton" onclick="writeQ();" style="color: black;">Start Questions</button>
-  <div id="questionText"></div>
-</div>
+            <div class="card">
+                <div class="header">
+                    Leaderboard
+                </div>
+                <div class="usergrid" id="leaderboardgrid">
+                </div>
+            </div>
 
-<div id="answerFrame"><div id="buzzer" onclick="buzzIn();"><b>Buzz In</b></div></div>
+            <div class="card">
+                <div class="header">
+                    Activity
+                </div>
+                <div class="usergrid" id="activitygrid">
+                    <div class="profileimg" style="background-color: #E75353;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
 
-<div id="previousQuestions"><div id="previousQuestionsBlocker"><u>Show Previous Questions</u></div></div>
+                    <div class="profileimg" style="background-color: #7788E3;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
 
-<div id="sidebar">
-   <div id="activityHeader"><b>Activity</b></div>
-   <div id="activityFrame">
-       <div class="activity"><b>&nbsp;</b> </div>
-       <div class="activity"><b> &nbsp;</b> </div>
-       <div class="activity"><b> &nbsp;</b> </div>
-       <div class="activity"><b> &nbsp;</b> </div>
-   </div>
+                    <div class="profileimg" style="background-color: #79B274;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+                    <div class="profileimg" style="background-color: #E75353;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
 
-   <div id="leaderboardHeader"><b>Leaderboard</b></div>
-   <div class="leaderboardLabel">Points</div>
-   <div class="leaderboardLabel">Player</div>
-   <div id="leaderboardFrame">
-    <table id="pointTable">
-      <thead>
-        <tr>
-          <th>Points</th>
-          <th>Player</th>
-        </tr>
-      </thead>
-      <tbody id="scoreboard">
-      </tbody>
-    </table>
-       <div class="leaderboardRow"><div class="points">10</div><div class="player">Derek</div></div>
-       <div class="leaderboardRow"><div class="points">0</div><div class="player">Donny</div></div>
-       <div class="leaderboardRow"><div class="points">10</div><div class="player">Derek</div></div>
-       <div class="leaderboardRow"><div class="points">0</div><div class="player">Donny</div></div>
-       <div class="leaderboardRow"><div class="points">10</div><div class="player">Derek</div></div>
-       <div class="leaderboardRow"><div class="points">0</div><div class="player">Donny</div></div>
-       <div class="leaderboardRow"><div class="points">10</div><div class="player">Derek</div></div>
-       <div class="leaderboardRow"><div class="points">0</div><div class="player">Donny</div></div>
-   </div>
-</div>
+                    <div class="profileimg" style="background-color: #7788E3;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
 
-<div id="settings">
-</div>
-<ul id="roomOwner"></ul>
+                    <div class="profileimg" style="background-color: #79B274;">
+                        HC
+                    </div>
+                    <div>
+                        <div class="profilename">
+                            HappyCat367
+                        </div>
+                        <div class="profiledetails">
+                            Buzzed in
+                        </div>
+                    </div>
+                    <div class="profileaction">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+           <!--Settings Popup-->
+           <div id="settingspopup" class="card popup">
+                <div class="header">
+                    Settings
+                </div>
+                <div class="settingsgrid">
+                    <div class="settingtxt">
+                        Room Code
+                    </div>
+                    <div id="roomCode" class="button">
+                        022867
+                    </div>
+                    <div class="button accentbtn">
+                        Copy
+                    </div>
+                    <div class="settingtxt">
+                        Room Owner
+                    </div>
+                    <div id="roomOwner" class="button">
+                        Noah
+                    </div>
+                    <div onclick="kick();" class="button accentbtn">
+                        Kick
+                    </div>
+                    <div class="settingtxt">
+                        Username
+                    </div>
+                    <input id="username" class="button input" />
+                    <div onclick="updateUsername();" class="button accentbtn">
+                        Update
+                    </div>
+                </div>
+                <div class="button redbtn" style="width: 100%;">
+                    Reset Score
+                </div>
+                <div class="button accentbtn" onclick="openSettings();" style="width: 100%;">
+                  Close Settings
+              </div>
+            </div>
+
+           <!--Room Popup-->
+           <div id="roompopup" class="card popup">
+                <div class="header">
+                    Join Room
+                </div>
+                <div class="settingsgrid">
+                    <div class="settingtxt">
+                        Room Code
+                    </div>
+                    <input id="roomCodeInput" class="button input" placeholder="Code"/>
+                    <div onclick="joinRoom()" class="button accentbtn">
+                        Join
+                    </div>
+                </div>
+                <center>- or -</center>
+
+                <div onclick="joinRandomRoom()" class="button accentbtn" style="width: 100%;">
+                    Join Random
+                </div>
+            </div>
+
+            <div id="overlay"></div>
 
 <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
     const adjectives = ['Happy', 'Brave', 'Clever', 'Sunny', 'Kind', 'Playful', 'Witty', 'Gentle', 'Vibrant'];
 const nouns = ['Cat', 'Dog', 'Bird', 'Sun', 'Moon', 'Flower', 'Star', 'Tree', 'Ocean'];
-const table = document.getElementById('scoreboard');
+const grid = document.getElementById('leaderboardgrid');
 
 function generateRandomUsername() {
   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -359,24 +482,64 @@ function generateRandomUsername() {
   return adjective + noun + number;
 }
 
-function sortTable() {
-  const table = document.getElementById('pointTable');
-  const tbody = table.getElementsByTagName('tbody')[0];
-  const rows = Array.from(tbody.getElementsByTagName('tr'));
+function sortGrid() {
+      const profileDivs = Array.from(grid.querySelectorAll('.profileimg, .profilename, .profileaction'));
+      const rowData = [];
+      for (let i = 0; i < profileDivs.length; i += 3) {
+        const profileimg = profileDivs[i];
+        const profilename = profileDivs[i + 1];
+        const profileaction = profileDivs[i + 2];
+        const value = parseInt(profileaction.textContent);
+        rowData.push({ profileimg, profilename, profileaction, value });
+      }
+      rowData.sort((a, b) => b.value - a.value);
+      const fragment = document.createDocumentFragment();
+      rowData.forEach(({ profileimg, profilename, profileaction }) => {
+        fragment.appendChild(profileimg);
+        const container = document.createElement('div');
+        container.appendChild(profilename);
+        fragment.appendChild(container);
+        fragment.appendChild(profileaction);
+      });
+      grid.innerHTML = '';
+      grid.appendChild(fragment);
+    }
 
-  rows.sort((a, b) => {
-    const cellA = a.getElementsByTagName('td')[0].textContent;
-    const cellB = b.getElementsByTagName('td')[0].textContent;
-    return cellB - cellA;
-  });
+    function generateColor(combination) {
+    const hue = (combination.charCodeAt(0) * combination.charCodeAt(1)) % 360;
+    const saturation = 50;
+    const lightness = 50;
 
-  rows.forEach(row => tbody.appendChild(row));
-}
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  }
+
+  function extractUppercaseLetters(input) {
+    const uppercaseLetters = input.match(/[A-Z]/g);
+    if (uppercaseLetters && uppercaseLetters.length >= 2) {
+      return uppercaseLetters.slice(0, 2).join('');
+    } else {
+      return input.slice(0, 2);
+    }
+  }
 
     socket.on('usersInRoom', (users) => {
       users.forEach((user) => {
-        table.innerHTML = users.map(user => `<tr><td>${user.score}</td><td>${user.username}</td></tr>`).join('');
-        sortTable();
+        console.log("update grid");
+        var characters = extractUppercaseLetters(user.username);
+        var color = generateColor(characters);
+        grid.innerHTML = users.map(user => {
+      const characters = extractUppercaseLetters(user.username);
+      const color = generateColor(characters);
+
+      return `
+        <div class="profileimg" style="background-color: ${color};">${characters.toUpperCase()}</div>
+        <div>
+          <div class="profilename">${user.username}</div>
+        </div>
+        <div class="profileaction">${user.score}</div>
+      `;
+    }).join('');
+        sortGrid();
       });
     });
 
@@ -391,28 +554,40 @@ function sortTable() {
 
     function handleKeyPress(event) {
     if (event.key === "Enter") {
-      sendanswer(); // also update this
+      sendanswer();
     }
   }
 
+    function updateUsername() { // first need to check with array in server for no duplicates
+      var result = confirm("Are you sure you would like to proceed? Your score will be lost.");
+      if (result != true) {
+        return;
+      }
+      localStorage.setItem('playerId', document.getElementById("username").value);
+      window.location.reload();
+    }
+
     function buzzIn() {
-      const room = document.getElementById('room-input').value;
-      document.getElementById('answerFrame').innerHTML = '<input type="text" id="answer-input" onkeypress="handleKeyPress(event)" style="color: black;" placeholder="Type an answer" /> <div id="buzzer" onclick="sendanswer();"><b>Answer</b></div>'; // will need to change function name
-      document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> buzzed in!</div>');
+      const room = document.getElementById('roomCode').innerHTML;
+      document.getElementById('answerFrame').innerHTML = '<input type="text" id="answerInput" onkeypress="handleKeyPress(event)" placeholder="Type an answer" />';
+      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> buzzed in!</div>'); // update to new layout
+      document.getElementById("answerInput").focus(); 
       socket.emit('buzzedIn', room);
     }
 
     function joinRoom() {
-      const room = document.getElementById('room-input').value;
+      const room = document.getElementById('roomCodeInput').value;
       socket.emit('joinRoom', room);
       document.getElementById('overlay').style.opacity = 0;
-      document.getElementById('joinRoomBox').style.opacity = 0;
-      document.getElementById('settings').innerHTML = "Room code: " + room; // update this with new website
+      document.getElementById('roompopup').style.opacity = 0;
+      document.getElementById('roomCode').innerHTML = room;
+      document.getElementById('username').value = playerId;
       socket.emit('getUsersInRoom', room);
-      document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>');
+      document.querySelectorAll('.navbarButtons').forEach(div => div.style.opacity = 1);
+      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>'); // update to new layout
       setTimeout(function() {
   document.getElementById('overlay').style.display = "none";
-      document.getElementById('joinRoomBox').style.display = "none";
+      document.getElementById('roompopup').style.display = "none";
 }, 800);
     }
 
@@ -420,13 +595,31 @@ function sortTable() {
       const room = Math.floor(Math.random() * 10000) + 1;
       socket.emit('joinRoom', room);
       document.getElementById('overlay').style.opacity = 0;
-      document.getElementById('joinRoomBox').style.opacity = 0;
-      document.getElementById('settings').innerHTML = "Room code: " + room; // update this with new website
-      document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>');
+      document.getElementById('roompopup').style.opacity = 0;
+      document.getElementById('roomCode').innerHTML = room;
+      document.getElementById('username').value = playerId;
+      document.querySelectorAll('.navbarButtons').forEach(div => div.style.opacity = 1);
+      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>'); // update to new layout
       setTimeout(function() {
   document.getElementById('overlay').style.display = "none";
-      document.getElementById('joinRoomBox').style.display = "none";
+      document.getElementById('roompopup').style.display = "none";
 }, 800);
+    }
+
+    function openSettings(){
+      if (document.getElementById("settingspopup").style.display == "grid") {
+        document.getElementById("settingspopup").style.opacity = 0;
+        document.getElementById("overlay").style.opacity = 0;
+        setTimeout(function() {
+              document.getElementById('settingspopup').style.display = "none";
+              document.getElementById("overlay").style.display = "none";
+        }, 800);
+      } else {
+      document.getElementById("settingspopup").style.display = "grid";
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("settingspopup").style.opacity = 1;
+      document.getElementById("overlay").style.opacity = 1;
+      }
     }
 
     function updateScore(score) {
@@ -434,43 +627,46 @@ function sortTable() {
     }
 
     function leaveRoom() {
-      const room = document.getElementById('room-input').value;
+      const room = document.getElementById('roomCode').innerHTML;
       socket.emit('leaveRoom', room);
     }
 
     function writeQ() {
-      const room = document.getElementById('room-input').value;
+      const room = document.getElementById('roomCode').innerHTML;
       socket.emit('writeQuestion', room, 200); // change the speed
     }
 
     function sendanswer() {
-      const room = document.getElementById('room-input').value;
-      const answer = document.getElementById('answer-input').value;
+      const room = document.getElementById('roomCode').innerHTML;
+      const answer = document.getElementById('answerInput').value;
       socket.emit('chatanswer', room, answer);
       socket.emit('getUsersInRoom', room);
     }
 
     function kick() {
-      const room = document.getElementById('room-input').value;
+      const room = document.getElementById('roomCode').innerHTML;
       socket.emit('kick', room);
     }
 
     socket.on('chatanswerReply', (grade) => {
-      const room = document.getElementById('room-input').value;
+      const room = document.getElementById('roomCode').innerHTML;
       if (grade === "pass") {
-        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> answered correctly!</div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> answered correctly!</div>'); // update to new layout
       } else if (grade === "prompt") {
-        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was prompted!</div>');
-        var promptAnswer = prompt("'" + document.getElementById('questionText').innerHTML + "'\n \nPrompt on " + document.getElementById('answer-input').value + ". Enter the correct answer below, then click OK.");
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was prompted!</div>'); // update to new layout
+        var promptAnswer = prompt("'" + document.getElementById('questiontxt').innerHTML + "'\n \nPrompt on " + document.getElementById('answerInput').value + ". Enter the correct answer below, then click OK."); // make into a popup, not an alert
+        if (promptAnswer === null) {
+          promptAnswer = "222222222222222222222222222";
+        }
         socket.emit('scorePromptAnswer', room, promptAnswer);
       } else if (grade === "fail") {
-        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was wrong.</div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was wrong.</div>'); // update to new layout
       }
 });
 
 socket.on('votesNeeded', (numerator, denominator) => {
   var roomLeader = document.getElementById('roomOwner').innerHTML;
-  document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity">' + numerator + '/' + denominator + ' votes received to kick <b>' + roomLeader + '</b></div>');
+  document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity">' + numerator + '/' + denominator + ' votes received to kick <b>' + roomLeader + '</b></div>'); // update to new layout
   });
 
 socket.on('refresh', (username) => {
@@ -480,36 +676,40 @@ socket.on('refresh', (username) => {
   });
 
 socket.on('userKicked', (username) => {
-    const room = document.getElementById('room-input').value;
+    const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
-    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was kicked.</div>');
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was kicked.</div>'); // update to new layout
   });
 
     socket.on('userJoined', (username) => {
-    const room = document.getElementById('room-input').value;
+    const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
-    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> has joined the room!</div>');
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> has joined the room!</div>'); // update to new layout
   });
 
   socket.on('updateLeaderboard', (username) => {
-    const room = document.getElementById('room-input').value;
+    const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
   });
 
   socket.on('userBuzzed', (username) => {
-    const room = document.getElementById('room-input').value;
-    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> buzzed in!</div>');
+    const room = document.getElementById('roomCode').innerHTML;
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> buzzed in!</div>'); // update to new layout
   });
 
   socket.on('userLeft', (username) => {
-    const room = document.getElementById('room-input').value;
+    const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
-    document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> returned to the abyss.</div>');
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> returned to the abyss.</div>'); // update to new layout
   });
 
   socket.on('increment', (word) => {
     document.getElementById("writeButton").style.display = "none";
-    document.getElementById("questionText").innerHTML += word;
+    document.getElementById("questiontxt").innerHTML += word;
+  });
+
+  socket.on('alertMessage', (message) => {
+    alert(message);
   });
 
   socket.on('roomLeader', (isRoomLeader, RoomLeader) => {
@@ -536,14 +736,14 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
     socket.on('chatanswer', (username, answer) => {
       
       if (answer === "pass") {
-        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> answered correctly!</div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> answered correctly!</div>'); // update to new layout
       } else if (answer === "prompt") {
-        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was prompted!</div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was prompted!</div>'); // update to new layout
       } else if (answer === "fail") {
-        document.getElementById('activityFrame').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was wrong.</div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was wrong.</div>'); // update to new layout
       }
 
-      const room = document.getElementById('room-input').value;
+      const room = document.getElementById('roomCode').innerHTML;
       socket.emit('getUsersInRoom', room);
     });
   </script>

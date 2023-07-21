@@ -67,6 +67,12 @@ io.on('connection', (socket) => {
     const votes = roomVotes[room];
     const roomSize = io.sockets.adapter.rooms.get(room)?.size || 0;
 
+    if (!(roomSize > 1)) {
+      console.log("cant vote out self");
+      socket.emit('alertMessage', "Kicking failed. Can not vote out self.");
+      return;
+    }
+
     if (roomLeader != socket.id && !votes.includes(playerSocket[playerId+room])) {
       votes.push(playerSocket[playerId+room]);
       var value = (roomVotes[room].length)/(roomSize-1);
@@ -79,6 +85,12 @@ io.on('connection', (socket) => {
         socket.emit('votesNeeded', (roomVotes[room].length), (roomSize-1));
         socket.to(room).emit('votesNeeded', (roomVotes[room].length), (roomSize-1));
       }
+    } else if (roomLeader = socket.id) {
+      console.log("cant vote out self");
+      socket.emit('alertMessage', "Kicking failed. Can not vote out self.");
+    } else if (votes.includes(playerSocket[playerId+room])) {
+      console.log("cant vote out self");
+      socket.emit('alertMessage', "You have already voted.");
     }
   });
 
@@ -107,6 +119,10 @@ socket.on('writeQuestion', (room, speed) => {
   }
 
 let question = "The creation of this type of substance generally starts by putting atoms in a magneto-optical trap, immediately followed by an evaporative method. In attempting the first synthesis of this type of substance, Wolfgang Ketterle worked with sodium atoms, while contemporaneously Eric Cornell and Carl Wieman succeeded with rubidium atoms. Atoms in this type of substance are all at the lowest quantum level. For 10 points, name this 'fifth state of matter' in which atoms are";
+let subject = "Science";
+
+socket.emit('updateSubject', subject);
+socket.to(room).emit('updateSubject', subject);
 
 const word = question.split(" ");
 var readSpeed = speed;
@@ -126,6 +142,9 @@ function increment(){
 });
 
     socket.on('scorePromptAnswer', (room, answer) => {
+      if (answer.length < 1) {
+        answer = "222222222222222222222222222222222222222222222222222222222222";
+      }
       var answerGrade = testAnswer(answer, "Derek Steriods", "Donny Kronladge", "Red");
       if (answerGrade === "pass") {
         socket.to(room).emit('chatanswer', playerId, "pass");
