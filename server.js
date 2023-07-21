@@ -30,12 +30,21 @@ io.on('connection', (socket) => {
 
   console.log('User connected');
 
+  socket.on('updateUsername', (enteredUsername, room) => {
+    if (playerSocket[enteredUsername + room]){
+      console.log("that username already exists");
+      socket.emit('alertMessage', "That username already exists in this room. Try another.");
+    } else {
+      socket.emit('refresh', enteredUsername);
+    }
+  });
+
   // Join a room
   socket.on('joinRoom', (room) => {
 
     if (playerSocket[playerId + room]){
       console.log("that username already exists");
-      socket.emit('refresh', playerId);
+      socket.emit('refresh', "2938y482y23333333333333");
       return;
     }
 
@@ -78,14 +87,15 @@ io.on('connection', (socket) => {
       var value = (roomVotes[room].length)/(roomSize-1);
       if (value == 1) {
         console.log(players[roomLeader] + " voted out by " + playerId);
-        socket.to(roomLeader).emit('refresh', players[roomLeader]);
+        socket.to(roomLeader).emit('refresh', "2222222224dsfsdfsdfsdfs");
+        socket.emit('userKicked', players[roomLeader]);
         socket.to(room).emit('userKicked', players[roomLeader]);
         users.delete(roomLeader);
       } else {
         socket.emit('votesNeeded', (roomVotes[room].length), (roomSize-1));
         socket.to(room).emit('votesNeeded', (roomVotes[room].length), (roomSize-1));
       }
-    } else if (roomLeader = socket.id) {
+    } else if (roomLeader == socket.id) {
       console.log("cant vote out self");
       socket.emit('alertMessage', "Kicking failed. Can not vote out self.");
     } else if (votes.includes(playerSocket[playerId+room])) {
@@ -104,11 +114,19 @@ io.on('connection', (socket) => {
   });
 
 // Update user score
-socket.on('updateScore', (score) => {
+socket.on('updateScore', (room, score) => {
+  if (score != 0) {
+    return;
+  }
   const user = Array.from(users.values()).find(user => user.playerId === playerId);
   if (user) {
     user.score = score;
     console.log(`Updated score for ${playerId} in room ${user.room}: ${score}`);
+    const usersInRoom = Array.from(users.values())
+    .filter(user => user.room === room)
+    .map(user => ({ username: user.playerId, score: user.score }));
+    socket.emit('usersInRoom', usersInRoom);
+    socket.to(room).emit('usersInRoom', usersInRoom);
   }
 });
 
@@ -134,6 +152,8 @@ function increment(){
   i = i + 1;
   if (i == word.length) {
      clearInterval(interval);
+     socket.emit('questionDone');
+     socket.to(room).emit('questionDone');
   } else {
      socket.emit('increment', word[i] + " ");
      socket.to(room).emit('increment', word[i] + " ");
@@ -167,14 +187,14 @@ function increment(){
   });
 
   // Handle chat answers
-  socket.on('chatanswer', (room, answer) => {
+  socket.on('chatanswer', (room, answer, points) => {
     var answerGrade = testAnswer(answer, "Derek Steriods", "Donny Kronladge", "Red");
     if (answerGrade === "pass") {
       console.log("Passed!");
       socket.to(room).emit('chatanswer', playerId, "pass");
       const user = Array.from(users.values()).find(user => user.playerId === playerId);
       if (user) {
-        user.score+=10;
+        user.score+=points;
         console.log(`Updated score for ${playerId} in room ${user.room}: ${user.score}`);
       }
       socket.emit('chatanswerReply', "pass");
@@ -208,6 +228,7 @@ function increment(){
           roomLeaders[room] = newLeader;
           io.to(room).emit('roomLeaderTransferred', players[newLeader]);
           console.log("new leader is:" + players[newLeader]);
+          io.to(room).emit('userLeft', playerId);
         }
       } else {
           io.to(room).emit('userLeft', playerId);

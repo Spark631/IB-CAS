@@ -117,7 +117,7 @@
             display: flex;
             justify-content: center;
         }
-        #minutes {
+        #seconds {
             line-height: 0.8;
         }
         #miliseconds {
@@ -247,14 +247,39 @@
    display: none;
    opacity: 0;
 }
+#promptpopup {
+   transition: .8s !important;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border: 3px solid white;
+   z-index: 9999;
+   padding: 40px;
+   border-radius: 8px;
+   display: none;
+}
 .navbarButtons {
    opacity: 0;
 }
 #answerInput {
-  width: 100%;
+width: 100%;
 border-radius: 4px;
 padding: 10px;
 border: 3px solid white;
+}
+#promptanswer {
+width: 100%;
+border-radius: 4px;
+padding: 10px;
+border: 3px solid white;
+margin-top: 10px;
+min-width: 300px;
+}
+.disabled {
+  transition: .8s !important;
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>
 
@@ -273,21 +298,21 @@ border: 3px solid white;
     <div class="main">
         <div>
             <div class="timer">
-                <div id="minutes">
-                    10:00
+                <div id="seconds">
+                    5
                 </div>
                 <div id="miliseconds">
                     .00
                 </div>
             </div>
             <div class="card">
-                <div class="tag">
+                <div id="subject" class="tag">
                     Waiting for room leader...
                 </div>
                 <button id="writeButton" class="button accentbtn" style="background-color: #e62227 !important; color: white !important;" onclick="writeQ();">Start Questions</button>
                 <div id="questiontxt"></div>
                 <div id="answerFrame">
-                    <div id="buzzer" onclick="buzzIn();" class="button accentbtn" style="width: 100%;">
+                    <div id="buzzer" onclick="buzzIn();" class="button accentbtn disabled" style="width: 100%;">
                         Buzz In
                     </div>
                 </div>
@@ -311,94 +336,6 @@ border: 3px solid white;
                     Activity
                 </div>
                 <div class="usergrid" id="activitygrid">
-                    <div class="profileimg" style="background-color: #E75353;">
-                        HC
-                    </div>
-                    <div>
-                        <div class="profilename">
-                            HappyCat367
-                        </div>
-                        <div class="profiledetails">
-                            Buzzed in
-                        </div>
-                    </div>
-                    <div class="profileaction">
-                        <i class="fa-solid fa-microphone"></i>
-                    </div>
-
-                    <div class="profileimg" style="background-color: #7788E3;">
-                        HC
-                    </div>
-                    <div>
-                        <div class="profilename">
-                            HappyCat367
-                        </div>
-                        <div class="profiledetails">
-                            Buzzed in
-                        </div>
-                    </div>
-                    <div class="profileaction">
-                        <i class="fa-solid fa-microphone"></i>
-                    </div>
-
-                    <div class="profileimg" style="background-color: #79B274;">
-                        HC
-                    </div>
-                    <div>
-                        <div class="profilename">
-                            HappyCat367
-                        </div>
-                        <div class="profiledetails">
-                            Buzzed in
-                        </div>
-                    </div>
-                    <div class="profileaction">
-                        <i class="fa-solid fa-microphone"></i>
-                    </div>
-                    <div class="profileimg" style="background-color: #E75353;">
-                        HC
-                    </div>
-                    <div>
-                        <div class="profilename">
-                            HappyCat367
-                        </div>
-                        <div class="profiledetails">
-                            Buzzed in
-                        </div>
-                    </div>
-                    <div class="profileaction">
-                        <i class="fa-solid fa-microphone"></i>
-                    </div>
-
-                    <div class="profileimg" style="background-color: #7788E3;">
-                        HC
-                    </div>
-                    <div>
-                        <div class="profilename">
-                            HappyCat367
-                        </div>
-                        <div class="profiledetails">
-                            Buzzed in
-                        </div>
-                    </div>
-                    <div class="profileaction">
-                        <i class="fa-solid fa-microphone"></i>
-                    </div>
-
-                    <div class="profileimg" style="background-color: #79B274;">
-                        HC
-                    </div>
-                    <div>
-                        <div class="profilename">
-                            HappyCat367
-                        </div>
-                        <div class="profiledetails">
-                            Buzzed in
-                        </div>
-                    </div>
-                    <div class="profileaction">
-                        <i class="fa-solid fa-microphone"></i>
-                    </div>
                 </div>
             </div>
         </div>
@@ -436,7 +373,7 @@ border: 3px solid white;
                         Update
                     </div>
                 </div>
-                <div class="button redbtn" style="width: 100%;">
+                <div class="button redbtn" onclick="updateScore(0)" style="width: 100%;">
                     Reset Score
                 </div>
                 <div class="button accentbtn" onclick="openSettings();" style="width: 100%;">
@@ -465,7 +402,16 @@ border: 3px solid white;
                 </div>
             </div>
 
-            <div id="overlay"></div>
+          <!--Prompt Popup-->
+          <div id="promptpopup" class="card popup">
+            <div class="header">
+                Prompt
+            </div>
+            <div id="prompttxt"></div>
+            <input id="promptanswer" onkeypress="handlePromptKeyPress(event)" placeholder="Type an answer" class="input" type="text"/>
+          </div>
+
+          <div id="overlay"></div>
 
 <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -473,6 +419,19 @@ border: 3px solid white;
     const adjectives = ['Happy', 'Brave', 'Clever', 'Sunny', 'Kind', 'Playful', 'Witty', 'Gentle', 'Vibrant'];
 const nouns = ['Cat', 'Dog', 'Bird', 'Sun', 'Moon', 'Flower', 'Star', 'Tree', 'Ocean'];
 const grid = document.getElementById('leaderboardgrid');
+let timerpoints = 1000;
+let timerinterval;
+
+var decreaseValue = () => {
+  timerpoints -= 7;
+
+  if (timerpoints <= 0) {
+    clearInterval(timerinterval);
+    timerpoints = 0;
+    console.log("Value reached 0 or below.");
+  }
+};
+
 
 function generateRandomUsername() {
   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -524,7 +483,6 @@ function sortGrid() {
 
     socket.on('usersInRoom', (users) => {
       users.forEach((user) => {
-        console.log("update grid");
         var characters = extractUppercaseLetters(user.username);
         var color = generateColor(characters);
         grid.innerHTML = users.map(user => {
@@ -558,19 +516,41 @@ function sortGrid() {
     }
   }
 
+  function handlePromptKeyPress(event) {
+    if (event.key === "Enter") {
+      console.log("here");
+      const room = document.getElementById('roomCode').innerHTML;
+      var promptAnswer = document.getElementById('promptanswer').value;
+      if (promptAnswer.length <= 1) {
+        promptAnswer = "222222222222222222222222222";
+      }
+      socket.emit('scorePromptAnswer', room, promptAnswer);
+      document.getElementById("promptpopup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+  }
+
     function updateUsername() { // first need to check with array in server for no duplicates
+      const room = document.getElementById('roomCode').innerHTML;
       var result = confirm("Are you sure you would like to proceed? Your score will be lost.");
       if (result != true) {
         return;
       }
-      localStorage.setItem('playerId', document.getElementById("username").value);
-      window.location.reload();
+      socket.emit('updateUsername', document.getElementById("username").value, room);
     }
 
     function buzzIn() {
+      try {
+        clearInterval(timerinterval);
+        console.log("Timer stopped at " + timerpoints);
+      } catch (error) {
+        console.log(error);
+      }
       const room = document.getElementById('roomCode').innerHTML;
       document.getElementById('answerFrame').innerHTML = '<input type="text" id="answerInput" onkeypress="handleKeyPress(event)" placeholder="Type an answer" />';
-      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> buzzed in!</div>'); // update to new layout
+      const characters = extractUppercaseLetters(playerId);
+      const color = generateColor(characters);
+      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Buzzed in</div></div><div class="profileaction"><i class="fa-solid fa-microphone"></i></div>');
       document.getElementById("answerInput").focus(); 
       socket.emit('buzzedIn', room);
     }
@@ -584,7 +564,9 @@ function sortGrid() {
       document.getElementById('username').value = playerId;
       socket.emit('getUsersInRoom', room);
       document.querySelectorAll('.navbarButtons').forEach(div => div.style.opacity = 1);
-      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>'); // update to new layout
+      const characters = extractUppercaseLetters(playerId);
+      const color = generateColor(characters);
+      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Joined the room</div></div><div class="profileaction"><i class="fas fa-user-plus"></i></div>');
       setTimeout(function() {
   document.getElementById('overlay').style.display = "none";
       document.getElementById('roompopup').style.display = "none";
@@ -599,7 +581,9 @@ function sortGrid() {
       document.getElementById('roomCode').innerHTML = room;
       document.getElementById('username').value = playerId;
       document.querySelectorAll('.navbarButtons').forEach(div => div.style.opacity = 1);
-      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> has joined the room!</div>'); // update to new layout
+      const characters = extractUppercaseLetters(playerId);
+      const color = generateColor(characters);
+      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Joined the room</div></div><div class="profileaction"><i class="fas fa-user-plus"></i></div>');
       setTimeout(function() {
   document.getElementById('overlay').style.display = "none";
       document.getElementById('roompopup').style.display = "none";
@@ -623,23 +607,37 @@ function sortGrid() {
     }
 
     function updateScore(score) {
-        socket.emit('updateScore', score);
+      const room = document.getElementById('roomCode').innerHTML;
+      socket.emit('updateScore', room, score);
     }
 
     function leaveRoom() {
       const room = document.getElementById('roomCode').innerHTML;
       socket.emit('leaveRoom', room);
-    }
+    }    
 
     function writeQ() {
       const room = document.getElementById('roomCode').innerHTML;
-      socket.emit('writeQuestion', room, 200); // change the speed
+      socket.emit('writeQuestion', room, 200); // change the speed based on room leader
     }
+
+    socket.on('updateSubject', (subject) => {
+       timerpoints = 1000;
+       document.getElementById("subject").innerHTML = subject;
+       document.getElementById("buzzer").classList.remove("disabled");
+       timerinterval = setInterval(decreaseValue, 200); // change speed based on room leader
+       console.log("Point timer started.");
+    });
+
+    socket.on('questionDone', () => {
+       console.log("Question done. Starting countdown timer.")
+       document.getElementById("buzzer").classList.add("disabled");
+    });
 
     function sendanswer() {
       const room = document.getElementById('roomCode').innerHTML;
       const answer = document.getElementById('answerInput').value;
-      socket.emit('chatanswer', room, answer);
+      socket.emit('chatanswer', room, answer, timerpoints);
       socket.emit('getUsersInRoom', room);
     }
 
@@ -650,41 +648,52 @@ function sortGrid() {
 
     socket.on('chatanswerReply', (grade) => {
       const room = document.getElementById('roomCode').innerHTML;
+      const characters = extractUppercaseLetters(playerId);
+      const color = generateColor(characters);
       if (grade === "pass") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> answered correctly!</div>'); // update to new layout
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Answered correctly!</div></div><div class="profileaction"><i class="fa fa-check"></i></div>');
       } else if (grade === "prompt") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was prompted!</div>'); // update to new layout
-        var promptAnswer = prompt("'" + document.getElementById('questiontxt').innerHTML + "'\n \nPrompt on " + document.getElementById('answerInput').value + ". Enter the correct answer below, then click OK."); // make into a popup, not an alert
-        if (promptAnswer === null) {
-          promptAnswer = "222222222222222222222222222";
-        }
-        socket.emit('scorePromptAnswer', room, promptAnswer);
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Was prompted!</div></div><div class="profileaction"><i class="fas fa-question"></i></div>');
+        document.getElementById("promptpopup").style.display = "grid";
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay").style.opacity = 1;
+        document.getElementById("promptanswer").focus();
+        document.getElementById("prompttxt").innerHTML = "'" + document.getElementById('questiontxt').innerHTML + "'<br><br>Prompt on " + document.getElementById('answerInput').value + ". Enter the correct answer below.";
       } else if (grade === "fail") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + playerId + '</b> was wrong.</div>'); // update to new layout
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Was wrong!</div></div><div class="profileaction"><i class="fas fa-times"></i></div>');
       }
 });
 
 socket.on('votesNeeded', (numerator, denominator) => {
   var roomLeader = document.getElementById('roomOwner').innerHTML;
-  document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity">' + numerator + '/' + denominator + ' votes received to kick <b>' + roomLeader + '</b></div>'); // update to new layout
+  document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: #e62227;">' + numerator + '/' + denominator + '</div><div><div class="profilename">Votes to kick <b>' + roomLeader + '</div><div class="profiledetails">' + (denominator - numerator) + ' more vote(s) needed</div></div><div class="profileaction"><i class="fas fa-gavel"></i></div>');
   });
 
 socket.on('refresh', (username) => {
-  playerId = generateRandomUsername();
-      localStorage.setItem('playerId', playerId);
+  if (username == document.getElementById("username").value){
+    playerId = generateRandomUsername();
+    localStorage.setItem('playerId', username);
+  } else {
+    playerId = generateRandomUsername();
+    localStorage.setItem('playerId', playerId);
+  }
   location.reload();
   });
 
 socket.on('userKicked', (username) => {
     const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
-    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was kicked.</div>'); // update to new layout
+    const characters = extractUppercaseLetters(username);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Was kicked</div></div><div class="profileaction"><i class="fas fa-user-slash"></i></div>');
   });
 
     socket.on('userJoined', (username) => {
     const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
-    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> has joined the room!</div>'); // update to new layout
+    const characters = extractUppercaseLetters(username);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Joined the room</div></div><div class="profileaction"><i class="fas fa-user-plus"></i></div>');
   });
 
   socket.on('updateLeaderboard', (username) => {
@@ -694,13 +703,17 @@ socket.on('userKicked', (username) => {
 
   socket.on('userBuzzed', (username) => {
     const room = document.getElementById('roomCode').innerHTML;
-    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> buzzed in!</div>'); // update to new layout
+    const characters = extractUppercaseLetters(username);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Buzzed in</div></div><div class="profileaction"><i class="fa-solid fa-microphone"></i></div>');
   });
 
   socket.on('userLeft', (username) => {
     const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
-    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> returned to the abyss.</div>'); // update to new layout
+    const characters = extractUppercaseLetters(username);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Returned to the abyss</div></div><div class="profileaction"><i class="fas fa-user-minus"></i></div>');
   });
 
   socket.on('increment', (word) => {
@@ -713,8 +726,11 @@ socket.on('userKicked', (username) => {
   });
 
   socket.on('roomLeader', (isRoomLeader, RoomLeader) => {
+    const characters = extractUppercaseLetters(RoomLeader);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + RoomLeader + '</div><div class="profiledetails">Is room leader</div></div><div class="profileaction"><i class="fas fa-user-cog"></i></div>');
     if (isRoomLeader) {
-    console.log('You are the room leader.');
+    document.getElementById("subject").innerHTML = "You are room leader";
   } else {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
@@ -723,8 +739,12 @@ socket.on('userKicked', (username) => {
 });
 
 socket.on('roomLeaderTransferred', (RoomLeader) => {
+  const characters = extractUppercaseLetters(RoomLeader);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + RoomLeader + '</div><div class="profiledetails">Appointed room leader</div></div><div class="profileaction"><i class="fas fa-user-cog"></i></div>');
   if (RoomLeader == playerId) {
     console.log('You are the room leader.');
+    document.getElementById("subject").innerHTML = "You are room leader";
     document.getElementById("writeButton").style.display = "block";
   } else {
     console.log('The room leader is player:', RoomLeader);
@@ -734,13 +754,14 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
 });
 
     socket.on('chatanswer', (username, answer) => {
-      
+      const characters = extractUppercaseLetters(username);
+      const color = generateColor(characters);
       if (answer === "pass") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> answered correctly!</div>'); // update to new layout
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Answered correctly!</div></div><div class="profileaction"><i class="fa fa-check"></i></div>');
       } else if (answer === "prompt") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was prompted!</div>'); // update to new layout
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Was prompted!</div></div><div class="profileaction"><i class="fas fa-question"></i></div>');
       } else if (answer === "fail") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="activity"><b>' + username + '</b> was wrong.</div>'); // update to new layout
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Was wrong!</div></div><div class="profileaction"><i class="fas fa-times"></i></div>');
       }
 
       const room = document.getElementById('roomCode').innerHTML;
