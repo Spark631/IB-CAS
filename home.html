@@ -107,6 +107,7 @@
             height: fit-content;
         }
         .timer {
+            transition: 1s !important;
             width: 100%;
             background-color: var(--bg3);
             padding: 24px;
@@ -309,7 +310,7 @@ min-width: 300px;
                 <div id="subject" class="tag">
                     Waiting for room leader...
                 </div>
-                <button id="writeButton" class="button accentbtn" style="background-color: #e62227 !important; color: white !important;" onclick="writeQ();">Start Questions</button>
+                <button id="writeButton" class="button accentbtn" style="background-color: #e62227 !important; color: white !important;" onclick="writeQ();">Next Question</button>
                 <div id="questiontxt"></div>
                 <div id="answerFrame">
                     <div id="buzzer" onclick="buzzIn();" class="button accentbtn disabled" style="width: 100%;">
@@ -407,6 +408,9 @@ min-width: 300px;
             <div class="header">
                 Prompt
             </div>
+            <div id="prompttime" class="button redbtn">
+              8.0 seconds
+            </div>
             <div id="prompttxt"></div>
             <input id="promptanswer" onkeypress="handlePromptKeyPress(event)" placeholder="Type an answer" class="input" type="text"/>
           </div>
@@ -421,6 +425,12 @@ const nouns = ['Cat', 'Dog', 'Bird', 'Sun', 'Moon', 'Flower', 'Star', 'Tree', 'O
 const grid = document.getElementById('leaderboardgrid');
 let timerpoints = 1000;
 let timerinterval;
+let timer;
+let write = true;
+let question = "";
+let answered = "";
+let questionSubmitted = false;
+let readyForNext = false;
 
 var decreaseValue = () => {
   timerpoints -= 7;
@@ -432,6 +442,85 @@ var decreaseValue = () => {
   }
 };
 
+function startPromptCountdownTimer() {
+  let timeRemaining = 8.0;
+  const interval = 100;
+
+  const countdownDisplay = document.getElementById("prompttime");
+
+  function updatePromptTimerDisplay() {
+    countdownDisplay.textContent = timeRemaining.toFixed(1) + " seconds";
+    timeRemaining -= 0.1;
+
+    if (timeRemaining < 0) {
+      clearInterval(timer);
+      countdownDisplay.textContent = "8.0 seconds";
+      const room = document.getElementById('roomCode').innerHTML;
+      var promptAnswer = document.getElementById('promptanswer').value;
+      if (promptAnswer.length <= 1) {
+        promptAnswer = "222222222222222222222222222";
+        socket.emit('scorePromptAnswer', room, promptAnswer);
+        socket.emit('questionFinished', room);
+      }
+      document.getElementById("promptpopup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+      write = true;
+      document.getElementById("questiontxt").innerHTML = question;
+      document.getElementById("subject").innerHTML = "Waiting for question to finish...";
+      document.getElementById("promptanswer").value="";
+    }
+  }
+
+  updatePromptTimerDisplay();
+
+  const timer = setInterval(updatePromptTimerDisplay, interval);
+}
+
+function countdownTimer(countdownTime) {
+  let remainingTime = countdownTime;
+  const interval = 100;
+
+  const updateTimerDisplay = () => {
+    let seconds = Math.floor(remainingTime / 1000);
+    let milliseconds = remainingTime % 1000;
+    milliseconds = milliseconds.toString().substring(1, 0);
+
+    document.getElementById("seconds").textContent = `${seconds}`;
+    document.getElementById("miliseconds").textContent = `.${milliseconds}`;
+    document.getElementsByClassName("timer")[0].style.border = "2px solid #e62227";
+
+    if (remainingTime <= 0) {
+      clearInterval(timer);
+      try {
+        if (!document.getElementById("answerInput").value) {
+          write = true;
+          document.getElementById("questiontxt").innerHTML = question;
+        }
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+      document.getElementById("answerFrame").innerHTML = '<div id="buzzer" onclick="buzzIn();" class="button accentbtn disabled" style="width: 100%;">Buzz In</div>';
+      document.getElementById("seconds").textContent = "5";
+      document.getElementById("miliseconds").textContent = ".00";
+      document.getElementById("buzzer").classList.add("disabled");
+      document.getElementsByClassName("timer")[0].style.border = "2px solid white";
+      clearInterval(timerinterval);
+      document.getElementById("subject").innerHTML = "Waiting for question to finish...";
+      if (!questionSubmitted) {
+        const room = document.getElementById('roomCodeInput').value;
+        socket.emit('questionFinished', room);
+        socket.emit('didNotAnswer', room);
+        questionSubmitted = true;
+      }
+    }
+
+    remainingTime -= interval;
+  };
+
+  updateTimerDisplay();
+
+  timer = setInterval(updateTimerDisplay, interval);
+}
 
 function generateRandomUsername() {
   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -518,7 +607,6 @@ function sortGrid() {
 
   function handlePromptKeyPress(event) {
     if (event.key === "Enter") {
-      console.log("here");
       const room = document.getElementById('roomCode').innerHTML;
       var promptAnswer = document.getElementById('promptanswer').value;
       if (promptAnswer.length <= 1) {
@@ -527,6 +615,9 @@ function sortGrid() {
       socket.emit('scorePromptAnswer', room, promptAnswer);
       document.getElementById("promptpopup").style.display = "none";
       document.getElementById("overlay").style.display = "none";
+      write = true;
+      document.getElementById("questiontxt").innerHTML = question;
+      document.getElementById("subject").innerHTML = "Waiting for question to finish...";
     }
   }
 
@@ -540,12 +631,15 @@ function sortGrid() {
     }
 
     function buzzIn() {
+      write = false;
       try {
         clearInterval(timerinterval);
+        clearInterval(timer);
         console.log("Timer stopped at " + timerpoints);
       } catch (error) {
         console.log(error);
       }
+      countdownTimer(8000);
       const room = document.getElementById('roomCode').innerHTML;
       document.getElementById('answerFrame').innerHTML = '<input type="text" id="answerInput" onkeypress="handleKeyPress(event)" placeholder="Type an answer" />';
       const characters = extractUppercaseLetters(playerId);
@@ -617,8 +711,26 @@ function sortGrid() {
     }    
 
     function writeQ() {
+      question = "";
+      questionSubmitted = false;
+      readyForNext = false;
+      document.getElementById('questiontxt').innerHTML = "";
       const room = document.getElementById('roomCode').innerHTML;
       socket.emit('writeQuestion', room, 200); // change the speed based on room leader
+      // DISJDISJDISJDSDSD
+      const questionChecker = setInterval(function() {
+        console.log("Waiting");
+        if (readyForNext) {
+          console.log("!!! REady for next !!!");
+          document.getElementById("questiontxt").innerHTML = question;
+          document.getElementById("writeButton").style.display = "block";
+          if (document.getElementById("roomOwner").innerHTML == document.getElementById("username").value){
+             document.getElementById("subject").innerHTML = "Ready for the next question - you are the room leader.";
+          }
+          question = "";
+          clearInterval(questionChecker);
+        }
+      }, 1000);
     }
 
     socket.on('updateSubject', (subject) => {
@@ -631,14 +743,24 @@ function sortGrid() {
 
     socket.on('questionDone', () => {
        console.log("Question done. Starting countdown timer.")
-       document.getElementById("buzzer").classList.add("disabled");
+       countdownTimer(5000);
+       write = true;
     });
 
     function sendanswer() {
+      questionSubmitted = true;
       const room = document.getElementById('roomCode').innerHTML;
-      const answer = document.getElementById('answerInput').value;
-      socket.emit('chatanswer', room, answer, timerpoints);
+      answered = document.getElementById('answerInput').value;
+      socket.emit('chatanswer', room, answered, timerpoints);
       socket.emit('getUsersInRoom', room);
+      clearInterval(timer);
+      document.getElementById("answerFrame").innerHTML = '<div id="buzzer" onclick="buzzIn();" class="button accentbtn disabled" style="width: 100%;">Buzz In</div>';
+      document.getElementById("seconds").textContent = "5";
+      document.getElementById("miliseconds").textContent = ".00";
+      document.getElementsByClassName("timer")[0].style.border = "2px solid white";
+      // write = true;
+      // document.getElementById("questiontxt").innerHTML = question;
+      // document.getElementById("subject").innerHTML = "Waiting for question to finish...";
     }
 
     function kick() {
@@ -652,17 +774,34 @@ function sortGrid() {
       const color = generateColor(characters);
       if (grade === "pass") {
         document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Answered correctly!</div></div><div class="profileaction"><i class="fa fa-check"></i></div>');
+        write = true;
+        document.getElementById("questiontxt").innerHTML = question;
+        document.getElementById("subject").innerHTML = "Waiting for question to finish...";
+        socket.emit('questionFinished', room);
       } else if (grade === "prompt") {
+        document.getElementById("prompttxt").innerHTML = "'" + document.getElementById('questiontxt').innerHTML + "'<br><br>Prompt on " + answered + ". Enter the correct answer below.";
         document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Was prompted!</div></div><div class="profileaction"><i class="fas fa-question"></i></div>');
         document.getElementById("promptpopup").style.display = "grid";
         document.getElementById("overlay").style.display = "block";
         document.getElementById("overlay").style.opacity = 1;
         document.getElementById("promptanswer").focus();
-        document.getElementById("prompttxt").innerHTML = "'" + document.getElementById('questiontxt').innerHTML + "'<br><br>Prompt on " + document.getElementById('answerInput').value + ". Enter the correct answer below.";
+        startPromptCountdownTimer();
       } else if (grade === "fail") {
         document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Was wrong!</div></div><div class="profileaction"><i class="fas fa-times"></i></div>');
+        write = true;
+        document.getElementById("questiontxt").innerHTML = question;
+        document.getElementById("subject").innerHTML = "Waiting for question to finish...";
+        socket.emit('questionFinished', room);
       }
 });
+
+socket.on('readyForNextQuestion', () => {
+  setTimeout(function() {
+  document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: white; color: #171717 !important;">?</div><div><div class="profilename">Question finished</div><div class="profiledetails">Waiting for room leader to continue</div></div><div class="profileaction"><i class="fas fa-spell-check"></i></div>');
+  document.getElementById("subject").innerHTML = "Waiting for room leader...";
+}, 200);
+  readyForNext = true;
+  });
 
 socket.on('votesNeeded', (numerator, denominator) => {
   var roomLeader = document.getElementById('roomOwner').innerHTML;
@@ -708,6 +847,13 @@ socket.on('userKicked', (username) => {
     document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Buzzed in</div></div><div class="profileaction"><i class="fa-solid fa-microphone"></i></div>');
   });
 
+  socket.on('userDidntAnswer', (username) => {
+    const room = document.getElementById('roomCode').innerHTML;
+    const characters = extractUppercaseLetters(username);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Failed to answer</div></div><div class="profileaction"><i class="fas fa-microphone-slash"></i></div>');
+  });
+
   socket.on('userLeft', (username) => {
     const room = document.getElementById('roomCode').innerHTML;
     socket.emit('getUsersInRoom', room);
@@ -716,21 +862,36 @@ socket.on('userKicked', (username) => {
     document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Returned to the abyss</div></div><div class="profileaction"><i class="fas fa-user-minus"></i></div>');
   });
 
+  socket.on('clearQuestion', (username) => {
+    const characters = extractUppercaseLetters(username);
+    const color = generateColor(characters);
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Started new question</div></div><div class="profileaction"><i class="fas fa-plus"></i></div>');
+    question = "";
+      questionSubmitted = false;
+      readyForNext = false;
+      document.getElementById('questiontxt').innerHTML = "";
+  });
+
+
   socket.on('increment', (word) => {
     document.getElementById("writeButton").style.display = "none";
-    document.getElementById("questiontxt").innerHTML += word;
+    question += word;
+    if (write) {
+      document.getElementById("questiontxt").innerHTML += word;
+    }
   });
 
   socket.on('alertMessage', (message) => {
     alert(message);
   });
 
-  socket.on('roomLeader', (isRoomLeader, RoomLeader) => {
+  socket.on('roomLeader', (isRoomLeader, RoomLeader, question) => {
+    document.getElementById("questiontxt").innerHTML = question;
     const characters = extractUppercaseLetters(RoomLeader);
     const color = generateColor(characters);
     document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + RoomLeader + '</div><div class="profiledetails">Is room leader</div></div><div class="profileaction"><i class="fas fa-user-cog"></i></div>');
     if (isRoomLeader) {
-    document.getElementById("subject").innerHTML = "You are room leader";
+    document.getElementById("subject").innerHTML = "You are the room leader";
   } else {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
@@ -744,7 +905,7 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
     document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + RoomLeader + '</div><div class="profiledetails">Appointed room leader</div></div><div class="profileaction"><i class="fas fa-user-cog"></i></div>');
   if (RoomLeader == playerId) {
     console.log('You are the room leader.');
-    document.getElementById("subject").innerHTML = "You are room leader";
+    document.getElementById("subject").innerHTML = "You are the room leader";
     document.getElementById("writeButton").style.display = "block";
   } else {
     console.log('The room leader is player:', RoomLeader);

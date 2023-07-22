@@ -10,16 +10,27 @@ const users = new Map();
 const roomLeaders = {};
 const players = {};
 const roomVotes = {};
+const questionAnswered = {};
 const playerSocket = {};
+const fs = require('fs');
+let randomQuestion = "";
+const rawdata = fs.readFileSync('questions.json');
+const triviaQuestions = JSON.parse(rawdata).questions;
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/home.html');
 });
 
+function getRandomQuestion() {
+  const randomIndex = Math.floor(Math.random() * triviaQuestions.length);
+  return triviaQuestions[randomIndex];
+}
+
 // Set up event handler for new socket connections
 io.on('connection', (socket) => {
 
   let roomId;
+  let questionDoneSoFar = "";
   
   let playerId = socket.handshake.query.playerId;
    // Set player Id
@@ -50,13 +61,14 @@ io.on('connection', (socket) => {
 
     players[socket.id] = playerId;
     playerSocket[playerId + room] = socket.id;
-    roomVotes[room] = []
+    roomVotes[room] = [];
+    questionAnswered[room] = 0;
     // If there is no existing room leader for the room, assign the current socket as the room leader
     if (!roomLeaders[room]) {
       roomLeaders[room] = socket.id;
-      socket.emit('roomLeader', true, playerId);
+      socket.emit('roomLeader', true, playerId, questionDoneSoFar);
     } else {
-      socket.emit('roomLeader', false, players[roomLeaders[room]]);
+      socket.emit('roomLeader', false, players[roomLeaders[room]], questionDoneSoFar);
     }
     socket.join(room);
     users.set(socket.id, { playerId, room, score: 0 });
@@ -70,6 +82,11 @@ io.on('connection', (socket) => {
     console.log('User with id ' + playerId + ' buzzed in room ' + room);
     socket.to(room).emit('userBuzzed', playerId);
   });
+
+    socket.on('didNotAnswer', (room) => {
+      socket.emit('userDidntAnswer', playerId);
+      socket.to(room).emit('userDidntAnswer', playerId);
+    });
 
   socket.on('kick', (room) => {
     const roomLeader = roomLeaders[room];
@@ -104,6 +121,21 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('questionFinished', (room) => {
+    const roomLeader = roomLeaders[room];
+    const roomSize = io.sockets.adapter.rooms.get(room)?.size || 0;
+    questionAnswered[room] += 1;
+    var value = (questionAnswered[room])/(roomSize);
+    console.log("Users who have answered: " + questionAnswered[room]);
+    console.log("Users in room: " + roomSize);
+    console.log("Value is " + value);
+      if (value == 1) {
+        socket.to(room).emit('readyForNextQuestion'); // to all rooms
+        socket.emit('readyForNextQuestion');
+        console.log("ready for next q");
+      }
+  });
+
   // Get users in a room
   socket.on('getUsersInRoom', (room) => {
     const usersInRoom = Array.from(users.values())
@@ -136,11 +168,19 @@ socket.on('writeQuestion', (room, speed) => {
     return;
   }
 
-let question = "The creation of this type of substance generally starts by putting atoms in a magneto-optical trap, immediately followed by an evaporative method. In attempting the first synthesis of this type of substance, Wolfgang Ketterle worked with sodium atoms, while contemporaneously Eric Cornell and Carl Wieman succeeded with rubidium atoms. Atoms in this type of substance are all at the lowest quantum level. For 10 points, name this 'fifth state of matter' in which atoms are";
-let subject = "Science";
+  questionAnswered[room] = 0;
+  console.log("Questions answered set to " + questionAnswered[room]);
+
+  randomQuestion = getRandomQuestion();
+
+let question = randomQuestion.question;
+let subject = randomQuestion.subject;
 
 socket.emit('updateSubject', subject);
 socket.to(room).emit('updateSubject', subject);
+
+socket.emit('clearQuestion', players[roomLeaders[room]]);
+socket.to(room).emit('clearQuestion', players[roomLeaders[room]]);
 
 const word = question.split(" ");
 var readSpeed = speed;
@@ -154,7 +194,9 @@ function increment(){
      clearInterval(interval);
      socket.emit('questionDone');
      socket.to(room).emit('questionDone');
+     questionDoneSoFar = "";
   } else {
+     questionDoneSoFar += (word[i] + " "); 
      socket.emit('increment', word[i] + " ");
      socket.to(room).emit('increment', word[i] + " ");
   }
@@ -165,7 +207,7 @@ function increment(){
       if (answer.length < 1) {
         answer = "222222222222222222222222222222222222222222222222222222222222";
       }
-      var answerGrade = testAnswer(answer, "Derek Steriods", "Donny Kronladge", "Red");
+      var answerGrade = testAnswer(answer, ...randomQuestion.answers);
       if (answerGrade === "pass") {
         socket.to(room).emit('chatanswer', playerId, "pass");
         const user = Array.from(users.values()).find(user => user.playerId === playerId);
@@ -188,7 +230,8 @@ function increment(){
 
   // Handle chat answers
   socket.on('chatanswer', (room, answer, points) => {
-    var answerGrade = testAnswer(answer, "Derek Steriods", "Donny Kronladge", "Red");
+    var answerGrade = testAnswer(answer, ...randomQuestion.answers);
+    console.log(randomQuestion.answers);
     if (answerGrade === "pass") {
       console.log("Passed!");
       socket.to(room).emit('chatanswer', playerId, "pass");
