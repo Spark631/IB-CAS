@@ -798,7 +798,11 @@ function sortGrid() {
 socket.on('readyForNextQuestion', () => {
   setTimeout(function() {
   document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: white; color: #171717 !important;">?</div><div><div class="profilename">Question finished</div><div class="profiledetails">Waiting for room leader to continue</div></div><div class="profileaction"><i class="fas fa-spell-check"></i></div>');
+  if (document.getElementById("roomOwner").innerHTML == document.getElementById("username").value){
+             document.getElementById("subject").innerHTML = "Ready for the next question - you are the room leader.";
+  } else {
   document.getElementById("subject").innerHTML = "Waiting for room leader...";
+  }
 }, 200);
   readyForNext = true;
   });
