@@ -763,20 +763,14 @@ function sortGrid() {
 
     function joinRandomRoom() {
       const room = Math.floor(Math.random() * 10000) + 1;
-      socket.emit('joinRoom', room);
-      document.getElementById('overlay').style.opacity = 0;
-      document.getElementById('roompopup').style.opacity = 0;
-      document.getElementById('roomCode').innerHTML = room;
-      document.getElementById('username').value = playerId;
-      document.querySelectorAll('.navbarButtons').forEach(div => div.style.opacity = 1);
-      const characters = extractUppercaseLetters(playerId);
-      const color = generateColor(characters);
-      document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Joined the room</div></div><div class="profileaction"><i class="fas fa-user-plus"></i></div>');
-      setTimeout(function() {
-  document.getElementById('overlay').style.display = "none";
-      document.getElementById('roompopup').style.display = "none";
-}, 800);
+      document.getElementById('roomCodeInput').value = room;
+      joinRoom();
     }
+
+    function windowBlurHandler() {
+      location.reload();
+    }
+    window.addEventListener("blur", windowBlurHandler);
 
     function openSettings(){
       if (document.getElementById("settingspopup").style.display == "grid") {
