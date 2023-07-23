@@ -145,6 +145,11 @@ io.on('connection', (socket) => {
     socket.emit('usersInRoom', usersInRoom);
   });
 
+  socket.on('questionFinishedAlert', (room) => {
+    socket.to(room).emit('giveQuestionFinishedAlert');
+  });
+
+
 // Update user score
 socket.on('updateScore', (room, score) => {
   if (score != 0) {
@@ -154,6 +159,7 @@ socket.on('updateScore', (room, score) => {
   if (user) {
     user.score = score;
     console.log(`Updated score for ${playerId} in room ${user.room}: ${score}`);
+    socket.emit('alertMessage', "Score successfully set to zero.");
     const usersInRoom = Array.from(users.values())
     .filter(user => user.room === room)
     .map(user => ({ username: user.playerId, score: user.score }));
@@ -176,8 +182,8 @@ socket.on('writeQuestion', (room, speed) => {
 let question = randomQuestion.question;
 let subject = randomQuestion.subject;
 
-socket.emit('updateSubject', subject);
-socket.to(room).emit('updateSubject', subject);
+socket.emit('updateSubject', subject, speed);
+socket.to(room).emit('updateSubject', subject, speed);
 
 socket.emit('clearQuestion', players[roomLeaders[room]]);
 socket.to(room).emit('clearQuestion', players[roomLeaders[room]]);

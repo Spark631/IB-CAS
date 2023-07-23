@@ -282,6 +282,22 @@ min-width: 300px;
   pointer-events: none;
   opacity: 0.5;
 }
+#readSpeed{
+  transition: 1s;
+  appearance: none;
+  background: white;
+  border-radius: 99999px;
+  pointer-events: none;
+  opacity: .1;
+  transform: rotate(180deg);
+}
+#readSpeed::-moz-range-thumb {
+  background: #e62227;
+  cursor: pointer;
+}
+#readSpeedLabel {
+  opacity: .1;
+}
 </style>
 
     <div class="navbar">
@@ -373,6 +389,10 @@ min-width: 300px;
                     <div onclick="updateUsername();" class="button accentbtn">
                         Update
                     </div>
+                    <div id="readSpeedLabel" class="settingtxt">
+                      Read Speed
+                  </div>
+                  <input id="readSpeed" type="range" min="1" max="400" value="200"/>
                 </div>
                 <div class="button redbtn" onclick="updateScore(0)" style="width: 100%;">
                     Reset Score
@@ -431,6 +451,8 @@ let question = "";
 let answered = "";
 let questionSubmitted = false;
 let readyForNext = false;
+let questionDone = false;
+let running = false;
 
 var decreaseValue = () => {
   timerpoints -= 7;
@@ -466,7 +488,6 @@ function startPromptCountdownTimer() {
       document.getElementById("overlay").style.display = "none";
       write = true;
       document.getElementById("questiontxt").innerHTML = question;
-      document.getElementById("subject").innerHTML = "Waiting for question to finish...";
       document.getElementById("promptanswer").value="";
     }
   }
@@ -477,6 +498,12 @@ function startPromptCountdownTimer() {
 }
 
 function countdownTimer(countdownTime) {
+  if (running) {
+    return;
+  } else {
+    running = true;
+  }
+
   let remainingTime = countdownTime;
   const interval = 100;
 
@@ -491,6 +518,7 @@ function countdownTimer(countdownTime) {
 
     if (remainingTime <= 0) {
       clearInterval(timer);
+      running = false;
       try {
         if (!document.getElementById("answerInput").value) {
           write = true;
@@ -505,7 +533,6 @@ function countdownTimer(countdownTime) {
       document.getElementById("buzzer").classList.add("disabled");
       document.getElementsByClassName("timer")[0].style.border = "2px solid white";
       clearInterval(timerinterval);
-      document.getElementById("subject").innerHTML = "Waiting for question to finish...";
       if (!questionSubmitted) {
         const room = document.getElementById('roomCodeInput').value;
         socket.emit('questionFinished', room);
@@ -601,6 +628,9 @@ function sortGrid() {
 
     function handleKeyPress(event) {
     if (event.key === "Enter") {
+      if (!document.getElementById('answerInput').value) {
+        document.getElementById('answerInput').value = "222222222222222222222222222222222";
+      }
       sendanswer();
     }
   }
@@ -635,6 +665,7 @@ function sortGrid() {
       try {
         clearInterval(timerinterval);
         clearInterval(timer);
+        running = false;
         console.log("Timer stopped at " + timerpoints);
       } catch (error) {
         console.log(error);
@@ -714,13 +745,13 @@ function sortGrid() {
       question = "";
       questionSubmitted = false;
       readyForNext = false;
+      questionDone = false;
       document.getElementById('questiontxt').innerHTML = "";
       const room = document.getElementById('roomCode').innerHTML;
-      socket.emit('writeQuestion', room, 200); // change the speed based on room leader
-      // DISJDISJDISJDSDSD
+      socket.emit('writeQuestion', room, document.getElementById("readSpeed").value);
       const questionChecker = setInterval(function() {
         console.log("Waiting");
-        if (readyForNext) {
+        if (readyForNext && questionDone) {
           console.log("!!! REady for next !!!");
           document.getElementById("questiontxt").innerHTML = question;
           document.getElementById("writeButton").style.display = "block";
@@ -730,14 +761,14 @@ function sortGrid() {
           question = "";
           clearInterval(questionChecker);
         }
-      }, 1000);
+      }, 100);
     }
 
-    socket.on('updateSubject', (subject) => {
+    socket.on('updateSubject', (subject, readSpeed) => {
        timerpoints = 1000;
        document.getElementById("subject").innerHTML = subject;
        document.getElementById("buzzer").classList.remove("disabled");
-       timerinterval = setInterval(decreaseValue, 200); // change speed based on room leader
+       timerinterval = setInterval(decreaseValue, readSpeed);
        console.log("Point timer started.");
     });
 
@@ -745,6 +776,9 @@ function sortGrid() {
        console.log("Question done. Starting countdown timer.")
        countdownTimer(5000);
        write = true;
+       setTimeout(function() {
+         questionDone = true;
+        }, 5000);
     });
 
     function sendanswer() {
@@ -754,6 +788,7 @@ function sortGrid() {
       socket.emit('chatanswer', room, answered, timerpoints);
       socket.emit('getUsersInRoom', room);
       clearInterval(timer);
+      running = false;
       document.getElementById("answerFrame").innerHTML = '<div id="buzzer" onclick="buzzIn();" class="button accentbtn disabled" style="width: 100%;">Buzz In</div>';
       document.getElementById("seconds").textContent = "5";
       document.getElementById("miliseconds").textContent = ".00";
@@ -796,15 +831,24 @@ function sortGrid() {
 });
 
 socket.on('readyForNextQuestion', () => {
-  setTimeout(function() {
-  document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: white; color: #171717 !important;">?</div><div><div class="profilename">Question finished</div><div class="profiledetails">Waiting for room leader to continue</div></div><div class="profileaction"><i class="fas fa-spell-check"></i></div>');
-  if (document.getElementById("roomOwner").innerHTML == document.getElementById("username").value){
-             document.getElementById("subject").innerHTML = "Ready for the next question - you are the room leader.";
-  } else {
-  document.getElementById("subject").innerHTML = "Waiting for room leader...";
-  }
-}, 200);
+  const room = document.getElementById('roomCode').innerHTML;
+    const checkQuestion = setInterval(function() {
+      if (questionDone) {
+        if (document.getElementById("roomOwner").innerHTML == document.getElementById("username").value){
+                  document.getElementById("subject").innerHTML = "Ready for the next question - you are the room leader.";
+                  document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: white; color: #171717 !important;">?</div><div><div class="profilename">Question finished</div><div class="profiledetails">Waiting for room leader to continue</div></div><div class="profileaction"><i class="fas fa-spell-check"></i></div>');
+                  socket.emit('questionFinishedAlert', room);
+        } else {
+          document.getElementById("subject").innerHTML = "Waiting for room leader...";
+        }
+        clearInterval(checkQuestion);
+      }
+    }, 100);
   readyForNext = true;
+  });
+
+  socket.on('giveQuestionFinishedAlert', () => {
+    document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: white; color: #171717 !important;">?</div><div><div class="profilename">Question finished</div><div class="profiledetails">Waiting for room leader to continue</div></div><div class="profileaction"><i class="fas fa-spell-check"></i></div>');
   });
 
 socket.on('votesNeeded', (numerator, denominator) => {
@@ -896,6 +940,9 @@ socket.on('userKicked', (username) => {
     document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + RoomLeader + '</div><div class="profiledetails">Is room leader</div></div><div class="profileaction"><i class="fas fa-user-cog"></i></div>');
     if (isRoomLeader) {
     document.getElementById("subject").innerHTML = "You are the room leader";
+    document.getElementById("readSpeed").style.pointerEvents = "auto";
+    document.getElementById("readSpeed").style.opacity = 1;
+    document.getElementById("readSpeedLabel").style.opacity = 1; 
   } else {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
@@ -911,6 +958,9 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
     console.log('You are the room leader.');
     document.getElementById("subject").innerHTML = "You are the room leader";
     document.getElementById("writeButton").style.display = "block";
+    document.getElementById("readSpeed").style.pointerEvents = "auto";
+    document.getElementById("readSpeed").style.opacity = 1;
+    document.getElementById("readSpeedLabel").style.opacity = 1; 
   } else {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
