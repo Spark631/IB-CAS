@@ -235,6 +235,19 @@
    padding: 40px;
    border-radius: 8px;
 }
+#questionspopup {
+  transition: .8s !important;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border: 3px solid white;
+   z-index: 9999;
+   padding: 40px;
+   border-radius: 8px;
+   display: none;
+   opacity: 0;
+}
 #settingspopup {
    transition: .8s !important;
    position: fixed;
@@ -282,7 +295,7 @@ min-width: 300px;
   pointer-events: none;
   opacity: 0.5;
 }
-#readSpeed{
+#readSpeed {
   transition: 1s;
   appearance: none;
   background: white;
@@ -297,6 +310,33 @@ min-width: 300px;
 }
 #readSpeedLabel {
   opacity: .1;
+}
+#questioncards {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.questionCard {
+  padding: 30px;
+  background-color: var(--bg1);
+  border-radius: 8px;
+  margin-right: 20px;
+  margin-bottom: 25px;
+}
+.qcSubject {
+  background-color: var(--bg2);
+display: inline-block;
+padding: 10px 25px 10px 25px;
+border-radius: 6px;
+margin-bottom: 15px;
+margin-top: -5px;
+}
+.qcAnswers {
+  background-color: var(--bg3);
+display: inline-block;
+padding: 10px 25px 10px 25px;
+border-radius: 6px;
+margin-bottom: -5px;
+margin-top: 15px;
 }
 </style>
 
@@ -334,7 +374,7 @@ min-width: 300px;
                     </div>
                 </div>
             </div>
-            <div class="button" style="margin: auto; margin-top: 25px;">
+            <div class="button" onclick="showQuestionsPopup()" style="margin: auto; margin-top: 25px;">
                 View Previous Questions
             </div>
         </div>
@@ -435,6 +475,15 @@ min-width: 300px;
             <input id="promptanswer" onkeypress="handlePromptKeyPress(event)" placeholder="Type an answer" class="input" type="text"/>
           </div>
 
+          <!--Previous Questions Popup-->
+          <div id="questionspopup" class="card popup">
+            <div class="header">
+                Past Questions
+            </div>
+            <div id="questioncards">No questions here yet.</div>
+            <div class="button accentbtn" onclick="closeQuestionsPopup()">Close</div>
+          </div>
+
           <div id="overlay"></div>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -463,6 +512,20 @@ var decreaseValue = () => {
     console.log("Value reached 0 or below.");
   }
 };
+
+function showQuestionsPopup() {
+  document.getElementById("questionspopup").style.display = "grid";
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("questionspopup").style.opacity = 1;
+  document.getElementById("overlay").style.opacity = 1;
+}
+
+function closeQuestionsPopup() {
+  document.getElementById("questionspopup").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("questionspopup").style.opacity = 0;
+  document.getElementById("overlay").style.opacity = 0;
+}
 
 function startPromptCountdownTimer() {
   let timeRemaining = 8.0;
@@ -770,6 +833,18 @@ function sortGrid() {
        document.getElementById("buzzer").classList.remove("disabled");
        timerinterval = setInterval(decreaseValue, readSpeed);
        console.log("Point timer started.");
+    });
+
+    socket.on('addPastQuestion', (subject, question, answers) => {
+      const addQuestions = setInterval(function() {
+        if (readyForNext && questionDone) {
+          if (document.getElementById("questioncards").innerHTML == "No questions here yet.") {
+            document.getElementById("questioncards").innerHTML = "";
+          }
+          document.getElementById("questioncards").insertAdjacentHTML('afterbegin', "<div class='questionCard'><div class='qcSubject'>" + subject + "</div><div class='qcQuestion'>" + question + "</div><div class='qcAnswers'>Answer(s): " + answers + "</div></div>");
+          clearInterval(addQuestions);
+        }
+      }, 100);
     });
 
     socket.on('questionDone', () => {

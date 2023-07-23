@@ -200,6 +200,8 @@ function increment(){
      clearInterval(interval);
      socket.emit('questionDone');
      socket.to(room).emit('questionDone');
+     socket.emit('addPastQuestion', subject, question, randomQuestion.answers);
+     socket.to(room).emit('addPastQuestion', subject, question, randomQuestion.answers);
      questionDoneSoFar = "";
   } else {
      questionDoneSoFar += (word[i] + " "); 
