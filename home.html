@@ -324,8 +324,15 @@ min-width: 300px;
   transition: 1s;
   pointer-events: none;
   opacity: .1;
+  width: 100%;
+  top: 0px;
+}
+#selectButton {
+  transition: 1s;
+  pointer-events: none;
+  opacity: .1;
   margin-top: 10px;
-  width: 147%;
+  width: 100%;
 }
 #questioncards {
   max-height: 300px;
@@ -426,14 +433,14 @@ margin-top: 15px;
                     <div id="roomCode" class="button">
                         022867
                     </div>
-                    <div class="button accentbtn" style="visibility: hidden;">
+                    <div class="button accentbtn" onclick="copy();">
                         Copy
                     </div>
                     <div class="settingtxt">
                         Room Owner
                     </div>
                     <div id="roomOwner" class="button">
-                        Noah
+                        roomOwnerPlaceholder
                     </div>
                     <div onclick="kick();" class="button accentbtn">
                         Kick
@@ -448,19 +455,23 @@ margin-top: 15px;
                     <div id="readSpeedLabel" class="settingtxt">
                       Read Speed
                   </div>
-                  <input id="readSpeed" type="range" min="1" max="400" value="200"/>
+                  <input id="readSpeed" type="range" min="50" max="500" value="300"/>
                   <div class="button accentbtn" style="visibility: hidden;">
                     Update
                 </div>
                   <div id="subjectLabel" class="settingtxt">
                     Subjects
                 </div>
+                
+                <div id="checklistContainer" style="max-height: 200px; overflow-y: scroll;"></div>
                 <div>
-                <div id="checklistContainer" style="max-height: 200px; overflow-y: scroll; margin-right: -124px;"></div>
                 <div onclick="deselect();" class="button accentbtn deselectButton" id="deselectButton">
                   Deselect All
-              </div>
-                </div>
+              </div><br>
+              <div onclick="select();" class="button accentbtn deselectButton" id="selectButton">
+                Select All
+            </div></div>
+                
               </div>
                 <div class="button redbtn" onclick="updateScore(0)" style="width: 100%;">
                     Reset Score
@@ -540,6 +551,18 @@ var decreaseValue = () => {
     console.log("Value reached 0 or below.");
   }
 };
+
+function copy() {
+  const textToCopy = document.getElementById("roomCode").innerHTML;
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      console.log('Text successfully copied to clipboard');
+      alert("Room code successfully copied to clipboard.");
+    })
+    .catch(err => {
+      console.error('Unable to copy text to clipboard', err);
+    });
+}
 
 function showQuestionsPopup() {
   document.getElementById("questionspopup").style.display = "grid";
@@ -833,6 +856,17 @@ function sortGrid() {
       questionDone = false;
       document.getElementById('questiontxt').innerHTML = "";
       const room = document.getElementById('roomCode').innerHTML;
+
+      const checkboxes = document.querySelectorAll('[type="checkbox"]');
+  checkboxes.forEach(checkbox => {
+      const selectedSubjects = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+
+      socket.emit('updateSelectedSubjects', selectedSubjects);
+  });
+//
+
       socket.emit('writeQuestion', room, document.getElementById("readSpeed").value);
       const questionChecker = setInterval(function() {
         console.log("Waiting");
@@ -1043,6 +1077,8 @@ socket.on('userKicked', (username) => {
       document.getElementById("checklistContainer").style.pointerEvents = "auto";
       document.getElementById("deselectButton").style.pointerEvents = "auto";
       document.getElementById("checklistContainer").style.opacity = 1;
+      document.getElementById("selectButton").style.pointerEvents = "auto";
+      document.getElementById("selectButton").style.opacity = 1; 
       document.getElementById("deselectButton").style.opacity = 1; 
       document.getElementById("subjectLabel").style.opacity = 1;
   } else {
@@ -1065,7 +1101,9 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
     document.getElementById("readSpeedLabel").style.opacity = 1; 
     document.getElementById("checklistContainer").style.pointerEvents = "auto";
     document.getElementById("deselectButton").style.pointerEvents = "auto";
+    document.getElementById("selectButton").style.pointerEvents = "auto";
     document.getElementById("checklistContainer").style.opacity = 1;
+    document.getElementById("selectButton").style.opacity = 1; 
     document.getElementById("deselectButton").style.opacity = 1; 
     document.getElementById("subjectLabel").style.opacity = 1;
   } else {
@@ -1090,12 +1128,25 @@ socket.on('checklistHTML', (checklistHTML) => {
   });
 });
 
+if (window.innerWidth < 980) {
+  var messageDiv = document.getElementById("roompopup");
+  messageDiv.textContent = "A larger viewpoint is required to use Quizzer.";
+  console.log("bad screen size");
+}
+      
 function deselect(){
   const checkboxes = document.querySelectorAll('[type="checkbox"]');
       checkboxes.forEach(checkbox => {
         checkbox.checked = false;
       });
   }
+
+  function select(){
+    const checkboxes = document.querySelectorAll('[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = true;
+        });
+    }
 
     socket.on('chatanswer', (username, answer) => {
       const characters = extractUppercaseLetters(username);
