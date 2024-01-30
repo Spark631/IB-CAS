@@ -311,6 +311,21 @@ min-width: 300px;
 #readSpeedLabel {
   opacity: .1;
 }
+#subjectLabel {
+  opacity: .1;
+}
+#checklistContainer {
+  transition: 1s;
+  pointer-events: none;
+  opacity: .1;
+}
+#deselectButton {
+  transition: 1s;
+  pointer-events: none;
+  opacity: .1;
+  margin-top: 10px;
+  width: 147%;
+}
 #questioncards {
   max-height: 300px;
   overflow-y: scroll;
@@ -410,7 +425,7 @@ margin-top: 15px;
                     <div id="roomCode" class="button">
                         022867
                     </div>
-                    <div class="button accentbtn">
+                    <div class="button accentbtn" style="visibility: hidden;">
                         Copy
                     </div>
                     <div class="settingtxt">
@@ -433,7 +448,19 @@ margin-top: 15px;
                       Read Speed
                   </div>
                   <input id="readSpeed" type="range" min="1" max="400" value="200"/>
+                  <div class="button accentbtn" style="visibility: hidden;">
+                    Update
                 </div>
+                  <div id="subjectLabel" class="settingtxt">
+                    Subjects
+                </div>
+                <div>
+                <div id="checklistContainer" style="max-height: 200px; overflow-y: scroll; margin-right: -124px;"></div>
+                <div onclick="deselect();" class="button accentbtn deselectButton" id="deselectButton">
+                  Deselect All
+              </div>
+                </div>
+              </div>
                 <div class="button redbtn" onclick="updateScore(0)" style="width: 100%;">
                     Reset Score
                 </div>
@@ -767,10 +794,10 @@ function sortGrid() {
       joinRoom();
     }
 
-    function windowBlurHandler() {
-      location.reload();
-    }
-    window.addEventListener("blur", windowBlurHandler);
+    //function windowBlurHandler() {
+      //location.reload();
+    //}
+    //window.addEventListener("blur", windowBlurHandler);
 
     function openSettings(){
       if (document.getElementById("settingspopup").style.display == "grid") {
@@ -877,21 +904,21 @@ function sortGrid() {
       const characters = extractUppercaseLetters(playerId);
       const color = generateColor(characters);
       if (grade === "pass") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Answered correctly!</div></div><div class="profileaction"><i class="fa fa-check"></i></div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename" style="color: lightgreen;">' + playerId + '</div><div class="profiledetails" style="color: lightgreen;">Answered correctly!</div></div><div class="profileaction" style="color: lightgreen;"><i class="fa fa-check"></i></div>');
         write = true;
         document.getElementById("questiontxt").innerHTML = question;
         document.getElementById("subject").innerHTML = "Waiting for question to finish...";
         socket.emit('questionFinished', room);
       } else if (grade === "prompt") {
         document.getElementById("prompttxt").innerHTML = "'" + document.getElementById('questiontxt').innerHTML + "'<br><br>Prompt on " + answered + ". Enter the correct answer below.";
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Was prompted!</div></div><div class="profileaction"><i class="fas fa-question"></i></div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename" style="color: #46a2bf;">' + playerId + '</div><div class="profiledetails" style="color: #46a2bf;">Was prompted!</div></div><div class="profileaction"><i class="fas fa-question" style="color: #46a2bf;"></i></div>');
         document.getElementById("promptpopup").style.display = "grid";
         document.getElementById("overlay").style.display = "block";
         document.getElementById("overlay").style.opacity = 1;
         document.getElementById("promptanswer").focus();
         startPromptCountdownTimer();
       } else if (grade === "fail") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + playerId + '</div><div class="profiledetails">Was wrong!</div></div><div class="profileaction"><i class="fas fa-times"></i></div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename" style="color: #ff6161;">' + playerId + '</div><div class="profiledetails" style="color: #ff6161;">Was wrong!</div></div><div class="profileaction"><i class="fas fa-times" style="color: #ff6161;"></i></div>');
         write = true;
         document.getElementById("questiontxt").innerHTML = question;
         document.getElementById("subject").innerHTML = "Waiting for question to finish...";
@@ -1008,10 +1035,15 @@ socket.on('userKicked', (username) => {
     const color = generateColor(characters);
     document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + RoomLeader + '</div><div class="profiledetails">Is room leader</div></div><div class="profileaction"><i class="fas fa-user-cog"></i></div>');
     if (isRoomLeader) {
-    document.getElementById("subject").innerHTML = "You are the room leader";
-    document.getElementById("readSpeed").style.pointerEvents = "auto";
-    document.getElementById("readSpeed").style.opacity = 1;
-    document.getElementById("readSpeedLabel").style.opacity = 1; 
+      document.getElementById("subject").innerHTML = "You are the room leader";
+      document.getElementById("readSpeed").style.pointerEvents = "auto";
+      document.getElementById("readSpeed").style.opacity = 1;
+      document.getElementById("readSpeedLabel").style.opacity = 1; 
+      document.getElementById("checklistContainer").style.pointerEvents = "auto";
+      document.getElementById("deselectButton").style.pointerEvents = "auto";
+      document.getElementById("checklistContainer").style.opacity = 1;
+      document.getElementById("deselectButton").style.opacity = 1; 
+      document.getElementById("subjectLabel").style.opacity = 1;
   } else {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
@@ -1030,6 +1062,11 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
     document.getElementById("readSpeed").style.pointerEvents = "auto";
     document.getElementById("readSpeed").style.opacity = 1;
     document.getElementById("readSpeedLabel").style.opacity = 1; 
+    document.getElementById("checklistContainer").style.pointerEvents = "auto";
+    document.getElementById("deselectButton").style.pointerEvents = "auto";
+    document.getElementById("checklistContainer").style.opacity = 1;
+    document.getElementById("deselectButton").style.opacity = 1; 
+    document.getElementById("subjectLabel").style.opacity = 1;
   } else {
     console.log('The room leader is player:', RoomLeader);
     document.getElementById("writeButton").style.display = "none";
@@ -1037,15 +1074,37 @@ socket.on('roomLeaderTransferred', (RoomLeader) => {
   document.getElementById("roomOwner").innerHTML = RoomLeader;
 });
 
+socket.on('checklistHTML', (checklistHTML) => {
+  document.getElementById('checklistContainer').innerHTML = checklistHTML;
+
+  const checkboxes = document.querySelectorAll('[type="checkbox"]');
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      const selectedSubjects = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+
+      socket.emit('updateSelectedSubjects', selectedSubjects);
+    });
+  });
+});
+
+function deselect(){
+  const checkboxes = document.querySelectorAll('[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+      });
+  }
+
     socket.on('chatanswer', (username, answer) => {
       const characters = extractUppercaseLetters(username);
       const color = generateColor(characters);
       if (answer === "pass") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Answered correctly!</div></div><div class="profileaction"><i class="fa fa-check"></i></div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename" style="color: lightgreen;">' + username + '</div><div class="profiledetails" style="color: lightgreen;">Answered correctly!</div></div><div class="profileaction"><i class="fa fa-check" style="color: lightgreen;"></i></div>');
       } else if (answer === "prompt") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Was prompted!</div></div><div class="profileaction"><i class="fas fa-question"></i></div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename" style="color: #46a2bf;">' + username + '</div><div class="profiledetails" style="color: #46a2bf;">Was prompted!</div></div><div class="profileaction"><i class="fas fa-question" style="color: #46a2bf;"></i></div>');
       } else if (answer === "fail") {
-        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename">' + username + '</div><div class="profiledetails">Was wrong!</div></div><div class="profileaction"><i class="fas fa-times"></i></div>');
+        document.getElementById('activitygrid').insertAdjacentHTML('afterbegin', '<div class="profileimg" style="background-color: ' + color + ';">' + characters.toUpperCase() + '</div><div><div class="profilename" style="color: #ff6161;">' + username + '</div><div class="profiledetails" style="color: #ff6161;">Was wrong!</div></div><div class="profileaction"><i class="fas fa-times" style="color: #ff6161;"></i></div>');
       }
 
       const room = document.getElementById('roomCode').innerHTML;
