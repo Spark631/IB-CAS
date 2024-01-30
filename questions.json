@@ -1,695 +1,764 @@
 {
   "questions": [
     {
-      "subject": "History",
-      "question": "Its collapse was imminent and came within half a century after its second greatest city, the market center Audaghost, fell. The Sanhaja had taken that city, and one of its former constituent people, the Susu, would murder its royal line. It was known as Wagadu by its citizens – a fact related to us in the chronicles of al-Bakri who described its society in detail, including its future major capital at Kumbi Saleh. Situated between the Sahara and the headwaters of the Senegal and Niger Rivers, it became the first great trading empire of western Africa. For 10 points, identify this African kingdom whose name lives on in a west African country.",
-      "answers": ["Ghana"]
-    },
-    {
-      "subject": "Geography",
-      "question": "One of its major southeastern towns is found on the Hyblaei Hills, and much of its agriculture takes place on the Plain of Catania. Madonie Park is a major preserve in its north, and this home to such provinces as Enna and Raguse has such major urban areas as Noto. The autonomous region dominated by this territory also includes Pelagie, Panteleria, Egadi, and Lipari. For 10 points, name this home to Mount Etna and Syracuse, an island found across the Strait of Messina from the city of Reggio on the southwest of the mainland of Italy.",
-      "answers": ["Sicily", "Sicilia"]
-    },
-    {
-      "subject": "Mythology",
-      "question": "According to legends, bees formed when this god's tears hit the desert sand. This god once punished humanity by sending the vengeful goddess Sekhmet. The cow-headed fertility goddess Hathor is called the eye of this god. At night, this god turns into a giant cat in order to slay the serpent Apophis or Apep, who attacks this god's boat in the underworld in an attempt to destroy the sun. For 10 points, name this Egyptian sun god, who was eventually combined with Amun.",
-      "answers": ["Ra", "Re", "Amon-Ra", "Amon-Re"]
-    },
-    {
-      "subject": "History",
-      "question": "This state's eventually successful attempt to mark its border at the Harris Line resulted in a skirmish at Phillips Corners against another territory. This state was represented in Congress during the Civil War by the leader of the Peace Democrats, or Copperheads, Clement Vallandigham. John Filo took a picture in this state of Mary Ann Vecchio kneeling over the body of Jeffrey Miller. That photo in this state came after a National Guard shooting of war protestors at Kent State University. For 10 points, name this state where the Cuyahoga River caught fire in 1969 and whose residents are known as Buckeyes.",
-      "answers": ["Ohio"]
-    },
-    {
-      "subject": "Science",
-      "question": "The study of this subatomic particle's behavior is a significant part of astrochemistry. The 2011 Nobel Prize in Physics was awarded for the discovery of neutrino oscillations, which shows that these particles have mass. There are three types of neutrinos: electron neutrinos, muon neutrinos, and tau neutrinos. They are electrically neutral, weakly interacting, and have extremely small, almost negligible, mass. For 10 points, name this elusive fundamental particle that is abundant in the universe.",
-      "answers": ["Neutrino"]
-    },
-    {
-      "subject": "Literature",
-      "question": "This novel centers around a magical circus called 'Le Cirque des Rêves' or 'The Circus of Dreams,' which operates only at night. The circus serves as a venue for a magical competition between two young illusionists, Celia Bowen and Marco Alisdair. Unbeknownst to them, the competition is a game set up by their mentors, and only one can be left standing. As the game unfolds, Celia and Marco fall in love, making the competition even more challenging. For 10 points, name this fantasy novel written by Erin Morgenstern.",
-      "answers": ["The Night Circus"]
-    },
-    {
-      "subject": "Literature",
-      "question": "This classic novel tells the story of a young orphan girl who is mistakenly sent to live with two elderly siblings, Matthew and Marilla Cuthbert, at the fictional Green Gables farm in Prince Edward Island, Canada. The girl, with her red hair and lively imagination, is initially a disappointment to the Cuthberts, who had intended to adopt a boy to help with their farm. However, she wins their hearts and the hearts of readers as she navigates through various adventures and mishaps. For 10 points, name this beloved novel written by Lucy Maud Montgomery.",
-      "answers": ["Anne of Green Gables"]
-    },
-    {
-      "subject": "Geography",
-      "question": "This river is the longest in the world, stretching over approximately 6,650 kilometers (4,130 miles) from its source in Burundi to its mouth in Egypt, where it empties into the Mediterranean Sea. The river flows through multiple countries, including Rwanda, Uganda, South Sudan, Sudan, and Egypt. It has played a significant role in the history and development of the civilizations that settled along its banks, particularly ancient Egypt. For 10 points, name this iconic river in northeastern Africa.",
-      "answers": ["The Nile River", "Nile River"]
-    },
-    {
-      "subject": "History",
-      "question": "This ancient empire was one of the most significant civilizations of the ancient Near East. It was located in the region known as Mesopotamia, between the Tigris and Euphrates rivers, in what is now present-day Iraq and parts of Syria and Turkey. This empire is known for its advancements in writing (using cuneiform script), law (the Code of Hammurabi), and mathematics (the sexagesimal system). It fell to the Persians in 539 BCE. For 10 points, name this ancient empire, often considered the cradle of civilization.",
-      "answers": ["Babylonian Empire", "Babylonia", "Babylon"]
-    },
-    {
-      "subject": "Science",
-      "question": "This celestial event occurs when the moon moves between the Earth and the sun, obscuring the sun's light and casting a shadow on the Earth. It can only occur during a new moon phase. There are different types of this event, including total, partial, annular, and hybrid eclipses, depending on the alignment of the moon and the sun. During a total this event, the sun is completely blocked, revealing the sun's corona. For 10 points, name this natural phenomenon.",
-      "answers": ["Solar eclipse"]
-    },
-    {
-      "subject": "Literature",
-      "question": "This novel, often considered a bildungsroman or coming-of-age story, follows the life of a young girl named Scout Finch as she grows up in the racially charged Deep South during the 1930s. The novel deals with themes of racial injustice, moral growth, and empathy. Scout's father, Atticus Finch, is a principled lawyer who defends a black man accused of raping a white woman, facing a prejudiced society. For 10 points, name this Pulitzer Prize-winning novel written by Harper Lee.",
-      "answers": ["To Kill a Mockingbird"]
-    },
-    {
-      "subject": "Geography",
-      "question": "This mountain range extends over 3,100 kilometers (1,900 miles) across South Asia, covering several countries including India, Nepal, Bhutan, and China (Tibet). It is home to the world's highest peak, Mount Everest, which reaches an elevation of 8,848 meters (29,029 feet) above sea level. This range also contains several other peaks that are among the world's highest. The rivers that originate in this range, such as the Ganges and the Indus, are vital for the region's water supply and agriculture. For 10 points, name this famous mountain range in Asia.",
-      "answers": ["The Himalayas", "Himalaya Mountains"]
-    },
-    {
-      "subject": "History",
-      "question": "This ancient civilization emerged in the region around the Yellow River (Huang He) in present-day China. It is one of the world's oldest civilizations, with a history dating back to the Neolithic period. This civilization is known for its advancements in agriculture, including the development of early rice and millet farming techniques. It also created one of the earliest writing systems, using characters on oracle bones and bronze artifacts. For 10 points, name this ancient civilization of China.",
-      "answers": ["Ancient China", "Chinese civilization"]
-    },
-    {
-      "subject": "Geography",
-      "question": "This desert is located in southwestern Africa, covering much of Namibia and parts of Angola and South Africa. It is one of the oldest deserts in the world, with a history of arid conditions dating back millions of years. Despite its dryness, it is home to a diverse range of desert-adapted plants and animals, including unique species like the Welwitschia plant and the desert-adapted elephant. It is known for its striking landscapes, including vast sand dunes and rocky desert plains. For 10 points, name this desert in Africa.",
-      "answers": ["The Namib Desert", "Namib Desert", "Namib"]
-    },
-    {
-      "subject": "History",
-      "question": "This ancient city was the capital of the powerful Aztec Empire, situated on an island in Lake Texcoco in present-day Mexico City. The city was founded in 1325 and became a major cultural, religious, and political center in Mesoamerica. It was known for its impressive architecture, including the grand pyramid-shaped temple known as the Templo Mayor. The city was conquered and destroyed by Spanish conquistadors led by Hernán Cortés in 1521. For 10 points, name this once-great city of the Aztecs.",
-      "answers": ["Tenochtitlan"]
-    },
-    {
-      "subject": "Science",
-      "question": "This fundamental force of nature is responsible for holding the components of an atomic nucleus together. It is one of the four fundamental forces in the universe, along with gravity, electromagnetism, and the weak force. The exchange of particles called gluons mediates this force. It is a strong force that overcomes the electromagnetic repulsion between positively charged protons in the nucleus. For 10 points, name this force that binds quarks and neutrons together.",
-      "answers": ["Strong nuclear force", "Strong force"]
-    },
-    {
-      "subject": "Literature",
-      "question": "This dystopian novel is set in the totalitarian society of Gilead, a theocratic regime that has replaced the United States. The story is narrated by a handmaid named Offred, who is assigned to a high-ranking commander for the purpose of bearing a child. In this society, handmaids are stripped of their names and identities and must conform to strict rules. The novel explores themes of power, gender, and freedom. For 10 points, name this novel written by Margaret Atwood.",
-      "answers": ["The Handmaid's Tale"]
-    },
-    {
-      "subject": "History",
-      "question": "This ancient civilization emerged in the valley of the Tigris and Euphrates rivers, in what is now present-day Iraq and parts of Kuwait and Syria. It is one of the earliest known civilizations and is credited with the invention of writing (using cuneiform script) and the wheel. The Babylonian and Assyrian empires were prominent in this region. Its decline was linked to environmental factors and invasions by neighboring peoples. For 10 points, name this ancient civilization.",
-      "answers": ["Mesopotamia"]
-    },
-    {
-      "subject": "Science",
-      "question": "This unit of measure is used to express the amount of energy or work done. It is defined as the energy required to apply a force of one newton over a distance of one meter in the direction of the force. This unit is named after the scientist who helped formulate the laws of motion and universal gravitation. It is a derived unit in the International System of Units (SI). For 10 points, name this unit of energy and work.",
-      "answers": ["Joule"]
-    },
-    {
-      "subject": "Literature",
-      "question": "This epic poem, composed by an anonymous poet, is one of the most important works of Old English literature. It tells the story of a hero named Beowulf, who comes to the aid of the Danish king Hrothgar to defeat the monstrous Grendel and later, Grendel's mother. Beowulf then becomes king of the Geats and faces a dragon in battle, ultimately sacrificing his life to save his people. For 10 points, name this epic poem set in Scandinavia.",
-      "answers": ["Beowulf"]
-    },
-    {
-      "subject": "Geography",
-      "question": "This mountain range runs along the western coast of South America, stretching over 7,000 kilometers (4,300 miles) from Venezuela to Chile and Argentina. It is the world's longest continental mountain range. The highest peak in this range is Aconcagua, reaching an elevation of 6,960.8 meters (22,837 feet) above sea level. It is known for its rich biodiversity, containing numerous unique and diverse ecosystems. For 10 points, name this famous mountain range in South America.",
-      "answers": ["The Andes", "Andes Mountains", "Andes"]
-    },
-    {
-      "subject": "Science",
-      "question": "This chemical element has the symbol 'Na' and atomic number 11. It is a highly reactive metal, and its name is derived from the Latin word 'natrium.' This element is essential for various biological processes and is found in table salt, sodium chloride. It is also used in various industrial applications, including the production of chemicals and soaps. When combined with chlorine, it forms common table salt. For 10 points, name this alkali metal with a silvery-white appearance.",
-      "answers": ["Sodium"]
-    },
-    {
       "subject": "IB Biology",
-      "question": "This process occurs in the mitochondria and involves the oxidation of pyruvate molecules to produce carbon dioxide, NADH, FADH2, and ATP. For 10 points, name this central metabolic pathway.",
+      "question": "This process occurs in the mitochondria and involves the oxidation of pyruvate molecules to produce carbon dioxide, NADH, FADH2, and ATP. Name this central metabolic pathway.",
       "answers": ["Krebs cycle", "Citric acid cycle", "TCA cycle"]
     },
     {
       "subject": "IB Physics",
-      "question": "This physical quantity represents the product of an object's mass and its velocity. In a closed system, this quantity is conserved. For 10 points, name this fundamental concept in physics.",
+      "question": "This physical quantity represents the product of an object's mass and its velocity. In a closed system, this quantity is conserved. Name this fundamental concept in physics.",
       "answers": ["Momentum"]
     },
     {
       "subject": "IB Analysis and Approaches",
-      "question": "This theorem states that any continuous function on a closed interval [a, b] is uniformly continuous on that interval. For 10 points, name this theorem named after a German mathematician.",
+      "question": "This theorem states that any continuous function on a closed interval [a, b] is uniformly continuous on that interval. Name this theorem named after a German mathematician.",
       "answers": ["Heine-Borel theorem"]
     },
     {
       "subject": "IB History of the Americas",
-      "question": "This treaty, signed in 1848, ended the Mexican-American War and ceded a large portion of Mexico's territory to the United States, including present-day California, Arizona, New Mexico, and parts of Utah, Nevada, and Colorado. For 10 points, name this treaty.",
+      "question": "This treaty, signed in 1848, ended the Mexican-American War and ceded a large portion of Mexico's territory to the United States, including present-day California, Arizona, New Mexico, and parts of Utah, Nevada, and Colorado. Name this treaty.",
       "answers": ["Treaty of Guadalupe Hidalgo"]
     },
     {
       "subject": "IB Chemistry",
-      "question": "This law states that the rate of a chemical reaction is directly proportional to the product of the concentrations of the reactants. For 10 points, name this law named after a French chemist.",
+      "question": "This law states that the rate of a chemical reaction is directly proportional to the product of the concentrations of the reactants. Name this law named after a French chemist.",
       "answers": ["Law of mass action"]
     },
     {
       "subject": "IB Economics",
-      "question": "This economic concept describes a situation where the production of one good increases as the production of another good decreases. For 10 points, name this phenomenon.",
+      "question": "This economic concept describes a situation where the production of one good increases as the production of another good decreases. Name this phenomenon.",
       "answers": ["Opportunity cost"]
     },
     {
       "subject": "IB English Literature",
-      "question": "This novel, published in 1847, tells the story of a young governess who is hired to educate the daughter of a wealthy man named Mr. Rochester. For 10 points, name this classic novel by Charlotte Bronte.",
+      "question": "This novel, published in 1847, tells the story of a young governess who is hired to educate the daughter of a wealthy man named Mr. Rochester. Name this classic novel by Charlotte Bronte.",
       "answers": ["Jane Eyre"]
     },
     {
       "subject": "IB Visual Arts",
-      "question": "This Dutch artist is known for his works such as 'The Starry Night' and 'Sunflowers.' For 10 points, name this post-impressionist painter.",
+      "question": "This Dutch artist is known for his works such as 'The Starry Night' and 'Sunflowers.' Name this post-impressionist painter.",
       "answers": ["Vincent van Gogh"]
     },
     {
       "subject": "IB Mathematics: Applications and Interpretation",
-      "question": "This mathematical concept is used to represent the chance of an event occurring, expressed as a value between 0 and 1. For 10 points, name this probability measure.",
+      "question": "This mathematical concept is used to represent the chance of an event occurring, expressed as a value between 0 and 1. Name this probability measure.",
       "answers": ["Probability"]
     },
     {
       "subject": "IB Theatre",
-      "question": "This Greek playwright is known for his tragedies, including 'Oedipus Rex' and 'Antigone.' For 10 points, name this ancient playwright.",
+      "question": "This Greek playwright is known for his tragedies, including 'Oedipus Rex' and 'Antigone.' Name this ancient playwright.",
       "answers": ["Sophocles"]
     },
     {
       "subject": "IB Environmental Systems and Societies",
-      "question": "This biome is characterized by cold temperatures, low biodiversity, and a layer of permanently frozen soil known as permafrost. For 10 points, name this biome.",
+      "question": "This biome is characterized by cold temperatures, low biodiversity, and a layer of permanently frozen soil known as permafrost. Name this biome.",
       "answers": ["Tundra"]
     },
     {
       "subject": "IB Computer Science",
-      "question": "This data structure consists of nodes connected in a hierarchical manner. Each node has a parent and zero or more children. For 10 points, name this data structure.",
+      "question": "This data structure consists of nodes connected in a hierarchical manner. Each node has a parent and zero or more children. Name this data structure.",
       "answers": ["Tree"]
     },
     {
       "subject": "IB Business Management",
-      "question": "This management theory emphasizes the importance of dividing labor into specialized tasks to increase efficiency. For 10 points, name this management theory named after its founder.",
+      "question": "This management theory emphasizes the importance of dividing labor into specialized tasks to increase efficiency. Name this management theory named after its founder.",
       "answers": ["Scientific management"]
     },
     {
       "subject": "IB Psychology",
-      "question": "This psychological disorder is characterized by persistent feelings of sadness, hopelessness, and loss of interest in activities. For 10 points, name this mood disorder.",
+      "question": "This psychological disorder is characterized by persistent feelings of sadness, hopelessness, and loss of interest in activities. Name this mood disorder.",
       "answers": ["Depression"]
     },
     {
       "subject": "IB Design Technology",
-      "question": "This manufacturing process involves the use of a computer-controlled machine to carve out three-dimensional objects from a solid block of material. For 10 points, name this process.",
+      "question": "This manufacturing process involves the use of a computer-controlled machine to carve out three-dimensional objects from a solid block of material. Name this process.",
       "answers": ["CNC machining", "Computer numerical control machining"]
     },
     {
       "subject": "IB Music",
-      "question": "This composer, known for his compositions such as 'Symphony No. 9' and 'Ode to Joy,' is considered one of the greatest composers of all time. For 10 points, name this German composer.",
+      "question": "This composer, known for his compositions such as 'Symphony No. 9' and 'Ode to Joy,' is considered one of the greatest composers of all time. Name this German composer.",
       "answers": ["Ludwig van Beethoven"]
     },
     {
       "subject": "IB Film",
-      "question": "This director is known for films such as 'Pulp Fiction,' 'Kill Bill,' and 'Inglourious Basterds.' For 10 points, name this American filmmaker.",
+      "question": "This director is known for films such as 'Pulp Fiction,' 'Kill Bill,' and 'Inglourious Basterds.' Name this American filmmaker.",
       "answers": ["Quentin Tarantino"]
     },
     {
       "subject": "IB World Religions",
-      "question": "This religion, founded by Siddhartha Gautama, teaches the Four Noble Truths and the Eightfold Path. For 10 points, name this major world religion.",
+      "question": "This religion, founded by Siddhartha Gautama, teaches the Four Noble Truths and the Eightfold Path. Name this major world religion.",
       "answers": ["Buddhism"]
     },
     {
       "subject": "IB Spanish",
-      "question": "This Spanish artist, known for his surrealist paintings such as 'The Persistence of Memory,' was born in Figueres, Catalonia. For 10 points, name this artist.",
+      "question": "This Spanish artist, known for his surrealist paintings such as 'The Persistence of Memory,' was born in Figueres, Catalonia. Name this artist.",
       "answers": ["Salvador Dalí"]
     },
     {
       "subject": "IB French",
-      "question": "This French writer is known for novels such as 'Les Misérables' and 'The Hunchback of Notre-Dame.' For 10 points, name this author.",
+      "question": "This French writer is known for novels such as 'Les Misérables' and 'The Hunchback of Notre-Dame.' Name this author.",
       "answers": ["Victor Hugo"]
     },
     {
       "subject": "IB Mandarin",
-      "question": "This Chinese philosopher, also known as Kongzi, is the central figure in Confucianism. For 10 points, name this philosopher.",
+      "question": "This Chinese philosopher, also known as Kongzi, is the central figure in Confucianism. Name this philosopher.",
       "answers": ["Confucius"]
     },
     {
       "subject": "IB Arabic",
-      "question": "This influential Islamic scholar is known for his comprehensive collection of hadiths, which are sayings and actions of the Prophet Muhammad. For 10 points, name this scholar.",
+      "question": "This influential Islamic scholar is known for his comprehensive collection of hadiths, which are sayings and actions of the Prophet Muhammad. Name this scholar.",
       "answers": ["Imam Bukhari"]
     },
     {
       "subject": "IB Russian",
-      "question": "This Russian author is known for novels such as 'War and Peace' and 'Anna Karenina.' For 10 points, name this prolific writer.",
+      "question": "This Russian author is known for novels such as 'War and Peace' and 'Anna Karenina.' Name this prolific writer.",
       "answers": ["Leo Tolstoy"]
     },
     {
       "subject": "IB Dutch",
-      "question": "This Dutch artist is known for his works such as 'The Night Watch' and 'The Anatomy Lesson of Dr. Nicolaes Tulp.' For 10 points, name this Dutch painter.",
+      "question": "This Dutch artist is known for his works such as 'The Night Watch' and 'The Anatomy Lesson of Dr. Nicolaes Tulp.' Name this Dutch painter.",
       "answers": ["Rembrandt"]
     },
     {
       "subject": "IB German",
-      "question": "This German composer is known for his compositions such as 'Symphony No. 5' and 'Für Elise.' For 10 points, name this classical composer.",
+      "question": "This German composer is known for his compositions such as 'Symphony No. 5' and 'Für Elise.' Name this classical composer.",
       "answers": ["Ludwig van Beethoven"]
     },
     {
       "subject": "IB Italian",
-      "question": "This Italian artist is known for his works such as 'David' and 'The Creation of Adam.' For 10 points, name this Renaissance artist.",
+      "question": "This Italian artist is known for his works such as 'David' and 'The Creation of Adam.' Name this Renaissance artist.",
       "answers": ["Michelangelo"]
     },
     {
       "subject": "IB Japanese",
-      "question": "This Japanese filmmaker is known for his films such as 'Seven Samurai' and 'Rashomon.' For 10 points, name this legendary director.",
+      "question": "This Japanese filmmaker is known for his films such as 'Seven Samurai' and 'Rashomon.' Name this legendary director.",
       "answers": ["Akira Kurosawa"]
     },
     {
       "subject": "IB Latin",
-      "question": "This Roman poet is known for his epic poem 'The Aeneid.' For 10 points, name this ancient poet.",
+      "question": "This Roman poet is known for his epic poem 'The Aeneid.' Name this ancient poet.",
       "answers": ["Virgil"]
     },
     {
       "subject": "IB Classical Greek",
-      "question": "This ancient Greek philosopher is known for his dialogues such as 'The Republic' and 'Apology.' For 10 points, name this philosopher.",
+      "question": "This ancient Greek philosopher is known for his dialogues such as 'The Republic' and 'Apology.' Name this philosopher.",
       "answers": ["Plato"]
     },
     {
       "subject": "IB Mandarin B",
-      "question": "This Chinese dynasty, known for its contributions to art, literature, and philosophy, ruled from 1368 to 1644. For 10 points, name this dynasty.",
+      "question": "This Chinese dynasty, known for its contributions to art, literature, and philosophy, ruled from 1368 to 1644. Name this dynasty.",
       "answers": ["Ming dynasty"]
     },
     {
       "subject": "IB Spanish B",
-      "question": "This Spanish artist, known for his surrealist paintings such as 'The Persistence of Memory,' was born in Figueres, Catalonia. For 10 points, name this artist.",
+      "question": "This Spanish artist, known for his surrealist paintings such as 'The Persistence of Memory,' was born in Figueres, Catalonia. Name this artist.",
       "answers": ["Salvador Dalí"]
     },
     {
       "subject": "IB French B",
-      "question": "This French artist, known for his impressionist paintings such as 'Impression, Sunrise,' is often regarded as the founder of impressionism. For 10 points, name this artist.",
+      "question": "This French artist, known for his impressionist paintings such as 'Impression, Sunrise,' is often regarded as the founder of impressionism. Name this artist.",
       "answers": ["Claude Monet"]
     },
     {
       "subject": "IB Italian B",
-      "question": "This Italian sculptor and architect is known for his works such as 'David' and 'Pieta.' For 10 points, name this Renaissance artist.",
+      "question": "This Italian sculptor and architect is known for his works such as 'David' and 'Pieta.' Name this Renaissance artist.",
       "answers": ["Michelangelo"]
     },
     {
       "subject": "IB Japanese B",
-      "question": "This Japanese novelist is known for his works such as 'Norwegian Wood' and 'Kafka on the Shore.' For 10 points, name this contemporary author.",
+      "question": "This Japanese novelist is known for his works such as 'Norwegian Wood' and 'Kafka on the Shore.' Name this contemporary author.",
       "answers": ["Haruki Murakami"]
     },
     {
       "subject": "IB Latin B",
-      "question": "This Roman statesman and orator is known for his speeches against the dictator Julius Caesar. For 10 points, name this Roman politician.",
+      "question": "This Roman statesman and orator is known for his speeches against the dictator Julius Caesar. Name this Roman politician.",
       "answers": ["Cicero"]
     },
     {
       "subject": "IB Classical Greek B",
-      "question": "This ancient Greek playwright is known for his tragedies such as 'Oedipus Rex' and 'Antigone.' For 10 points, name this playwright.",
+      "question": "This ancient Greek playwright is known for his tragedies such as 'Oedipus Rex' and 'Antigone.' Name this playwright.",
       "answers": ["Sophocles"]
     },
     {
       "subject": "IB Mandarin Ab Initio",
-      "question": "This Chinese philosopher, also known as Kongzi, is the central figure in Confucianism. For 10 points, name this philosopher.",
+      "question": "This Chinese philosopher, also known as Kongzi, is the central figure in Confucianism. Name this philosopher.",
       "answers": ["Confucius"]
     },
     {
       "subject": "IB Spanish Ab Initio",
-      "question": "This Spanish artist, known for his surrealist paintings such as 'The Persistence of Memory,' was born in Figueres, Catalonia. For 10 points, name this artist.",
+      "question": "This Spanish artist, known for his surrealist paintings such as 'The Persistence of Memory,' was born in Figueres, Catalonia. Name this artist.",
       "answers": ["Salvador Dalí"]
     },
     {
       "subject": "IB French Ab Initio",
-      "question": "This French artist, known for his impressionist paintings such as 'Impression, Sunrise,' is often regarded as the founder of impressionism. For 10 points, name this artist.",
+      "question": "This French artist, known for his impressionist paintings such as 'Impression, Sunrise,' is often regarded as the founder of impressionism. Name this artist.",
       "answers": ["Claude Monet"]
     },
     {
       "subject": "IB Italian Ab Initio",
-      "question": "This Italian sculptor and architect is known for his works such as 'David' and 'Pieta.' For 10 points, name this Renaissance artist.",
+      "question": "This Italian sculptor and architect is known for his works such as 'David' and 'Pieta.' Name this Renaissance artist.",
       "answers": ["Michelangelo"]
     },
     {
       "subject": "IB Japanese Ab Initio",
-      "question": "This Japanese novelist is known for his works such as 'Norwegian Wood' and 'Kafka on the Shore.' For 10 points, name this contemporary author.",
+      "question": "This Japanese novelist is known for his works such as 'Norwegian Wood' and 'Kafka on the Shore.' Name this contemporary author.",
       "answers": ["Haruki Murakami"]
     },
     {
       "subject": "IB Latin Ab Initio",
-      "question": "This Roman statesman and orator is known for his speeches against the dictator Julius Caesar. For 10 points, name this Roman politician.",
+      "question": "This Roman statesman and orator is known for his speeches against the dictator Julius Caesar. Name this Roman politician.",
       "answers": ["Cicero"]
     },
     {
       "subject": "IB Classical Greek Ab Initio",
-      "question": "This ancient Greek playwright is known for his tragedies such as 'Oedipus Rex' and 'Antigone.' For 10 points, name this playwright.",
+      "question": "This ancient Greek playwright is known for his tragedies such as 'Oedipus Rex' and 'Antigone.' Name this playwright.",
       "answers": ["Sophocles"]
     },
     {
       "subject": "IB Arabic Ab Initio",
-      "question": "This influential Islamic scholar is known for his comprehensive collection of hadiths, which are sayings and actions of the Prophet Muhammad. For 10 points, name this scholar.",
+      "question": "This influential Islamic scholar is known for his comprehensive collection of hadiths, which are sayings and actions of the Prophet Muhammad. Name this scholar.",
       "answers": ["Imam Bukhari"]
     },
     {
       "subject": "IB Russian Ab Initio",
-      "question": "This Russian author is known for novels such as 'War and Peace' and 'Anna Karenina.' For 10 points, name this prolific writer.",
+      "question": "This Russian author is known for novels such as 'War and Peace' and 'Anna Karenina.' Name this prolific writer.",
       "answers": ["Leo Tolstoy"]
     },
     {
       "subject": "IB Dutch Ab Initio",
-      "question": "This Dutch artist is known for his works such as 'The Night Watch' and 'The Anatomy Lesson of Dr. Nicolaes Tulp.' For 10 points, name this Dutch painter.",
+      "question": "This Dutch artist is known for his works such as 'The Night Watch' and 'The Anatomy Lesson of Dr. Nicolaes Tulp.' Name this Dutch painter.",
       "answers": ["Rembrandt"]
     },
     {
       "subject": "IB German Ab Initio",
-      "question": "This German composer is known for his compositions such as 'Symphony No. 5' and 'Für Elise.' For 10 points, name this classical composer.",
+      "question": "This German composer is known for his compositions such as 'Symphony No. 5' and 'Für Elise.' Name this classical composer.",
       "answers": ["Ludwig van Beethoven"]
     },
     {
+      "subject": "IB Physics",
+      "question": "The energy of electromagnetic waves is obtained by multiplying Planck's constant h by this quantity. When an object such as a bridge vibrates at the natural state of this quantity, resonance occurs. For rotating devices, it is symbolized by omega and expressed in revolutions per second. Name this property referring to the number of occurrences of a repeating event per unit time, which is measured in Hertz.",
+      "answers": ["frequency","f"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This force allows accelerated rolling motion down an incline by producing a net torque on the object. In general, this nonconservative force is equal to the normal force times mu, its namesake coefficient, and it converts kinetic energy into internal energy. For a given object, the kinetic variety is less than the static type. Name this force between surfaces that opposes the motion of an object. ",
+      "answers": ["friction"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "One of these devices with a length of 994 millimeters can be used to measure a second. The precession of one of these devices proved that the Earth rotates, according to Foucault. Christian Huygens used these devices to make more accurate (*) grandfather clocks. Name this device consisting of a mass suspending from a pivot, from which it swings back and forth. ",
+      "answers": ["pendulum"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This law was first derived by Benoit Clapeyron, and its namesake constant is equal to the Boltzmann constant multiplied by Avogadro's number, which equals approximately 8.3 joules per mole Kelvin. A modification of this law takes into account attractive forces and particle volume and is named for (*) van der Waals. It can be thought of as a combination of Avogadro's, Boyle's, and Charles's laws. Name this equation of state approximating behavior of its namesake state of matter, often represented as PV equals nRT. ",
+      "answers": ["ideal gas","ideal gas law"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "It was postulated after the discovery of several heavy particles thought to be formed by strong nuclear reactions but did not interact with matter via that force. Having only integer values, it is always conserved in strong nuclear reactions that created the heavy particles but not in the weak interactions that cause their decay. Since it must be conserved, heavy particles can only be produced in pairs where the net value is zero, a process called associated production. Identify this quantum property, first proposed by Nishijima and Gell-Mann. ",
+      "answers": ["strangness"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In fluids, this quantity can be considered equivalent to energy per volume. If Bernoulli’s principle is expressed with all the terms in distance squared per time squared, this quantity is divided by density, and an increase in this quantity has the same type of impact as an increase in energy. Integrating this with respect to volume gives work, and a calculation of enthalpy involves multiplying this times volume and adding the result to internal energy. This is commonly defined as force per area, and it varies inversely with volume in the ideal gas law. Name this quantity that can be measured in pascals, bars, or atmospheres. ",
+      "answers": ["pressure"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This quantity is expressed in the Gell-Mann-Nishijima formula in terms of baryon number, strangeness, and isospin. There are “hyper” types of this associated with both the strong and weak nuclear forces. The derivative of the density of this quantity with respect to time equals the opposite of the flux of current density. The Faraday constant is equal to the fundamental value of this times Avogadro’s constant; that fundamental value was measured by Robert Millikan’s oil-drop experiment, and can be divided by three for quarks. Name this quantity that may be positive or negative, measured in coulombs. ",
+      "answers": ["electric charge"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In standard units, this force's namesake constant equals 6.67 times ten to the negative eleventh power. This force's magnitude is inversely proportional to the square of the distance between two objects. On earth it causes objects to accelerate at 9.81 meters per second squared. It acts more strongly on objects of greater mass. Name this fundamental force that causes objects to fall to the ground.",
+      "answers": ["gravity","gravitation"]
+    },
+    {
       "subject": "IB Chinese Ab Initio",
-      "question": "This Chinese dynasty, known for its contributions to art, literature, and philosophy, ruled from 1368 to 1644. For 10 points, name this dynasty.",
+      "question": "This Chinese dynasty, known for its contributions to art, literature, and philosophy, ruled from 1368 to 1644. Name this dynasty.",
       "answers": ["Ming dynasty"]
     },
     {
       "subject": "Geography",
-      "question": "One of its major southeastern towns is found on the Hyblaei Hills, and much of its agriculture takes place on the Plain of Catania. Madonie Park is a major preserve in its north, and this home to such provinces as Enna and Raguse has such major urban areas as Noto. The autonomous region dominated by this territory also includes Pelagie, Panteleria, Egadi, and Lipari. For 10 points, name this home to Mount Etna and Syracuse, an island found across the Strait of Messina from the city of Reggio on the southwest of the mainland of Italy.",
+      "question": "One of its major southeastern towns is found on the Hyblaei Hills, and much of its agriculture takes place on the Plain of Catania. Madonie Park is a major preserve in its north, and this home to such provinces as Enna and Raguse has such major urban areas as Noto. The autonomous region dominated by this territory also includes Pelagie, Panteleria, Egadi, and Lipari. Name this home to Mount Etna and Syracuse, an island found across the Strait of Messina from the city of Reggio on the southwest of the mainland of Italy.",
       "answers": ["Sicily", "Sicilia"]
     },
     {
       "subject": "IB Mathematics",
-      "question": "This theorem states that any continuous function on a closed interval [a, b] is uniformly continuous on that interval. For 10 points, name this theorem named after a German mathematician.",
+      "question": "This theorem states that any continuous function on a closed interval [a, b] is uniformly continuous on that interval. Name this theorem named after a German mathematician.",
       "answers": ["Heine-Borel theorem"]
     },
     {
       "subject": "IB Physics",
-      "question": "This physical quantity represents the product of an object's mass and its velocity. In a closed system, this quantity is conserved. For 10 points, name this fundamental concept in physics.",
+      "question": "This physical quantity represents the product of an object's mass and its velocity. In a closed system, this quantity is conserved. Name this fundamental concept in physics.",
       "answers": ["Momentum"]
     },
     {
+      "subject": "IB Physics",
+      "question": "One representation of this quantity is equal to the momentum squared over two times mass, and it is represented in the Lagrangian with a capital T. The equipartition theorem dictates that for molecules in an ideal gas, this quantity is equal to three-halves times the Boltzmann constant times temperature. The change in this quantity is equal to power times time, and inelastic collisions do not conserve this quantity. Name this quantity defined as one-half times the mass times velocity squared, the energy possessed by objects in motion. ",
+      "answers": ["KE","Kinetic Energy"]
+    },
+    {
       "subject": "IB Psychology",
-      "question": "According to this theory of emotion, physiological arousal and the experience of emotion occur simultaneously, each triggering the other. This theory contrasts with the James-Lange theory. For 10 points, name this theory named after two psychologists.",
+      "question": "According to this theory of emotion, physiological arousal and the experience of emotion occur simultaneously, each triggering the other. This theory contrasts with the James-Lange theory. Name this theory named after two psychologists.",
       "answers": ["Cannon-Bard theory"]
     },
     {
       "subject": "IB Biology",
-      "question": "This process occurs in the mitochondria and involves the oxidation of pyruvate molecules to produce carbon dioxide, NADH, FADH2, and ATP. For 10 points, name this central metabolic pathway.",
+      "question": "This process occurs in the mitochondria and involves the oxidation of pyruvate molecules to produce carbon dioxide, NADH, FADH2, and ATP. Name this central metabolic pathway.",
       "answers": ["Krebs cycle", "Citric acid cycle", "TCA cycle"]
     },
     {
       "subject": "IB History of the Americas",
-      "question": "This treaty, signed in 1848, ended the Mexican-American War and ceded a large portion of Mexico's territory to the United States, including present-day California, Arizona, New Mexico, and parts of Utah, Nevada, and Colorado. For 10 points, name this treaty.",
+      "question": "This treaty, signed in 1848, ended the Mexican-American War and ceded a large portion of Mexico's territory to the United States, including present-day California, Arizona, New Mexico, and parts of Utah, Nevada, and Colorado. Name this treaty.",
       "answers": ["Treaty of Guadalupe Hidalgo"]
     },
     {
       "subject": "IB Mathematics",
-      "question": "This mathematical constant, often denoted by the letter 'e', is approximately equal to 2.71828. It is the base of the natural logarithm and appears in many areas of mathematics, including calculus and probability theory. For 10 points, name this important constant.",
+      "question": "This mathematical constant, often denoted by the letter 'e', is approximately equal to 2.71828. It is the base of the natural logarithm and appears in many areas of mathematics, including calculus and probability theory. Name this important constant.",
       "answers": ["Euler's number", "Napier's constant", "Base of natural logarithm"]
     },
     {
       "subject": "IB Physics",
-      "question": "This fundamental force is responsible for holding the nucleus of an atom together. It is mediated by particles called gluons. For 10 points, name this force.",
-      "answers": ["Strong nuclear force", "Strong force"]
+      "question": "This fundamental force is responsible for holding the nucleus of an atom together. It is mediated by particles called gluons. Name this force.",
+      "answers": ["Strong nuclear force", "Strong force","Strong"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "For a homogenous system, the ratio of the rate of this reaction to that of absorption is the thermal utilization f, which is one of the factors in the four-factor formula. Solid-state actinide detectors for very-high-energy photons use the gamma-induced variety of this reaction. Plotted against atomic number, its usual yield curve is normally hollow, double-humped and symmetric, but can shift right if the inducing particles are highly energetic. It is energetically favorable to the right of iron-56 so power generation methods utilizing it use heavy elements like thorium as fuel. Name this nuclear reaction often accompanied by release of energy and neutrons; the break-up of large nuclei into smaller ones, discovered by Hahn and Meitner. ",
+      "answers": ["Nuclear fission", "fission"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "Yang and Mills created a theory of this force that is a non-abelian gauge theory. Another theory describing this force has a lattice variety, and that theory describing this force takes place in an SU(3) symmetry group. Pions were believed to carry this force but it is now known that this is mediated by the exchange of (*) gluons. Color confinement is a consequence of this force that is described by quantum chromodynamics, or QCD. Name this force that confines quarks into hadrons, is the most powerful of the four fundamental forces, and holds atomic nuclei together. ",
+      "answers": ["Strong Nuclear Force","Strong force"]
+    },
+    {
+      "subject": "IB World Topics",
+      "question": "This Cuban leader played a pivotal role in the success of the Cuban Revolution, leading to the establishment of his government. What is the name of this influential figure?",
+      "answers": ["Fidel Castro","Castro","Fidel"]
+    },
+    {
+      "subject": "IB World Topics",
+      "question": "During the Cold War, Fidel Castro and Cuba became central figures in this intense geopolitical event, raising concerns worldwide. What is the name of this crisis?",
+      "answers": ["Cuban Missile Crisis"]
     },
     {
       "subject": "IB Psychology",
-      "question": "This psychological perspective emphasizes the role of unconscious conflicts and early childhood experiences in shaping behavior and personality. It was founded by Sigmund Freud. For 10 points, name this perspective.",
+      "question": "This psychological perspective emphasizes the role of unconscious conflicts and early childhood experiences in shaping behavior and personality. It was founded by Sigmund Freud. Name this perspective.",
       "answers": ["Psychoanalytic perspective", "Psychoanalysis"]
     },
     {
       "subject": "IB Biology",
-      "question": "This organelle is responsible for the synthesis of proteins in eukaryotic cells. It consists of two subunits, one large and one small, and is composed of RNA and protein. For 10 points, name this cellular structure.",
+      "question": "This organelle is responsible for the synthesis of proteins in eukaryotic cells. It consists of two subunits, one large and one small, and is composed of RNA and protein. Name this cellular structure.",
       "answers": ["Ribosome"]
     },
     {
       "subject": "IB History of the Americas",
-      "question": "This movement, which began in the late 19th and early 20th centuries, advocated for the rights of workers and sought to improve working conditions and wages. It led to the formation of labor unions and the enactment of labor laws. For 10 points, name this social and political movement.",
+      "question": "This movement, which began in the late 19th and early 20th centuries, advocated for the rights of workers and sought to improve working conditions and wages. It led to the formation of labor unions and the enactment of labor laws. Name this social and political movement.",
       "answers": ["Labor movement", "Labor union movement"]
     },
     {
       "subject": "IB Mathematics",
-      "question": "This theorem, named after a French mathematician, states that if a function is continuous on a closed interval and differentiable on the open interval, then there exists at least one point in the open interval where the derivative of the function is equal to the average rate of change of the function over the closed interval. For 10 points, name this theorem.",
+      "question": "This theorem, named after a French mathematician, states that if a function is continuous on a closed interval and differentiable on the open interval, then there exists at least one point in the open interval where the derivative of the function is equal to the average rate of change of the function over the closed interval. Name this theorem.",
       "answers": ["Mean Value Theorem", "Rolle's Theorem"]
     },
     {
       "subject": "IB Physics",
-      "question": "This physical principle states that the total energy of an isolated system remains constant over time, regardless of internal changes. For 10 points, name this principle.",
+      "question": "This physical principle states that the total energy of an isolated system remains constant over time, regardless of internal changes. Name this principle.",
       "answers": ["Law of conservation of energy", "Conservation of energy"]
     },
     {
       "subject": "IB Psychology",
-      "question": "This theory, proposed by Albert Bandura, emphasizes the role of observational learning and cognitive processes in shaping behavior. It suggests that individuals can learn new behaviors by observing others and that reinforcement and punishment are not always necessary for learning to occur. For 10 points, name this theory.",
+      "question": "This theory, proposed by Albert Bandura, emphasizes the role of observational learning and cognitive processes in shaping behavior. It suggests that individuals can learn new behaviors by observing others and that reinforcement and punishment are not always necessary for learning to occur. Name this theory.",
       "answers": ["Social learning theory", "Social cognitive theory", "Observational learning theory"]
     },
     {
       "subject": "IB Biology",
-      "question": "This process, which occurs during cell division, ensures that each daughter cell receives an identical set of chromosomes. It involves the separation of sister chromatids. For 10 points, name this phase of mitosis.",
+      "question": "This process, which occurs during cell division, ensures that each daughter cell receives an identical set of chromosomes. It involves the separation of sister chromatids. Name this phase of mitosis.",
       "answers": ["Anaphase"]
     },
     {
       "subject": "IB History of the Americas",
-      "question": "This landmark Supreme Court case, decided in 1954, declared state laws establishing separate public schools for black and white students to be unconstitutional. It overturned the doctrine of 'separate but equal' established by the Plessy v. Ferguson decision. For 10 points, name this case.",
+      "question": "This landmark Supreme Court case, decided in 1954, declared state laws establishing separate public schools for black and white students to be unconstitutional. It overturned the doctrine of 'separate but equal' established by the Plessy v. Ferguson decision. Name this case.",
       "answers": ["Brown v. Board of Education"]
     },
     {
-      "subject": "History",
-      "question": "This medieval conflict, which lasted from 1337 to 1453, was fought between the Kingdom of England and the Kingdom of France over control of the French throne. It is often considered one of the most significant conflicts in European history. For 10 points, name this series of wars.",
-      "answers": ["Hundred Years' War"]
-    },
-    {
-      "subject": "Geography",
-      "question": "This country, located in Southeast Asia, is known for its thousands of islands, including Java, Sumatra, Borneo, and Sulawesi. It is the world's largest island country by area and fourth-most populous country. For 10 points, name this country.",
-      "answers": ["Indonesia"]
+      "subject": "IB World Topics",
+      "question": "Fidel Castro's political career began with his involvement in opposition movements against this Cuban dictator. What is the name of the dictator whose regime Castro opposed?",
+      "answers": ["Fulgencio Batista","Batista"]
     },
     {
       "subject": "IB Mathematics",
-      "question": "This mathematical function, denoted by f prime of x or dy over dx, represents the rate of change of a function with respect to its independent variable. For 10 points, name this important concept in calculus.",
+      "question": "This mathematical function, denoted by f prime of x or dy over dx, represents the rate of change of a function with respect to its independent variable. Name this important concept in calculus.",
       "answers": ["Derivative"]
     },
     {
       "subject": "IB Physics",
-      "question": "This law states that the pressure of a gas is inversely proportional to its volume at constant temperature. For 10 points, name this law named after a French chemist.",
+      "question": "This law states that the pressure of a gas is inversely proportional to its volume at constant temperature. Name this law named after a French chemist.",
       "answers": ["Boyle's law"]
     },
     {
       "subject": "IB Psychology",
-      "question": "This cognitive bias refers to the tendency to rely on information that is readily available, rather than considering all relevant information when making judgments. For 10 points, name this bias.",
+      "question": "This cognitive bias refers to the tendency to rely on information that is readily available, rather than considering all relevant information when making judgments. Name this bias.",
       "answers": ["Availability heuristic"]
     },
     {
       "subject": "IB Biology",
-      "question": "This type of cellular transport involves the movement of molecules or ions against their concentration gradient, typically using energy from ATP. For 10 points, name this process.",
+      "question": "This type of cellular transport involves the movement of molecules or ions against their concentration gradient, typically using energy from ATP. Name this process.",
       "answers": ["Active transport"]
     },
     {
       "subject": "IB History of the Americas",
-      "question": "This American president, who served from 1933 to 1945, implemented the New Deal policies to address the Great Depression and led the United States during World War II. For 10 points, name this president.",
+      "question": "This American president, who served from 1933 to 1945, implemented the New Deal policies to address the Great Depression and led the United States during World War II. Name this president.",
       "answers": ["Franklin D. Roosevelt", "FDR"]
     },
     {
       "subject": "IB Mathematics",
-      "question": "This geometric shape has all sides of equal length and all angles of equal measure. For 10 points, name this polygon.",
+      "question": "This geometric shape has all sides of equal length and all angles of equal measure. Name this polygon.",
       "answers": ["Equilateral triangle"]
     },
     {
       "subject": "IB Physics",
-      "question": "This fundamental particle, discovered in 1932 by Carl Anderson, has the same mass as an electron but opposite charge. For 10 points, name this particle.",
+      "question": "This fundamental particle, discovered in 1932 by Carl Anderson, has the same mass as an electron but opposite charge. Name this particle.",
       "answers": ["Positron"]
     },
     {
       "subject": "IB Psychology",
-      "question": "This psychological perspective focuses on the ways in which people perceive, process, and retrieve information. It examines mental processes such as memory, problem-solving, and decision-making. For 10 points, name this perspective.",
+      "question": "This psychological perspective focuses on the ways in which people perceive, process, and retrieve information. It examines mental processes such as memory, problem-solving, and decision-making. Name this perspective.",
       "answers": ["Cognitive perspective"]
     },
     {
       "subject": "IB Biology",
-      "question": "This organelle, found in plant cells but not animal cells, is responsible for photosynthesis. It contains chlorophyll and converts light energy into chemical energy. For 10 points, name this cellular structure.",
+      "question": "This organelle, found in plant cells but not animal cells, is responsible for photosynthesis. It contains chlorophyll and converts light energy into chemical energy. Name this cellular structure.",
       "answers": ["Chloroplast"]
     },
     {
       "subject": "IB History of the Americas",
-      "question": "This landmark legislation, signed into law in 1964, outlawed discrimination based on race, color, religion, sex, or national origin. For 10 points, name this civil rights act.",
+      "question": "This landmark legislation, signed into law in 1964, outlawed discrimination based on race, color, religion, sex, or national origin. Name this civil rights act.",
       "answers": ["Civil Rights Act of 1964"]
     },
     {
       "subject": "IB Chemistry",
-      "question": "This law states that the total pressure exerted by a mixture of gases is equal to the sum of the partial pressures of each individual gas in the mixture. For 10 points, name this law.",
+      "question": "This law states that the total pressure exerted by a mixture of gases is equal to the sum of the partial pressures of each individual gas in the mixture. Name this law.",
       "answers": ["Dalton's law of partial pressures"]
     },
     {
       "subject": "IB Chemistry",
-      "question": "This type of chemical bond is formed between two atoms when they share one or more pairs of electrons. For 10 points, name this bond.",
+      "question": "This type of chemical bond is formed between two atoms when they share one or more pairs of electrons. Name this bond.",
       "answers": ["Covalent bond"]
     },
     {
       "subject": "IB Chemistry",
-      "question": "This process involves the conversion of a solid directly into a gas without passing through the liquid state. For 10 points, name this process.",
+      "question": "This process involves the conversion of a solid directly into a gas without passing through the liquid state. Name this process.",
       "answers": ["Sublimation"]
     },
     {
       "subject": "IB Chemistry",
-      "question": "This law, named after a French chemist, states that the mass of the products in a chemical reaction is equal to the mass of the reactants. For 10 points, name this law.",
+      "question": "This law, named after a French chemist, states that the mass of the products in a chemical reaction is equal to the mass of the reactants. Name this law.",
       "answers": ["Law of conservation of mass"]
     },
     {
       "subject": "IB Chemistry",
-      "question": "This branch of chemistry deals with the study of the rates of chemical reactions and the factors that affect them. For 10 points, name this branch of chemistry.",
+      "question": "This branch of chemistry deals with the study of the rates of chemical reactions and the factors that affect them. Name this branch of chemistry.",
       "answers": ["Chemical kinetics"]
     },
     {
       "subject": "IB Analysis and Approaches",
-      "question": "This theorem, formulated by a French mathematician in the 17th century, states that if a function is continuous on a closed interval and differentiable on the open interval, then there exists at least one point in the open interval where the derivative of the function is equal to the average rate of change of the function over the closed interval. For 10 points, name this theorem, which is a special case of the Mean Value Theorem.",
+      "question": "This theorem, formulated by a French mathematician in the 17th century, states that if a function is continuous on a closed interval and differentiable on the open interval, then there exists at least one point in the open interval where the derivative of the function is equal to the average rate of change of the function over the closed interval. Name this theorem, which is a special case of the Mean Value Theorem.",
       "answers": ["Rolle's Theorem"]
     },
     {
       "subject": "IB Analysis and Approaches",
-      "question": "This mathematical concept, often used in calculus, represents the instantaneous rate of change of a function at a specific point. It is defined as the limit of the average rate of change of the function as the interval approaches zero. For 10 points, name this fundamental concept in calculus.",
+      "question": "This mathematical concept, often used in calculus, represents the instantaneous rate of change of a function at a specific point. It is defined as the limit of the average rate of change of the function as the interval approaches zero. Name this fundamental concept in calculus.",
       "answers": ["Derivative"]
     },
     {
       "subject": "IB Physics",
-      "question": "This fundamental law of physics, formulated by Sir Isaac Newton in the 17th century, states that every object persists in its state of rest or uniform motion in a straight line unless acted upon by an external force. It provides the foundation for understanding the motion of objects under the influence of forces. For 10 points, name this law.",
+      "question": "This fundamental law of physics, formulated by Sir Isaac Newton in the 17th century, states that every object persists in its state of rest or uniform motion in a straight line unless acted upon by an external force. It provides the foundation for understanding the motion of objects under the influence of forces. Name this law.",
       "answers": ["Newton's First Law of Motion"]
     },
     {
       "subject": "IB Physics",
-      "question": "This physical quantity, commonly represented by the symbol 'F', is defined as the product of an object's mass and its acceleration. It is measured in units of Newtons. For 10 points, name this fundamental concept in physics.",
+      "question": "This physical quantity, commonly represented by the symbol 'F', is defined as the product of an object's mass and its acceleration. It is measured in units of Newtons. Name this fundamental concept in physics.",
       "answers": ["Force"]
     },
     {
-      "subject": "IB Computer Science",
-      "question": "This programming concept involves breaking down a complex problem into smaller, more manageable subproblems, which are then solved individually. It is often used to simplify the design and implementation of algorithms and programs. For 10 points, name this problem-solving approach.",
-      "answers": ["Divide and conquer"]
-    },
-    {
-      "subject": "IB Computer Science",
-      "question": "This data structure organizes data in a hierarchical manner, with each node having at most two children. It is commonly used to implement binary search trees and is an essential concept in computer science and programming. For 10 points, name this data structure.",
-      "answers": ["Binary tree"]
-    },
-    {
-      "subject": "IB Analysis and Approaches",
-      "question": "This mathematical concept, named after a German mathematician, represents the total area under a curve between two points on a graph. It is often used to find the cumulative effect or total quantity of a changing quantity. For 10 points, name this concept in calculus.",
-      "answers": ["Integral"]
-    },
-    {
-      "subject": "IB Analysis and Approaches",
-      "question": "This mathematical principle, named after a French philosopher and mathematician, states that the total number of ways to choose a subset of objects from a larger set is given by the binomial coefficient. It is often used in combinatorics and probability theory. For 10 points, name this principle.",
-      "answers": ["Pascal's Triangle", "Binomial theorem"]
+      "subject": "IB Physics",
+      "question": "In the context of nuclear physics, what term is used to describe the process by which a heavy nucleus splits into two or more smaller nuclei, releasing a large amount of energy?",
+      "answers": ["Nuclear Fission"]
     },
     {
       "subject": "IB Physics",
-      "question": "This physical quantity, represented by the symbol 'p', is defined as the product of an object's mass and its velocity. It is a vector quantity, meaning it has both magnitude and direction. For 10 points, name this fundamental concept in physics.",
+      "question": "When a wave encounters a surface that cannot absorb its energy, it bounces back. What is the term for this phenomenon in physics?",
+      "answers": ["Reflection"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "When two waves of the same frequency and amplitude are in phase (crest aligns with crest), what term is used to describe the resulting wave?",
+      "answers": ["Constructive Interference"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the context of nuclear reactions, what type of radiation consists of high-energy photons and has no mass or charge?",
+      "answers": ["Gamma Radiation", "Gamma"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "What is the name of the law that states the pressure of a gas is inversely proportional to its volume, provided the temperature and quantity of gas remain constant?",
+      "answers": ["Boyle's Law", "Boyle", "Boyle's"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "What is the name of the process by which an unstable atomic nucleus loses energy by emitting radiation, such as alpha or beta particles?",
+      "answers": ["Radioactive Decay", "decay"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "What is the SI unit of electric charge?",
+      "answers": ["Coulomb","C"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the context of optics, what term describes the bending of light as it passes from one medium to another, caused by a change in its speed?",
+      "answers": ["Refraction"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This subatomic particle, discovered in 1897 by J.J. Thomson, is negatively charged and is a fundamental constituent of atoms. What is the name of this particle?",
+      "answers": ["Electron"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the study of waves, what term is used to describe the maximum displacement from equilibrium in a wave?",
+      "answers": ["Amplitude"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the context of electric circuits, what is the term for a circuit element that resists the flow of electric current?",
+      "answers": ["Resistor"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "According to the wave equation, what is the product of the frequency and wavelength of a wave?",
+      "answers": ["Wave Speed","speed"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "What is the term for the process by which two nuclear particles combine to form a heavier nucleus, releasing energy in the process?",
+      "answers": ["Fusion"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the context of classical mechanics, what is the term for a force that opposes the relative motion or tendency of motion between two surfaces in contact? This force is influenced by factors such as the nature of the surfaces and the normal force acting between them.",
+      "answers": ["Friction"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "Examine the concept of momentum in classical mechanics. What is the term for the product of an object's mass and its velocity? According to Newton's second law, the rate of change of this quantity is equal to the net force acting on the object.",
       "answers": ["Momentum"]
     },
     {
       "subject": "IB Physics",
-      "question": "This fundamental law of physics, named after a British physicist, states that the force experienced by a current-carrying wire in a magnetic field is proportional to the current, the length of the wire, and the strength of the magnetic field. For 10 points, name this law.",
+      "question": "This quantity, symbolized by 'W', represents the amount of energy transferred to or from a system as a result of a force acting over a distance. What is this concept in the realm of classical mechanics?",
+      "answers": ["Work"]
+    },
+    {
+      "subject": "IB Computer Science",
+      "question": "This programming concept involves breaking down a complex problem into smaller, more manageable subproblems, which are then solved individually. It is often used to simplify the design and implementation of algorithms and programs. Name this problem-solving approach.",
+      "answers": ["Divide and conquer"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "When an object moves along a circular path at a constant speed, this force directed towards the center of the circle is responsible for keeping the object in its circular motion. What is the term for this force?",
+      "answers": ["Centripetal Force"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the study of waves, the distance between successive peaks or troughs of a wave is defined as what?",
+      "answers": ["Wavelength"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This fundamental quantity in mechanics is defined as the rate of change of velocity of an object. What is the term for this quantity?",
+      "answers": ["Acceleration"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the field of optics, this phenomenon occurs when light waves spread out as they pass through a narrow opening or around an obstacle, leading to the bending of the waves. What is this phenomenon?",
+      "answers": ["Diffraction"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This quantity, measured in joules, is defined as the capacity to do work or transfer heat. What is the term for this fundamental concept in thermodynamics?",
+      "answers": ["Energy"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In nuclear physics, this term refers to the time required for half of a radioactive substance to undergo decay. What is this term?",
+      "answers": ["Half-life","half life"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the realm of classical mechanics, this quantity is defined as the force acting on an object per unit area. What is the term for this physical quantity?",
+      "answers": ["Pressure"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "In the context of nuclear physics, this type of decay involves the emission of an alpha particle from the nucleus. What is the term for this type of radioactive decay?",
+      "answers": ["Alpha Decay","alpha"]
+    },
+    {
+      "subject": "IB Computer Science",
+      "question": "This data structure organizes data in a hierarchical manner, with each node having at most two children. It is commonly used to implement binary search trees and is an essential concept in computer science and programming. Name this data structure.",
+      "answers": ["Binary tree"]
+    },
+    {
+      "subject": "IB Analysis and Approaches",
+      "question": "This mathematical concept, named after a German mathematician, represents the total area under a curve between two points on a graph. It is often used to find the cumulative effect or total quantity of a changing quantity. Name this concept in calculus.",
+      "answers": ["Integral"]
+    },
+    {
+      "subject": "IB Analysis and Approaches",
+      "question": "This mathematical principle, named after a French philosopher and mathematician, states that the total number of ways to choose a subset of objects from a larger set is given by the binomial coefficient. It is often used in combinatorics and probability theory. Name this principle.",
+      "answers": ["Pascal's Triangle", "Binomial theorem"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This physical quantity, represented by the symbol 'p', is defined as the product of an object's mass and its velocity. It is a vector quantity, meaning it has both magnitude and direction. Name this fundamental concept in physics.",
+      "answers": ["Momentum"]
+    },
+    {
+      "subject": "IB Physics",
+      "question": "This fundamental law of physics, named after a British physicist, states that the force experienced by a current-carrying wire in a magnetic field is proportional to the current, the length of the wire, and the strength of the magnetic field. Name this law.",
       "answers": ["Biot-Savart Law"]
     },
     {
       "subject": "IB Computer Science",
-      "question": "This programming paradigm involves organizing code into reusable components called objects, which interact with each other to perform tasks. It promotes modularity, encapsulation, and code reuse. For 10 points, name this programming paradigm.",
+      "question": "This programming paradigm involves organizing code into reusable components called objects, which interact with each other to perform tasks. It promotes modularity, encapsulation, and code reuse. Name this programming paradigm.",
       "answers": ["Object-oriented programming", "OOP"]
     },
     {
       "subject": "IB Computer Science",
-      "question": "This data structure, commonly used to implement LIFO (Last In, First Out) behavior, allows elements to be added or removed only from one end. It follows the principle of Last In, First Out. For 10 points, name this data structure.",
+      "question": "This data structure, commonly used to implement LIFO (Last In, First Out) behavior, allows elements to be added or removed only from one end. It follows the principle of Last In, First Out. Name this data structure.",
       "answers": ["Stack"]
     },
       {
       "subject": "IB Computer Science",
-      "question": "This programming language, developed by Sun Microsystems, is commonly used for building enterprise-level applications, web services, and mobile apps. It is known for its platform independence and object-oriented features. For 10 points, name this programming language.",
+      "question": "This programming language, developed by Sun Microsystems, is commonly used for building enterprise-level applications, web services, and mobile apps. It is known for its platform independence and object-oriented features. Name this programming language.",
       "answers": ["Java"]
     },
     {
       "subject": "IB Computer Science",
-      "question": "This programming language, often used for system programming and embedded systems development, was developed by Dennis Ritchie at Bell Labs in the early 1970s. It is known for its efficiency and low-level control over hardware. For 10 points, name this programming language.",
+      "question": "This programming language, often used for system programming and embedded systems development, was developed by Dennis Ritchie at Bell Labs in the early 1970s. It is known for its efficiency and low-level control over hardware. Name this programming language.",
       "answers": ["C"]
     },
     {
       "subject": "IB Computer Science",
-      "question": "This sorting algorithm, named after a Hungarian-American mathematician, works by repeatedly swapping adjacent elements if they are in the wrong order. It has an average and worst-case time complexity of O(n^2). For 10 points, name this sorting algorithm.",
+      "question": "This sorting algorithm, named after a Hungarian-American mathematician, works by repeatedly swapping adjacent elements if they are in the wrong order. It has an average and worst-case time complexity of O(n^2). Name this sorting algorithm.",
       "answers": ["Bubble sort"]
     },
     {
       "subject": "IB Computer Science",
-      "question": "This programming concept involves breaking down a complex problem into smaller, more manageable subproblems, which are then solved individually. It is often used to simplify the design and implementation of algorithms and programs. For 10 points, name this problem-solving approach.",
+      "question": "This programming concept involves breaking down a complex problem into smaller, more manageable subproblems, which are then solved individually. It is often used to simplify the design and implementation of algorithms and programs. Name this problem-solving approach.",
       "answers": ["Divide and conquer"]
     },
     {
       "subject": "IB Computer Science",
-      "question": "This programming concept, often used in object-oriented programming, refers to the bundling of data and methods that operate on that data into a single unit. It promotes encapsulation and information hiding. For 10 points, name this concept.",
+      "question": "This programming concept, often used in object-oriented programming, refers to the bundling of data and methods that operate on that data into a single unit. It promotes encapsulation and information hiding. Name this concept.",
       "answers": ["Abstraction"]
     },
         {
       "subject": "IB Sports Science",
-      "question": "This physiological process, often referred to as 'the body's thermostat', helps regulate body temperature by increasing blood flow to the skin and promoting sweating when the body overheats, and by conserving heat through vasoconstriction and shivering when the body is cold. For 10 points, name this process.",
+      "question": "This physiological process, often referred to as 'the body's thermostat', helps regulate body temperature by increasing blood flow to the skin and promoting sweating when the body overheats, and by conserving heat through vasoconstriction and shivering when the body is cold. Name this process.",
       "answers": ["Thermoregulation"]
     },
     {
       "subject": "IB Sports Science",
-      "question": "This sports psychology concept, named after a Russian physiologist, refers to the state of optimal functioning where an athlete is fully immersed in their activity, characterized by complete absorption, heightened focus, and a distorted sense of time. For 10 points, name this concept.",
+      "question": "This sports psychology concept, named after a Russian physiologist, refers to the state of optimal functioning where an athlete is fully immersed in their activity, characterized by complete absorption, heightened focus, and a distorted sense of time. Name this concept.",
       "answers": ["Flow", "Flow state", "Zone"]
     },
     {
       "subject": "IB Sports Science",
-      "question": "This sports science principle, often applied in strength training, states that muscles adapt to the specific demands placed upon them. It suggests that to improve performance, training must progressively overload the muscles by increasing the intensity, duration, or frequency of exercise. For 10 points, name this principle.",
+      "question": "This sports science principle, often applied in strength training, states that muscles adapt to the specific demands placed upon them. It suggests that to improve performance, training must progressively overload the muscles by increasing the intensity, duration, or frequency of exercise. Name this principle.",
       "answers": ["Principle of overload"]
     },
     {
       "subject": "IB Sports Science",
-      "question": "This sports science concept, often referred to as 'the gas tank of the body', represents the maximum amount of oxygen that an individual can utilize during intense exercise. It is measured in milliliters of oxygen per kilogram of body weight per minute. For 10 points, name this concept.",
+      "question": "This sports science concept, often referred to as 'the gas tank of the body', represents the maximum amount of oxygen that an individual can utilize during intense exercise. It is measured in milliliters of oxygen per kilogram of body weight per minute. Name this concept.",
       "answers": ["VO2 max", "Maximum oxygen consumption"]
     },
     {
       "subject": "IB Biology",
-      "question": "This cellular organelle, often referred to as the 'powerhouse of the cell', is responsible for generating adenosine triphosphate (ATP), the primary energy currency of the cell, through the process of cellular respiration. For 10 points, name this organelle.",
+      "question": "This cellular organelle, often referred to as the 'powerhouse of the cell', is responsible for generating adenosine triphosphate (ATP), the primary energy currency of the cell, through the process of cellular respiration. Name this organelle.",
       "answers": ["Mitochondrion", "Mitochondria"]
     },
     {
       "subject": "IB Biology",
-      "question": "This process, occurring in the chloroplasts of plant cells, converts light energy into chemical energy, producing glucose and oxygen as byproducts. For 10 points, name this process.",
+      "question": "This process, occurring in the chloroplasts of plant cells, converts light energy into chemical energy, producing glucose and oxygen as byproducts. Name this process.",
       "answers": ["Photosynthesis"]
     },
     {
       "subject": "IB Biology",
-      "question": "This genetic disorder, caused by the presence of an extra copy of chromosome 21, is characterized by intellectual disability, developmental delays, distinctive facial features, and other health problems. For 10 points, name this disorder.",
+      "question": "This genetic disorder, caused by the presence of an extra copy of chromosome 21, is characterized by intellectual disability, developmental delays, distinctive facial features, and other health problems. Name this disorder.",
       "answers": ["Down syndrome"]
     },
     {
       "subject": "IB Biology",
-      "question": "This type of cell division, occurring in sexually reproducing organisms, results in the formation of haploid gametes from diploid germ cells. For 10 points, name this process.",
+      "question": "This type of cell division, occurring in sexually reproducing organisms, results in the formation of haploid gametes from diploid germ cells. Name this process.",
       "answers": ["Meiosis"]
     },
     {
     "subject": "IB Sports Science",
-    "question": "This sports science concept, often referred to as 'the point of no return', represents the intensity of exercise beyond which the body can no longer meet the demands for oxygen and anaerobic metabolism predominates. It is often associated with the buildup of lactic acid and the onset of muscle fatigue. For 10 points, name this concept.",
+    "question": "This sports science concept, often referred to as 'the point of no return', represents the intensity of exercise beyond which the body can no longer meet the demands for oxygen and anaerobic metabolism predominates. It is often associated with the buildup of lactic acid and the onset of muscle fatigue. Name this concept.",
     "answers": ["Anaerobic threshold", "Lactate threshold"]
     },
     {
       "subject": "IB Sports Science",
-      "question": "This sports science principle, often applied in training programs, states that the physiological adaptations resulting from exercise are specific to the type of activity performed and the muscles involved. It suggests that training should mimic the movements and energy systems used in the athlete's sport. For 10 points, name this principle.",
+      "question": "This sports science principle, often applied in training programs, states that the physiological adaptations resulting from exercise are specific to the type of activity performed and the muscles involved. It suggests that training should mimic the movements and energy systems used in the athlete's sport. Name this principle.",
       "answers": ["Specificity principle"]
     },
     {
       "subject": "IB Sports Science",
-      "question": "This sports psychology concept, named after a Russian psychologist, refers to the process of mentally rehearsing or visualizing an athletic performance in order to improve skill execution, reduce anxiety, and enhance confidence. For 10 points, name this concept.",
+      "question": "This sports psychology concept, named after a Russian psychologist, refers to the process of mentally rehearsing or visualizing an athletic performance in order to improve skill execution, reduce anxiety, and enhance confidence. Name this concept.",
       "answers": ["Imagery", "Mental rehearsal", "Visualization"]
     },
     {
       "subject": "IB Sports Science",
-      "question": "This biomechanical principle, often applied in sports technique analysis, states that for every action, there is an equal and opposite reaction. It helps explain how forces are generated and transferred during movement. For 10 points, name this principle.",
+      "question": "This biomechanical principle, often applied in sports technique analysis, states that for every action, there is an equal and opposite reaction. It helps explain how forces are generated and transferred during movement. Name this principle.",
       "answers": ["Newton's Third Law of Motion"]
     },
     {
       "subject": "IB Biology",
-      "question": "This cellular process, occurring in prokaryotic and eukaryotic cells, involves the synthesis of RNA from a DNA template. It is the first step in gene expression and plays a crucial role in protein synthesis. For 10 points, name this process.",
+      "question": "This cellular process, occurring in prokaryotic and eukaryotic cells, involves the synthesis of RNA from a DNA template. It is the first step in gene expression and plays a crucial role in protein synthesis. Name this process.",
       "answers": ["Transcription"]
     },
     {
       "subject": "IB Biology",
-      "question": "This cellular structure, found in plant cells but not animal cells, provides structural support and rigidity to the cell, as well as protection and regulation of cell shape. It is composed of cellulose fibers and other polysaccharides. For 10 points, name this structure.",
-      "answers": ["Cell wall"]
+      "question": "This cellular structure, found in plant cells but not animal cells, provides structural support and rigidity to the cell, as well as protection and regulation of cell shape. It is composed of cellulose fibers and other polysaccharides. Name this structure.",
+      "answers": ["Cell wall, wall"]
     },
     {
       "subject": "IB Biology",
-      "question": "This genetic disorder, caused by a mutation in the CFTR gene, affects the respiratory, digestive, and reproductive systems, leading to thick, sticky mucus buildup in the lungs, pancreas, and other organs. For 10 points, name this disorder.",
+      "question": "This genetic disorder, caused by a mutation in the CFTR gene, affects the respiratory, digestive, and reproductive systems, leading to thick, sticky mucus buildup in the lungs, pancreas, and other organs. Name this disorder.",
       "answers": ["Cystic fibrosis"]
     },
     {
       "subject": "IB Biology",
-      "question": "This process, occurring during cell division, ensures that each daughter cell receives an equal and complete set of chromosomes. It involves the separation of sister chromatids and the formation of two genetically identical daughter cells. For 10 points, name this process.",
+      "question": "This process, occurring during cell division, ensures that each daughter cell receives an equal and complete set of chromosomes. It involves the separation of sister chromatids and the formation of two genetically identical daughter cells. Name this process.",
       "answers": ["Mitosis"]
     },
     {
       "subject": "IB Biology",
-      "question": "This biological concept, named after an English naturalist, refers to the process by which organisms with advantageous traits are more likely to survive and reproduce, leading to the gradual change in populations over time. For 10 points, name this concept.",
+      "question": "This biological concept, named after an English naturalist, refers to the process by which organisms with advantageous traits are more likely to survive and reproduce, leading to the gradual change in populations over time. Name this concept.",
       "answers": ["Natural selection"]
     },
     {
       "subject": "IB Biology",
-      "question": "This type of symbiotic relationship, in which both organisms benefit from the association, is exemplified by the relationship between nitrogen-fixing bacteria and leguminous plants. For 10 points, name this type of relationship.",
+      "question": "This type of symbiotic relationship, in which both organisms benefit from the association, is exemplified by the relationship between nitrogen-fixing bacteria and leguminous plants. Name this type of relationship.",
       "answers": ["Mutualism"]
     }
   ]
 }
-      
