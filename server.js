@@ -16,14 +16,38 @@ const fs = require('fs');
 let randomQuestion = "";
 const rawdata = fs.readFileSync('questions.json');
 const triviaQuestions = JSON.parse(rawdata).questions;
+let selectedSubjects = [];
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/home.html');
 });
 
+function generateChecklistHTML(questions) {
+  const uniqueSubjects = [...new Set(questions.map(question => question.subject))];
+  const checklistHTML = uniqueSubjects.map((subject, index) => {
+    const checkboxId = `subjectCheckbox${index + 1}`;
+    const checkboxName = `subjectCheckbox${index + 1}`;
+    return `
+      <input type="checkbox" id="${checkboxId}" name="${checkboxName}" value="${subject}" checked>
+      <label for="${checkboxId}">${subject}</label><br>
+    `;
+  }).join('');
+  return checklistHTML;
+}
+
+function resetSelectedSubjects() {
+  selectedSubjects = [];
+  console.log('Selected subjects reset:', selectedSubjects);
+}
+
 function getRandomQuestion() {
-  const randomIndex = Math.floor(Math.random() * triviaQuestions.length);
-  return triviaQuestions[randomIndex];
+  const filteredQuestions = triviaQuestions.filter(question => selectedSubjects.includes(question.subject));
+  if (filteredQuestions.length === 0) {
+    return triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
+  }
+
+  const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
+  return filteredQuestions[randomIndex];
 }
 
 // Set up event handler for new socket connections
@@ -75,6 +99,8 @@ io.on('connection', (socket) => {
     console.log('User with id ' + playerId + ' joined room ' + room);
     socket.to(room).emit('userJoined', playerId);
     roomId = room;
+    const checklistHTML = generateChecklistHTML(triviaQuestions);
+    socket.emit('checklistHTML', checklistHTML);
   });
 
   // Buzzed in
@@ -86,6 +112,11 @@ io.on('connection', (socket) => {
     socket.on('didNotAnswer', (room) => {
       socket.emit('userDidntAnswer', playerId);
       socket.to(room).emit('userDidntAnswer', playerId);
+    });
+
+    socket.on('updateSelectedSubjects', (subjects) => {
+      selectedSubjects = subjects;
+      console.log('Updated selected subjects:', selectedSubjects);
     });
 
   socket.on('kick', (room) => {
@@ -148,7 +179,6 @@ io.on('connection', (socket) => {
   socket.on('questionFinishedAlert', (room) => {
     socket.to(room).emit('giveQuestionFinishedAlert');
   });
-
 
 // Update user score
 socket.on('updateScore', (room, score) => {
@@ -279,6 +309,7 @@ function increment(){
           roomLeaders[room] = newLeader;
           io.to(room).emit('roomLeaderTransferred', players[newLeader]);
           console.log("new leader is:" + players[newLeader]);
+          resetSelectedSubjects();
           io.to(room).emit('userLeft', playerId);
         }
       } else {
